@@ -1,0 +1,347 @@
+﻿@*@model IEnumerable<MSP_RegProf.Models.Matricula>*@
+@using MSP_RegProf.Models
+@model Tuple<Persona, List<Matricula>>
+
+@{
+    //Layout = null;
+    ViewBag.Title = "Matriculas";
+    Persona Profesional = Model.Item1;
+    List<Matricula> Matriculas = Model.Item2;
+}
+
+<style>
+    .modal-lg {
+        width: 60%;
+    }
+</style>
+
+
+<div class="row">
+    <!--Datos de Personales-->
+    <div class="col-md-3">
+        <div class="box box-primary">
+            <div class="box-body box-profile">
+                <img class="profile-user-img img-responsive img-circle user-img" src="~/Content/img/nopic.png" alt="User profile picture">
+
+                <h3 class="profile-username text-center">@Profesional.Nombre @Profesional.Apellido</h3>
+
+                <p class="text-muted text-center">Profesional de la Salud</p>
+
+                <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item">
+                        <b>DNI:</b> <a class="pull-right">@Profesional.NroDocumento</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Fecha Nacimiento</b> <a class="pull-right">@Profesional.FechaNacimiento.Value.ToString("dd/MM/yyy")</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Nacionalidad</b> <a class="pull-right">@Profesional.Pais.Nombre</a>
+                    </li>
+                </ul>
+
+                <a class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Profesionales/Edit/@Profesional.ID','Editar','Profesionales')"><b>Editar Datos</b></a>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div><!--Datos de Personales-->
+    <!--Datos de Titulos-->
+    <div class="col-md-9">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">Listado de Titulos</h3>
+
+                <button type="button" style="margin-right:25px;" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Matriculas/Create/@Profesional.ID', 'Agregar', 'Matricula')">
+                    <i class="fa fa-plus"></i> Nuevo
+                </button>
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+                @if (Matriculas.Count > 0)
+            {
+                    <table id="dtCertificados" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width:120px;">
+                                    Documentos
+                                </th>
+                                <th class="text-center">
+                                    Denominacion
+                                </th>
+                                <th class="text-center">
+                                    Matricula
+                                </th>
+                                <th class="text-center">
+                                    Libro
+                                </th>
+                                <th class="text-center">
+                                    Folio
+                                </th>
+                                <th class="text-center">
+                                    Habilitado
+                                </th>
+                                <th class="text-center" style="width:200px;">
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var Matricula in Matriculas)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="btn-group-sm text-center">
+                                            <!-- btn-uploadFile -->
+                                            <span data-placement="top" title="Subir Docs" data-toggle="tooltip">
+                                                <a class="btn btn-default fa fa-upload" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DigitDocs/SubirDocs/@Profesional.ID/@Matricula.ID','Cargar','Documentos')"></a>
+                                            </span>
+
+                                            <!-- btn-ViewFile -->
+                                            <span data-placement="top" title="Ver Docs" data-toggle="tooltip">
+                                                <a class="btn btn-primary fa fa-eye" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DigitDocs/VerDocs/@Profesional.ID/@Matricula.ID','Detalle','Documentos')"></a>
+                                            </span>
+                                            
+                                                @*<a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DigitDocs/Delete/@item.titId','Eliminar','Certificado')"></a>
+                                                <a class="btn btn-primary fa fa-print" onclick="reporte(@item.titId)"></a>*@
+
+                                            
+
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => Matricula.Titulo.Descripcion)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => Matricula.NroMatricula)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => Matricula.libro)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => Matricula.Folio)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => Matricula.Habilitada)
+                                    </td>
+                                    <td class="text-center">
+                                        <!-- btn-Edit -->
+                                        <span data-placement="top" title="Editar" data-toggle="tooltip">
+                                            <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Matriculas/Edit/@Matricula.ID','Editar','Profesionales')"></a>
+                                        </span>
+
+                                        <!-- btn-Details -->
+                                        <span data-placement="top" title="Detalles" data-toggle="tooltip">
+                                            <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Matriculas/Details/@Matricula.ID','Detalle','Profesionales')"></a>
+                                        </span>
+
+                                        <!-- btn-Delete -->
+                                        <span data-placement="top" title="Eliminar" data-toggle="tooltip">
+                                            <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Matriculas/Delete/@Matricula.ID','Eliminar','Profesionales')"></a>
+                                        </span>
+
+                                        <!-- btn-ExportarSISA -->
+                                        <span data-placement="top" title="Exportar a SISA" data-toggle="tooltip">
+                                            <a class="btn btn-success fa fa-download" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Matriculas/ExportarSISA/@Matricula.ID','ExportarSISA','Profesionales')"></a>
+                                        </span>
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                }
+                else
+                {
+                <!--Mensaje-->
+                    <div>
+                        <div class="alert alert-info alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-info"></i> Atencion!</h4>
+                            <p>No existen Titulos registrados para este profesional.</p>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div><!--Datos de Titulos-->
+</div>
+
+
+<script>
+    $(function () {
+        $('#myModal').on('show.bs.modal', function (e) {
+
+            //debugger
+            $("#myModal .modal-dialog").addClass("modal-lg")
+
+        });
+    });
+
+
+
+
+    //function abrirModalMatricula(ruta, titulo, accion) {
+    //    ruta = GetPathApp(ruta);
+
+    //    setTituloModal(accion, titulo);
+    //    setBotonesModal(accion);
+
+
+
+    //    $.ajax({
+    //        type: "GET",
+    //        url: ruta,
+    //        beforeSend: function (xhr) {
+    //            abrirWaiting();
+    //        },
+    //        success: function (result) {
+    //            //debugger
+    //            $("#contenidoModal").html(result);
+
+    //            cerrarWaiting();
+    //        },
+    //        error: function (xhr, ajaxOptions, thrownError) {
+    //            debugger
+    //            alert(xhr.status);
+    //            alert(thrownError);
+    //        }
+    //    });
+    //}
+
+
+</script>
+@*<div>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Revalido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaDiploma)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ObservacionDiploma)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaInscripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NroMatricula)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Folio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.libro)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaActualizacion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Habilitada)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Retirado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaRetiro)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ObservacionMatricula)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TieneAnalitico)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TieneTitulo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Organismo.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Persona.Apellido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TipoEstadoMatricula.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Titulo.Descripcion)
+                </th>
+                <th></th>
+            </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Revalido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaDiploma)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ObservacionDiploma)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaInscripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NroMatricula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Folio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.libro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaActualizacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Habilitada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Retirado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaRetiro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ObservacionMatricula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TieneAnalitico)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TieneTitulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Organismo.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Persona.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoEstadoMatricula.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo.Descripcion)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+                </td>
+            </tr>
+        }
+
+        </table>
+    </div>*@
+

@@ -1,0 +1,170 @@
+﻿@*@model IEnumerable<MSP_RegProf.Models.Persona>*@
+
+@{
+    //Layout = null;
+    ViewBag.Title = "Profesionales";
+}
+
+<style>
+    .modal-lg {
+        width: 70%;
+    }
+</style>
+
+<section class="content-header">
+    <h1>
+        Profesionales
+    </h1>
+
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="#">Registro de Profesionales</a></li>
+        <li class="active">Profesionales</li>
+    </ol>
+</section>
+
+
+<section class="content">
+    <!--Header de Profesional-->
+    <div class="box box-primary">
+        <div class="row">
+
+            <!--Busqueda de Profesional-->
+            <div class="col-md-8">
+                <div class="box-header">
+                    <h3 class="box-title">Busqueda</h3>
+                </div>
+                <div class="box-body col-md-offset-1">
+                    @using (Html.BeginForm("buscaProf", "Profesionales", FormMethod.Post, new { @id = "formBusqueda" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="optionsRadios" id="rdb1" value="1" checked="">
+                                                <B>Busqueda por Nro de Matricula</B>
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="optionsRadios" id="rdb2" value="2">
+                                                <B>Busqueda por DNI, Nombre o Apellido</B>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6" style="margin-top: 15px; margin-left: -35px;">
+                                        <input type="text" id="txtBusqueda" required />
+                                        <button id="txtBusqueda" class="btn btn-primary" style="margin-left: 15px;">Buscar</button>
+                                        
+                                    </div>
+                                </div>
+                                
+                                
+
+                                
+                            </div>
+
+
+                            @*<div class="form-group">                                
+                                <label class="control-label " for="Firma">Busqueda por DNI, Nombre o Apellido:</label>
+
+                                <input type="text" id="profDni" required/>
+
+                                <button id="btnBusca" class="btn btn-primary">Buscar</button>
+                            </div>*@
+                        </div>
+                    }
+                </div>
+
+            </div>
+
+            <!--Nuevo Profesional-->
+            <div class="col-md-4">
+                <div class="box-header">
+                    <h3 class="box-title">Nuevo Profesional</h3>
+                </div>
+                <div class="box-body col-md-offset-4">
+                    <button type="button" style="margin-bottom: 15px;" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Profesionales/Create', 'Agregar', 'Profesionales')">
+                        <i class="fa fa-plus"></i> Nuevo
+                    </button>
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+    <!--Fin Busqueda de Profesional-->
+    <!--Datos de Profesional-->
+    <div id="contenProfesionales">
+
+
+    </div>
+    <!--Fin Datos de Profesional-->
+
+</section>
+
+
+
+
+<script>
+    $(function () {
+
+
+        $('#formBusqueda').submit(function (e) {
+            //$('#btnBusca').click(function (e) {
+            debugger
+            var _url = GetPathApp("/Profesionales/BuscaProf");
+
+            Pace.track(function () {
+                $.ajax({
+                    method: "POST",
+                    url: _url,
+                    data: {
+                        txtBusqueda: $('#txtBusqueda').val(),
+                        tipoBusqueda: $('input[name=optionsRadios]:checked', '#formBusqueda').val(),
+                        __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val()
+                    },
+                    beforeSend: function (xhr) {
+
+                        $('#contentMsg').hide();
+                        $('#contenTitulos').empty();
+                    },
+                    success: function (result) {
+                        //debugger
+                        if (result.ok == "false") {
+
+                            $('#contenTitulos').empty();
+                            $('#contentMsg').show();
+                            $('#contentMsg p').text(result.mensaje);
+                        }
+                        else {
+                            $('#contentMsg').hide();
+                            $('#contenProfesionales').html(result);
+                        }
+
+                    }
+                });
+            });
+
+            e.preventDefault();
+        });//Fin "submit"
+
+
+
+        $('#myModal').on('show.bs.modal', function (e) {
+            
+            //debugger
+            $("#myModal .modal-dialog").addClass("modal-lg")
+
+        })
+
+    });
+
+    
+</script>

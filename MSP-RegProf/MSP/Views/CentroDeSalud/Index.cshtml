@@ -1,0 +1,106 @@
+﻿@model IEnumerable<MSP_RegProf.Models.CentroDeSalud>
+
+@{
+    //Layout = null;
+    ViewBag.Title = "Centros de Salud";
+        
+}
+<style>
+    .modal-lg {
+        width: 70%;
+    }
+</style>
+
+
+
+<section class="content-header">
+    <h1>
+        Centros de Salud
+        <small></small>
+    </h1>
+
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li class="active"> Centros de Salud</li>
+    </ol>
+</section>
+
+<div class="content">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Listado de Centros de Salud</h3>
+
+            <button type="button" style="margin-right:25px;" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CentroDeSalud/Create', 'Agregar', 'Centro de Salud')">
+                <i class="fa fa-plus"></i> Nuevo
+            </button>
+        </div>
+        <div class="box-body">
+            <table id="dtCentroDeSalud" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th style="width:140px">Acciones</th>
+                        <th>Nombre</th>
+                        @*<th>Latitud</th>*@
+                        @*<th>Longitud</th>*@
+                        <th>Direccion</th>
+                        <th>Telefono</th>
+                        <th>EMail</th>
+                        @*<th>URLImagenDelCentroDeSalud</th>*@
+                        @*<th>Activo</th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="btn-group-sm">
+                                    <span data-placement="top" title="Editar" data-toggle="tooltip">
+                                        @*<a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CentroDeSalud/Edit/@item.ID','Editar','Centro de Salud')"></a>*@
+                                        <a href="@Url.Action("Edit","CentroDeSalud",new {id=item.ID})" class="btn btn-info fa fa-pencil-square-o"></a>
+                                    </span>
+
+                                    <span data-placement="top" title="Detalles" data-toggle="tooltip">
+                                        <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CentroDeSalud/Details/@item.ID','Detalle','Centro de Salud')"></a>
+                                    </span>
+                                    <span data-placement="top" title="Eliminar" data-toggle="tooltip">
+                                        <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CentroDeSalud/Delete/@item.ID','Eliminar','Centro de Salud')"></a>
+                                    </span>
+                                </div>
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                            @*<td>@Html.DisplayFor(modelItem => item.Latitud)</td>*@
+                            @*<td>@Html.DisplayFor(modelItem => item.Longitud)</td>*@
+                            <td>@Html.DisplayFor(modelItem => item.Direccion)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
+                            <td>@Html.DisplayFor(modelItem => item.EMail)</td>
+                            @*<td>@Html.DisplayFor(modelItem => item.URLImagenDelCentroDeSalud)</td>*@
+                            @*<td>@Html.DisplayFor(modelItem => item.Activo)</td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        if (!$.fn.dataTable.isDataTable('#dtCentroDeSalud')) {
+            $('#dtCentroDeSalud').DataTable({
+                "language": DataTableEsp()
+            });
+        }
+
+
+        $('#myModal').on('show.bs.modal', function (e) {
+            debugger
+            $("#myModal .modal-dialog").addClass("modal-lg")
+
+        })
+    });
+</script>
+
+
+
+

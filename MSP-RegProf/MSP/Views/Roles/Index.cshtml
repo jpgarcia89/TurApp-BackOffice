@@ -1,0 +1,75 @@
+﻿@model IEnumerable<TurApp.Models.AspNetRoles>
+
+@{
+    ViewBag.Title = "Roles";
+}
+
+<section class="content-header">
+    <h1>
+        Roles
+        <small>Seguridad</small>
+    </h1>
+
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="#">Seguridad</a></li>
+        <li class="active">Roles</li>
+    </ol>
+</section>
+
+<div class="content">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Listado de Usuarios</h3>
+
+            <button type="button" style="margin-right:25px;" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Roles/Create', 'Agregar', 'Roles')">
+                <i class="fa fa-plus"></i> Nuevo
+            </button>
+        </div>
+        <div class="box-body">
+            <table id="dtRoles" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th style="width:140px">Acciones</th>
+                        <th>Rol</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="btn-group-sm">
+                                    <span data-placement="top" title="Editar" data-toggle="tooltip">
+                                        <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Roles/Edit/@item.Id','Editar','Roles')"></a>
+                                    </span>
+
+                                    <span data-placement="top" title="Detalles" data-toggle="tooltip">
+                                        <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Roles/Details/@item.Id','Detalle','Roles')"></a>
+                                    </span>
+                                    <span data-placement="top" title="Eliminar" data-toggle="tooltip">
+                                        <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Roles/Delete/@item.Id','Eliminar','Roles')"></a>
+                                    </span>
+                                    <span data-placement="top" title="Permisos" data-toggle="tooltip">
+                                        <a class="btn btn-success fa fa-list" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Roles/Permisos/@item.Id','Asignar','Permisos')"></a>
+                                    </span>
+                                </div>
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        if (!$.fn.dataTable.isDataTable('#dtRoles')) {
+            $('#dtRoles').DataTable({
+                "language": DataTableEsp()
+            });
+        }
+    });
+</script>

@@ -1,0 +1,73 @@
+﻿@model MSP_RegProf.Models.TituloProfVM
+
+
+
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            <label class="control-label col-md-4" for="Firma">Titulo:</label>
+            <div class="col-md-4 ">
+                <button id="docTitulo" class="btn btn-primary btn-block">Ver</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4" for="Firma">Analítico:</label>
+            <div class="col-md-4 ">
+                <button id="docAnalitico" class="btn btn-primary btn-block">Ver</button>
+            </div>
+        </div>
+        @Html.HiddenFor(model => Model.profId)
+        @Html.HiddenFor(model=>Model.titId)        
+    </div>
+
+
+<script>
+    $(function () {
+
+        //Click "Ver Titulo"
+        $("#docTitulo").click(function () {
+            //debugger
+            verDoc("docTitulo");
+        });
+
+        //Click "Ver Analitico"
+        $("#docAnalitico").click(function () {
+            //debugger
+            verDoc("docAnalitico");
+        });
+
+        //Ver Documento
+        function verDoc(_tipoDoc) {
+
+            debugger
+            var _data={
+                tipoDoc: _tipoDoc,
+                profId:$("#profId").val(),
+                titId: $("#titId").val()
+            };
+
+            //var _url = GetPathApp("/DigitDocs/VerDocs/");
+
+            var _src = GetPathApp("/DigitDocs/VerDocs/" + _data.tipoDoc + "/" + _data.profId + "/" + _data.titId + "/");
+            window.open(_src);
+
+            //$.ajax({
+            //    url: _url,
+            //    type: "POST",
+            //    data: _data,
+            //    beforeSend: function (xhr) {
+            //        abrirWaiting();
+            //    },
+            //    success: function (result) {
+            //        //debugger
+            //        $("#contenidoModal").html(result);
+            //        cerrarWaiting();
+            //    },
+            //});
+
+        }
+        
+    });
+
+</script>

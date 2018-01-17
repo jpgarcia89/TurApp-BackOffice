@@ -1,0 +1,99 @@
+﻿@model List<MSP_RegProf.Models.EspecialidadPorCentroDeSalud>
+@using MSP_RegProf.Models
+
+
+<!-- Box - Especialidades y Horarios -->
+<div class="box box-primary">
+    <div class="box-header">
+        <h3 class="box-title">Especialidades y Horarios:</h3>
+
+        <button type="button" style="margin-right:25px;" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CentroDeSalud/CreateEspecialidad/@ViewBag.csId', 'Agregar', 'Especialidad')">
+            <i class="fa fa-plus"></i> Agregar
+        </button>
+    </div>
+    <div class="box-body">       
+            <div class="form-horizontal">
+                <div class="container">
+                   
+                    <!-- Lista de Especialidades-->
+                    <div class="row">
+
+                        @if (Model != null )
+                        {
+                            foreach (var Especialidad in Model.OrderBy(r => r.Especialidad.Nombre).ToList())
+                            {
+                                        <!-- Acordion -->
+                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                    <!-- Collapsable 1 - Cardiologia-->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingThree">
+                                            <div class="panel-title">
+                                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_@Especialidad.ID" aria-expanded="false" aria-controls="collapseThree">
+                                                    @Especialidad.Especialidad.Nombre
+                                                </a>
+                                                                                                
+                                                <a class="btn pull-right">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+
+                                                <a class="btn pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CentroDeSalud/EditEspecialidad/@Especialidad.ID', 'Detalle', 'Centro de Salud')">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+
+
+                                            </div>
+                                        </div>
+                                        <div id="collapse_@Especialidad.ID" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                            <div class="panel-body">
+                                                <ul class="todo-list">
+
+                                                    @foreach (var HorariosPorDia in Especialidad.HorariosPorEspecialidadPorCentroDeSalud.GroupBy(r => r.Dia))
+                                                    {
+
+                                                        <li>
+                                                            <div class="box box-success">
+                                                                <div class="box-header with-border">
+                                                                    <i class="fa fa-calendar"></i>
+
+                                                                    <h3 class="box-title">@((Dias)HorariosPorDia.FirstOrDefault().Dia)</h3>
+
+                                                                    @*<div class="pull-right">
+                                                                        <a class="btn"><i class="fa fa-trash-o"></i></a>
+                                                                        <a class="btn"><i class="fa fa-edit"></i></a>
+                                                                        
+                                                                    </div>*@
+                                                                </div>
+                                                                <!-- /.box-header -->
+                                                                <div class="box-body">
+                                                                    <ul>
+                                                                        @foreach (var Horario in HorariosPorDia)
+                                                                        {
+                                                                            <li><span class="fa fa-clock-o"></span> @Horario.Horarios.Hora hs - @Horario.Horarios1.Hora hs</li>
+                                                                        }
+                                                                    </ul>
+                                                                </div>
+                                                                <!-- /.box-body -->
+
+                                                            </div>
+                                                        </li>
+                                                    }
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                                            <!-- Mensaje "No hay Especialidades asociadas" -->
+                        }
+
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+</div>
+

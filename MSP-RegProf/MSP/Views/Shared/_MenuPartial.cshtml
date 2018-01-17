@@ -1,0 +1,26 @@
+﻿@{
+    List<TurApp.Models.MenuVM> menus;
+    var aux = Session["Menu"] as List<TurApp.Models.MenuVM>;
+    if (Session["Menu"] == null || aux.Count == 0)
+    {
+        String user = User.Identity.Name;
+
+        var menuClien = new TurApp.Controllers.MenuController();
+        if (Session["UserName"] != null)
+        {
+            Session["Menu"] = menuClien.GetMenu(Session["UserName"].ToString());
+            Session["Permisos"] = menuClien.GetPermisos(Session["UserName"].ToString());
+        }
+        else
+        {
+            Session["Menu"] = menuClien.GetMenu(user);
+            Session["Permisos"] = menuClien.GetPermisos(user);
+        }
+    }
+
+    menus = Session["Menu"] as List<TurApp.Models.MenuVM>;
+}
+<ul class="sidebar-menu">
+    @TurApp.Helpers.HtmlHelperExtensions.RenderMenu(menus);
+</ul>
+

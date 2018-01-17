@@ -1,0 +1,266 @@
+﻿@model MSP_RegProf.Models.Matricula
+
+@{
+    Layout = null;
+}
+
+
+<style>
+    /*.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+        padding-right: 5px;
+        padding-left: 5px;
+    }*/
+
+    legend {
+        border-bottom: 1px solid #3c8dbc;
+    }
+</style>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <!-- Grupo - Datos Titulos -->
+        <fieldset id="fsDatosTitulos">
+            <legend>Datos Titulos:</legend>
+
+
+            <!-- Fila 1 - Titulo y Organismo -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label col-md-3 col-md-offset-1" for="Titulo">Titulo:</label>
+                        <div class="col-md-8">
+                            @Html.DropDownList("TituloID", null, htmlAttributes: new { @class = "form-control select2Control", @style = "width:100%" })
+                            @Html.ValidationMessageFor(model => model.TituloID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label col-md-4" for="Organismo">Organismo:</label>
+                        <div class="col-md-8">
+                            @Html.DropDownList("OrganismoID", null, htmlAttributes: new { @class = "form-control select2Control" })
+                            @Html.ValidationMessageFor(model => model.OrganismoID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fila 2 - Revalido y Fecha Diploma -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label col-md-3 col-md-offset-1" for="Revalido">Revalido:</label>
+                        <div class="checkbox col-md-offset-1 col-md-4">
+                            @Html.CheckBox("Revalido", Model.Revalido ?? false)
+                            @Html.ValidationMessageFor(model => model.Revalido, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label col-md-4" for="NroDocumento">Fecha Diploma:</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.FechaDiploma, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                            @Html.ValidationMessageFor(model => model.FechaDiploma, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Fila 3 - Observacion Diploma -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <label class="control-label col-md-3" for="ObservacionDiploma">Observacion Diploma:</label>
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.ObservacionDiploma, new { @rows = "3", @style = "width: 100%;" })
+                            @Html.ValidationMessageFor(model => model.ObservacionDiploma, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+
+
+        <!-- Grupo - Datos Matricula -->
+        <fieldset id="fsDatosMatricula">
+            <legend>Datos Matricula:</legend>
+
+            <!-- Fila 1 - Nro Matricula, Folio y Libro -->
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group row">
+                        <label class="control-label col-md-6" for="NroMatricula">Nro Matricula:</label>
+                        <div class="col-md-5">
+                            @Html.EditorFor(model => model.NroMatricula, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NroMatricula, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group row">
+                        <label class="control-label col-md-4" for="Folio">Folio:</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Folio, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Folio, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group row">
+                        <label class="control-label col-md-4" for="libro">Libro:</label>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.libro, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.libro, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fila 2 - Nro Matricula, Folio y Libro -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group row">
+                        <label class="control-label col-md-6 col-md-offset-1" for="Habilitada">Habilitada:</label>
+                        <div class="col-md-3 col-md-offset-1 checkbox">
+                            @Html.EditorFor(model => model.Habilitada)
+                            @Html.ValidationMessageFor(model => model.Habilitada, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="form-group row">
+                        <label class="control-label col-md-4" for="TipoEstadoMatriculaID">Estado Matricula:</label>
+                        <div class="col-md-8">
+                            @Html.DropDownList("TipoEstadoMatriculaID", null, htmlAttributes: new { @class = "form-control select2Control" })
+                            @Html.ValidationMessageFor(model => model.TipoEstadoMatriculaID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Fila 3 - Observacion Matricula -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <label class="control-label col-md-3" for="ObservacionDiploma">Observacion Matricula:</label>
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.ObservacionMatricula, new { @rows = "3", @style = "width: 100%;" })
+                            @Html.ValidationMessageFor(model => model.ObservacionMatricula, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+
+
+        <!-- Grupo - Datos Retiro -->
+        <fieldset id="fsDatosRetiro">
+            <legend>Datos Retiro:</legend>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Retirado, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Retirado)
+                        @Html.ValidationMessageFor(model => model.Retirado, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FechaRetiro, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.FechaRetiro, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                    @Html.ValidationMessageFor(model => model.FechaRetiro, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </fieldset>
+
+    </div>
+
+
+    @Html.HiddenFor(model => model.PersonaID);
+    @Html.HiddenFor(model => model.FechaActualizacion);
+    @Html.HiddenFor(model => model.FechaInscripcion);
+}
+
+<script>
+    $(document).ready(function () {
+        $(".select2Control").select2({
+            width: 'element',
+        });
+
+        $(".select2-selection, .select2-selection--single").removeClass('select2-selection--single').addClass('form-control');
+
+
+
+        $('.datepicker').datepicker({
+            format: "dd/mm/yyyy",
+            language: "es",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "1930:+0"
+        });
+
+
+    });
+
+
+    //Click "Guardar"
+    $("#btnGuardar").unbind("click");
+    $("#btnGuardar").click(function () {
+        //debugger
+        $('#contenidoModal form').submit()
+    });
+
+    //Submit
+    $('form').submit(function () {
+        //debugger
+        if ($(this).valid()) {
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                beforeSend: function (xhr) {
+                    abrirWaiting();
+                },
+                success: function (result) {
+                    //debugger
+                    cerrarWaiting();
+                    if (result.ok) {
+                        window.location.href = window.location.href;
+                        cerrarModal();
+                        return;
+                    }
+                    $('#contenidoModal').html(result);
+                },
+                error: function () {
+                    cerrarWaiting();
+                }
+            });
+        }
+        return false;
+    });
+
+</script>

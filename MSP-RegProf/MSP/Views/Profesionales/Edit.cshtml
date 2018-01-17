@@ -1,0 +1,437 @@
+﻿@model MSP_RegProf.Models.Persona
+@using MSP_RegProf.Models
+@{
+    Layout = null;
+}
+
+<style>
+    .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+    legend {
+        border-bottom: 1px solid #3c8dbc;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="container">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <!-- Grupo - Datos Personales -->
+            <fieldset id="fsDatosPersonales">
+                <legend>Datos Personales:</legend>
+
+                <!-- Fila 1 - Nombre y Apellido -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="control-label col-md-2 col-md-offset-1" for="Apellido">Apellido:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Apellido, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Apellido, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="control-label col-md-2 col-md-offset-1" for="Nombre">Nombres:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 2 - Tipo DNI, Nro Doc y CUIL-->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="control-label col-md-4" for="TipodniID">Tipo DNI:</label>
+                            <div class="col-md-7">
+                                @Html.DropDownList("TipodniID", null, htmlAttributes: new { @class = "form-control select2Control" })
+                                @Html.ValidationMessageFor(model => model.TipodniID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="NroDocumento">Nro Doc.:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.NroDocumento, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NroDocumento, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="Firma">CUIL:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.CUIL, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CUIL, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Fila 3 - Estado Civil y Sexo -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="EstadoCivilID">Estado Civil:</label>
+                            <div class="col-md-8">
+                                @Html.DropDownList("EstadoCivilID", null, htmlAttributes: new { @class = "form-control select2Control" })
+                                @Html.ValidationMessageFor(model => model.EstadoCivilID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="SexoID">Sexo:</label>
+                            <div class="col-md-8">
+                                @Html.DropDownList("SexoID", null, htmlAttributes: new { @class = "form-control select2Control" })
+                                @Html.ValidationMessageFor(model => model.SexoID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 4 - Nacionalidad y Fecha Nac -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="NacionalidadID">Nacionalidad:</label>
+                            <div class="col-md-8">
+                                @Html.DropDownList("NacionalidadID", null, htmlAttributes: new { @class = "form-control select2Control" })
+                                @Html.ValidationMessageFor(model => model.NacionalidadID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="control-label col-md-4" for="FechaNacimiento">Fecha Nacimiento:</label>
+                            <div class="col-md-7">
+                                @Html.EditorFor(model => model.FechaNacimiento, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                                @Html.ValidationMessageFor(model => model.FechaNacimiento, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Grupo - Domicilio -->
+            <fieldset id="fsDomicilio">
+                <legend>Domicilio:</legend>
+
+                <!-- Fila 1 - Calle, Numero y Manzana -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="DomicilioCalle">Calle:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.DomicilioCalle, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DomicilioCalle, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="DomicilioNumero">Numero:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.DomicilioNumero, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DomicilioNumero, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="DomicilioManzana">Manzana:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.DomicilioManzana, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DomicilioManzana, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 2 - Piso, Depto y Barrio -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="DomicilioPiso">Piso:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.DomicilioPiso, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DomicilioPiso, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="DomicilioDepto">Depto:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.DomicilioDepto, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DomicilioDepto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="BarrioID">Barrio:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.BarrioID, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.BarrioID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 3 - Localidad y CP -->
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="LocalidadID">Localidad:</label>
+                            <div class="col-md-8">
+                                @*@Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control select2Control" })
+                                @Html.ValidationMessageFor(model => model.LocalidadID, "", new { @class = "text-danger" })*@
+
+                                <select id="LocalidadID" class="form-control select2Control">
+                                    @foreach (Departamento depto in ViewBag.Departamento)
+                                    {
+                                        <optgroup label="@depto.Nombre">
+
+                                            @foreach (Localidad loc in depto.Localidad.ToList())
+                                            {
+                                                <option value="@loc.ID">@loc.Nombre</option>
+                                            }
+                                        </optgroup>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="CodigoPostal">CP:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.CodigoPostal, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CodigoPostal, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Fila 4 - CalleReferencia1 y CalleReferencia2 -->
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="CalleReferencia1">Calle Ref 1:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.CalleReferencia1, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CalleReferencia1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="CalleReferencia2">Calle Ref 2:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.CalleReferencia2, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CalleReferencia2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </fieldset>
+
+
+            <!-- Grupo - Domicilio Laboral -->
+            <fieldset id="fsDomicilio">
+                <legend>Domicilio Laboral:</legend>
+
+                <!-- Fila 1 - Calle, Numero y Manzana -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="DomicilioCalle">Calle:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.DomicilioLaboralCalle, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DomicilioLaboralCalle, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="DomicilioNumero">Numero:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.DomicilioLaboralNumero, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DomicilioLaboralNumero, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="DomicilioManzana">Manzana:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.DomicilioLaboralManzana, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DomicilioLaboralManzana, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 2 - Piso, Depto y Barrio -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="DomicilioPiso">Piso:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.DomicilioLaboralPiso, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DomicilioLaboralPiso, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="DomicilioDepto">Depto:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.DomicilioLaboralDepto, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DomicilioLaboralDepto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </fieldset>
+
+
+            <!-- Grupo - Contacto -->
+            <fieldset id="fsTelefono">
+                <legend>Contacto:</legend>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="Firma">Tel. Fijo:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.TelefonoFijo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TelefonoFijo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="control-label col-md-4" for="Firma">Tel. Celular:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.TelefonoCelular, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TelefonoCelular, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="Firma">Email:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </fieldset>
+
+        </div>
+    </div>
+
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.FechaAlta)
+    @Html.HiddenFor(model => model.FechaActualizacion)
+}
+
+<script>
+    $(document).ready(function () {
+        $(".select2Control").select2();
+
+        $("#LocalidadID").select2({
+            matcher: modelMatcher,
+        });
+
+        $(".select2-selection, .select2-selection--single").removeClass('select2-selection--single').addClass('form-control');
+
+        $('.datepicker').datepicker({
+            format: "dd/mm/yyyy",
+            language: "es",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "1930:+0"
+        });
+    });
+
+
+    //Click "Guardar"
+    $("#btnGuardar").unbind("click");
+    $("#btnGuardar").click(function () {
+        //debugger
+        $('#contenidoModal form').submit()
+    });
+
+    //Submit
+    $('form').submit(function () {
+        //debugger
+        if ($(this).valid()) {
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                beforeSend: function (xhr) {
+                    abrirWaiting();
+                },
+                success: function (result) {
+                    //debugger
+                    cerrarWaiting();
+                    if (result.ok) {
+                        $('#contenProfesionales').html(result.data);
+                        cerrarModal();
+                        return;
+                    }
+                    $('#contenidoModal').html(result);
+                },
+                error: function () {
+                    cerrarWaiting();
+                }
+            });
+        }
+        return false;
+    });
+
+</script>

@@ -1,0 +1,280 @@
+﻿@model MSP_RegProf.Models.CentroDeSalud
+@using MSP_RegProf.Models
+@{
+    //Layout = null;
+    ViewBag.Title = "Centros de Salud";
+    short csId = Model.ID;
+}
+
+<style>
+    #map {
+        height: 500px;
+        width: 100%;
+    }
+
+    .todo-list li{
+        margin-bottom : 0px;
+    }
+
+    .todo-list .box {
+        margin-bottom: 0px;
+    }
+
+    .todo-list li {
+        list-style: none;
+    }
+
+    .panel-title .btn {
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+
+    .todo-list .btn {
+        padding-bottom: 0px;
+        padding-top: 0px;
+    }
+
+    .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+    .legend {
+        border-bottom: 1px solid #3c8dbc;
+        display: block;
+        width: 100%;
+        padding: 0;
+        margin-bottom: 20px;
+        font-size: 21px;
+        line-height: inherit;
+        color: #333333;
+        border: 0;
+    }
+</style>
+
+
+<section class="content-header">
+    <h1>
+        @Model.Nombre
+        <small>Centro de Salud</small>
+    </h1>
+
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="@Url.Action("Index","CentroDeSalud")">Centros de Centros de Salud</a></li>
+        <li class="active">Editar</li>
+    </ol>
+</section>
+
+<div class="content">
+
+    <!-- Box - Datos Centro de Salud -->
+    <div class="box box-primary">
+
+        <div class="box-header">
+            <h3 class="box-title">Datos Generales:</h3>
+        </div>
+
+        <div class="box-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <div class="container">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <!-- Grupo - Datos Generales -->
+                        <!-- Fila 1 - Nombre y Direccion -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="Apellido">Nombre:</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="Nombre">Direccion:</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fila 2 - Departamento y Localidad -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="Depto">Depto:</label>
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("DepartamentoID", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Localidad.DepartamentoID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="Apellido">Localidad:</label>
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.LocalidadID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Fila 3 - Telefono y EMail -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="Apellido">Telefono:</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="Apellido">EMail:</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.EMail, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.EMail, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Fila 4 - Imagen -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="Apellido">Imagen:</label>
+                                    <div class="col-md-8">
+                                        <input type="file" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+
+    <!-- Box - Lineas de Colectivos -->
+    <div class="box box-primary">
+
+        <div class="box-header">
+            <h3 class="box-title">Lineas de Colectivos:</h3>
+        </div>
+
+       
+    </div>
+
+
+    <!-- Box - Especialidades y Horarios -->
+    @{
+        var EspecialidadPorCentroDeSaludModel = new List<EspecialidadPorCentroDeSalud>();
+
+        if (Model.EspecialidadPorCentroDeSalud != null && Model.EspecialidadPorCentroDeSalud.Count > 0)
+        {
+            EspecialidadPorCentroDeSaludModel = Model.EspecialidadPorCentroDeSalud.ToList();
+        }
+
+    }
+    <div id="EspecialidadPartial">
+        @Html.Partial("_EspecialidadesPartial", EspecialidadPorCentroDeSaludModel, new ViewDataDictionary { { "csId", Model.ID } })
+    </div>
+
+    <!-- Box - Lineas de Colectivos -->
+    <div class="box box-primary">
+
+        <div class="box-header">
+            <h3 class="box-title">Especialidades y Horarios:</h3>
+        </div>
+
+        <div class="box-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <div class="container">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <!-- Grupo - Geolocalizacion -->
+                        <!-- Fila 1 - Latitud y Longitud -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="Latitud">Latitud:</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Latitud, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Latitud, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="Longitud">Longitud:</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Longitud, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Longitud, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            @*style="display:none"*@
+                            <div class="col-md-12">
+                                <div id="map"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script>
+    function initMap() {
+        //var uluru = { lat: -25.363, lng: 131.044 };,,7.75z
+        var SanJuan = { lat: -30.526, lng: -69.592 };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 7,
+            center: SanJuan
+        });
+        //var marker = new google.maps.Marker({
+        //    position: uluru,
+        //    map: map
+        //});
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZK0bGv6wCVNOpLiLRLgV_hy8B-Y07pp4&callback=initMap">
+</script>

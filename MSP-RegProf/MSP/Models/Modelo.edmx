@@ -1,0 +1,2509 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
+          <Property Name="Icono" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'MSP-Ares-Desarrollo.dbo.AsignacionTipo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="AsignacionTipo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'MSP-Ares-Desarrollo.dbo.AspNetMenuAccion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="AspNetMenuAccion">
+          <Key>
+            <PropertyRef Name="IdMenu" />
+            <PropertyRef Name="IdAccion" />
+          </Key>
+          <Property Name="IdMenu" Type="int" Nullable="false" />
+          <Property Name="IdAccion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CarreraMatriculada">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ResolucionHabilitante" Type="nvarchar" MaxLength="200" />
+          <Property Name="ResolucionCierre" Type="nvarchar" MaxLength="200" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="FechaAlta" Type="datetime" />
+          <Property Name="TipoEstadoProfesionID" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CentroDeSalud">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Latitud" Type="nvarchar" MaxLength="20" />
+          <Property Name="Longitud" Type="nvarchar" MaxLength="20" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="50" />
+          <Property Name="EMail" Type="nvarchar" MaxLength="50" />
+          <Property Name="URLImagenDelCentroDeSalud" Type="nvarchar" MaxLength="200" />
+          <Property Name="LocalidadID" Type="smallint" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="FechaUltimaActualizacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ProvinciaID" Type="tinyint" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+          <Property Name="id_access" Type="int" />
+          <Property Name="Zona" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Especialidad">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EspecialidadPorCentroDeSalud">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CentroDeSaludID" Type="smallint" Nullable="false" />
+          <Property Name="EspecialidadID" Type="smallint" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Horarios">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Hora" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HorariosPorEspecialidadPorCentroDeSalud">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HorarioIDEntrada" Type="smallint" Nullable="false" />
+          <Property Name="HorarioIDSalida" Type="smallint" Nullable="false" />
+          <Property Name="EspecialidadPorCentroDeSaludID" Type="int" Nullable="false" />
+          <Property Name="Dia" Type="tinyint" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LineaColectivo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numero" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LineaColectivoPorCentroDeSalud">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LineaColectivoID" Type="smallint" Nullable="false" />
+          <Property Name="CentroDeSaludID" Type="smallint" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Localidad">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DepartamentoID" Type="smallint" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+          <Property Name="id_access" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Matricula">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonaID" Type="int" Nullable="false" />
+          <Property Name="TituloID" Type="int" Nullable="false" />
+          <Property Name="OrganismoID" Type="int" Nullable="false" />
+          <Property Name="Revalido" Type="bit" />
+          <Property Name="FechaDiploma" Type="datetime" />
+          <Property Name="ObservacionDiploma" Type="nvarchar(max)" />
+          <Property Name="FechaInscripcion" Type="datetime" />
+          <Property Name="NroMatricula" Type="int" Nullable="false" />
+          <Property Name="Folio" Type="nvarchar" MaxLength="10" />
+          <Property Name="libro" Type="nvarchar" MaxLength="10" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="Habilitada" Type="bit" Nullable="false" />
+          <Property Name="TipoEstadoMatriculaID" Type="tinyint" Nullable="false" />
+          <Property Name="Retirado" Type="bit" Nullable="false" />
+          <Property Name="FechaRetiro" Type="datetime" />
+          <Property Name="ObservacionMatricula" Type="nvarchar(max)" />
+          <Property Name="TieneAnalitico" Type="bit" Nullable="false" />
+          <Property Name="TieneTitulo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PadreID" Type="int" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Orden" Type="tinyint" />
+          <Property Name="Icono" Type="nvarchar" MaxLength="50" />
+          <Property Name="Accion" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Controlador" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+          <Property Name="mnuId" Type="int" />
+        </EntityType>
+        <EntityType Name="MenuAspNetRoles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuId" Type="int" Nullable="false" />
+          <Property Name="AspNetRolesId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuAspNetRolesAccion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccionId" Type="int" Nullable="false" />
+          <Property Name="MenuAspNetRolesId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Organismo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="200" />
+          <Property Name="ProvinciaID" Type="tinyint" Nullable="false" />
+          <Property Name="id_access" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+          <Property Name="id_access" Type="int" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Apellido" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TipodniID" Type="tinyint" Nullable="false" />
+          <Property Name="NroDocumento" Type="nvarchar" MaxLength="30" />
+          <Property Name="EstadoCivilID" Type="tinyint" />
+          <Property Name="SexoID" Type="tinyint" />
+          <Property Name="FechaNacimiento" Type="datetime" />
+          <Property Name="LocalidadID" Type="smallint" />
+          <Property Name="CodigoPostal" Type="nvarchar" MaxLength="10" />
+          <Property Name="DomicilioCalle" Type="nvarchar" MaxLength="100" />
+          <Property Name="DomicilioNumero" Type="nvarchar" MaxLength="20" />
+          <Property Name="DomicilioManzana" Type="nvarchar" MaxLength="20" />
+          <Property Name="DomicilioPiso" Type="nvarchar" MaxLength="20" />
+          <Property Name="DomicilioDepto" Type="nvarchar" MaxLength="20" />
+          <Property Name="CalleReferencia1" Type="nvarchar" MaxLength="100" />
+          <Property Name="CalleReferencia2" Type="nvarchar" MaxLength="100" />
+          <Property Name="BarrioID" Type="int" />
+          <Property Name="TelefonoFijo" Type="nvarchar" MaxLength="50" />
+          <Property Name="TelefonoCelular" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="70" />
+          <Property Name="LocalidadNacimientoID" Type="int" />
+          <Property Name="NacionalidadID" Type="int" />
+          <Property Name="CUIL" Type="nvarchar" MaxLength="13" />
+          <Property Name="Fallecido" Type="bit" Nullable="false" />
+          <Property Name="FechaActualizacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+          <Property Name="FechaFallecido" Type="datetime" />
+          <Property Name="DomicilioLaboralCalle" Type="nvarchar" MaxLength="100" />
+          <Property Name="DomicilioLaboralNumero" Type="nvarchar" MaxLength="20" />
+          <Property Name="DomicilioLaboralManzana" Type="nvarchar" MaxLength="20" />
+          <Property Name="DomicilioLaboralPiso" Type="nvarchar" MaxLength="20" />
+          <Property Name="DomicilioLaboralDepto" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Profesional">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonaId" Type="int" Nullable="false" />
+          <Property Name="SisaId" Type="int" />
+          <Property Name="FechaInscripionSisa" Type="datetime" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="ActualizadoSisa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PaisID" Type="int" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+          <Property Name="id_access" Type="int" />
+        </EntityType>
+        <EntityType Name="RegistroActualizacionTablas">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreTabla" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaUltimaActualizacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoDNI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoEstadoCivil">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoEstadoMatricula">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Habilitada" Type="bit" Nullable="false" />
+          <Property Name="PermiteCambio" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoEstadoProfesion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoFormacion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoNivelAcademico">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoSexo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Titulo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="TipoFormacionID" Type="tinyint" Nullable="false" />
+          <Property Name="TipoNivelAcademicoID" Type="tinyint" Nullable="false" />
+          <Property Name="CarreraMatriculadaID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AspNetMenuAccion_Accion">
+          <End Role="Accion" Type="Self.Accion" Multiplicity="1" />
+          <End Role="AspNetMenuAccion" Type="Self.AspNetMenuAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AspNetMenuAccion">
+              <PropertyRef Name="IdAccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetMenuAccion_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="AspNetMenuAccion" Type="Self.AspNetMenuAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AspNetMenuAccion">
+              <PropertyRef Name="IdMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarreraMatriculada_TipoEstadoProfesion">
+          <End Role="TipoEstadoProfesion" Type="Self.TipoEstadoProfesion" Multiplicity="1" />
+          <End Role="CarreraMatriculada" Type="Self.CarreraMatriculada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEstadoProfesion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CarreraMatriculada">
+              <PropertyRef Name="TipoEstadoProfesionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CentroDeSalud_Localidad">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="1" />
+          <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CentroDeSalud">
+              <PropertyRef Name="LocalidadID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Departamento_Provincia">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Departamento">
+              <PropertyRef Name="ProvinciaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EspecialidadPorCentroDeSalud_CentroDeSalud">
+          <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="1" />
+          <End Role="EspecialidadPorCentroDeSalud" Type="Self.EspecialidadPorCentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroDeSalud">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EspecialidadPorCentroDeSalud">
+              <PropertyRef Name="CentroDeSaludID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EspecialidadPorCentroDeSalud_Especialidad">
+          <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
+          <End Role="EspecialidadPorCentroDeSalud" Type="Self.EspecialidadPorCentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidad">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EspecialidadPorCentroDeSalud">
+              <PropertyRef Name="EspecialidadID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HorariosPorEspecialidadPorCentroDeSalud_EspecialidadPorCentroDeSalud">
+          <End Role="EspecialidadPorCentroDeSalud" Type="Self.EspecialidadPorCentroDeSalud" Multiplicity="1" />
+          <End Role="HorariosPorEspecialidadPorCentroDeSalud" Type="Self.HorariosPorEspecialidadPorCentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EspecialidadPorCentroDeSalud">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HorariosPorEspecialidadPorCentroDeSalud">
+              <PropertyRef Name="EspecialidadPorCentroDeSaludID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HorariosPorEspecialidadPorCentroDeSalud_Horarios">
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="1" />
+          <End Role="HorariosPorEspecialidadPorCentroDeSalud" Type="Self.HorariosPorEspecialidadPorCentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Horarios">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HorariosPorEspecialidadPorCentroDeSalud">
+              <PropertyRef Name="HorarioIDEntrada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HorariosPorEspecialidadPorCentroDeSalud_Horarios1">
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="1" />
+          <End Role="HorariosPorEspecialidadPorCentroDeSalud" Type="Self.HorariosPorEspecialidadPorCentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Horarios">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HorariosPorEspecialidadPorCentroDeSalud">
+              <PropertyRef Name="HorarioIDSalida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LineaColectivoPorCentroDeSalud_CentroDeSalud">
+          <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="1" />
+          <End Role="LineaColectivoPorCentroDeSalud" Type="Self.LineaColectivoPorCentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroDeSalud">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LineaColectivoPorCentroDeSalud">
+              <PropertyRef Name="CentroDeSaludID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LineaColectivoPorCentroDeSalud_LineaColectivo">
+          <End Role="LineaColectivo" Type="Self.LineaColectivo" Multiplicity="1" />
+          <End Role="LineaColectivoPorCentroDeSalud" Type="Self.LineaColectivoPorCentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LineaColectivo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LineaColectivoPorCentroDeSalud">
+              <PropertyRef Name="LineaColectivoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Localidad_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Localidad">
+              <PropertyRef Name="DepartamentoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_Organismo">
+          <End Role="Organismo" Type="Self.Organismo" Multiplicity="1" />
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organismo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="OrganismoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="PersonaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_TipoEstadoMatricula">
+          <End Role="TipoEstadoMatricula" Type="Self.TipoEstadoMatricula" Multiplicity="1" />
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEstadoMatricula">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="TipoEstadoMatriculaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_Titulo">
+          <End Role="Titulo" Type="Self.Titulo" Multiplicity="1" />
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Titulo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="TituloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Menu1">
+              <PropertyRef Name="PadreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRoles_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="MenuAspNetRoles" Type="Self.MenuAspNetRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuAspNetRoles">
+              <PropertyRef Name="AspNetRolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRoles_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="MenuAspNetRoles" Type="Self.MenuAspNetRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRoles">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRolesAccion_Accion">
+          <End Role="Accion" Type="Self.Accion" Multiplicity="1" />
+          <End Role="MenuAspNetRolesAccion" Type="Self.MenuAspNetRolesAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRolesAccion">
+              <PropertyRef Name="AccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRolesAccion_MenuAspNetRoles">
+          <End Role="MenuAspNetRoles" Type="Self.MenuAspNetRoles" Multiplicity="1" />
+          <End Role="MenuAspNetRolesAccion" Type="Self.MenuAspNetRolesAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuAspNetRoles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRolesAccion">
+              <PropertyRef Name="MenuAspNetRolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organismo_Provincia">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
+          <End Role="Organismo" Type="Self.Organismo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Organismo">
+              <PropertyRef Name="ProvinciaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_Pais">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="NacionalidadID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_TipoDNI">
+          <End Role="TipoDNI" Type="Self.TipoDNI" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDNI">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="TipodniID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_TipoEstadoCivil">
+          <End Role="TipoEstadoCivil" Type="Self.TipoEstadoCivil" Multiplicity="0..1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEstadoCivil">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="EstadoCivilID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_TipoSexo">
+          <End Role="TipoSexo" Type="Self.TipoSexo" Multiplicity="0..1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoSexo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="SexoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profesional_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Profesional" Type="Self.Profesional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Profesional">
+              <PropertyRef Name="PersonaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provincia_Pais">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Provincia">
+              <PropertyRef Name="PaisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Titulo_CarreraMatriculada">
+          <End Role="CarreraMatriculada" Type="Self.CarreraMatriculada" Multiplicity="1" />
+          <End Role="Titulo" Type="Self.Titulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarreraMatriculada">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Titulo">
+              <PropertyRef Name="CarreraMatriculadaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Titulo_TipoFormacion">
+          <End Role="TipoFormacion" Type="Self.TipoFormacion" Multiplicity="1" />
+          <End Role="Titulo" Type="Self.Titulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoFormacion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Titulo">
+              <PropertyRef Name="TipoFormacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Titulo_TipoNivelAcademico">
+          <End Role="TipoNivelAcademico" Type="Self.TipoNivelAcademico" Multiplicity="1" />
+          <End Role="Titulo" Type="Self.Titulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoNivelAcademico">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Titulo">
+              <PropertyRef Name="TipoNivelAcademicoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetPermisosPorNombreDeUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Accion" EntityType="Self.Accion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarreraMatriculada" EntityType="Self.CarreraMatriculada" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CentroDeSalud" EntityType="Self.CentroDeSalud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Especialidad" EntityType="Self.Especialidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EspecialidadPorCentroDeSalud" EntityType="Self.EspecialidadPorCentroDeSalud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Horarios" EntityType="Self.Horarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HorariosPorEspecialidadPorCentroDeSalud" EntityType="Self.HorariosPorEspecialidadPorCentroDeSalud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LineaColectivo" EntityType="Self.LineaColectivo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LineaColectivoPorCentroDeSalud" EntityType="Self.LineaColectivoPorCentroDeSalud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Matricula" EntityType="Self.Matricula" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuAspNetRoles" EntityType="Self.MenuAspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuAspNetRolesAccion" EntityType="Self.MenuAspNetRolesAccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Organismo" EntityType="Self.Organismo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profesional" EntityType="Self.Profesional" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegistroActualizacionTablas" EntityType="Self.RegistroActualizacionTablas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoDNI" EntityType="Self.TipoDNI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoEstadoCivil" EntityType="Self.TipoEstadoCivil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoEstadoMatricula" EntityType="Self.TipoEstadoMatricula" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoEstadoProfesion" EntityType="Self.TipoEstadoProfesion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoFormacion" EntityType="Self.TipoFormacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoNivelAcademico" EntityType="Self.TipoNivelAcademico" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoSexo" EntityType="Self.TipoSexo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Titulo" EntityType="Self.Titulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AsignacionTipo" EntityType="Self.AsignacionTipo" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AsignacionTipo].[ID] AS [ID], 
+    [AsignacionTipo].[Descripcion] AS [Descripcion]
+    FROM [dbo].[AsignacionTipo] AS [AsignacionTipo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AspNetMenuAccion" EntityType="Self.AspNetMenuAccion" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AspNetMenuAccion].[IdMenu] AS [IdMenu], 
+    [AspNetMenuAccion].[IdAccion] AS [IdAccion]
+    FROM [dbo].[AspNetMenuAccion] AS [AspNetMenuAccion]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_AspNetMenuAccion_Accion" Association="Self.FK_AspNetMenuAccion_Accion">
+            <End Role="Accion" EntitySet="Accion" />
+            <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetMenuAccion_Menu" Association="Self.FK_AspNetMenuAccion_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarreraMatriculada_TipoEstadoProfesion" Association="Self.FK_CarreraMatriculada_TipoEstadoProfesion">
+            <End Role="TipoEstadoProfesion" EntitySet="TipoEstadoProfesion" />
+            <End Role="CarreraMatriculada" EntitySet="CarreraMatriculada" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CentroDeSalud_Localidad" Association="Self.FK_CentroDeSalud_Localidad">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Departamento_Provincia" Association="Self.FK_Departamento_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Departamento" EntitySet="Departamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EspecialidadPorCentroDeSalud_CentroDeSalud" Association="Self.FK_EspecialidadPorCentroDeSalud_CentroDeSalud">
+            <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
+            <End Role="EspecialidadPorCentroDeSalud" EntitySet="EspecialidadPorCentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EspecialidadPorCentroDeSalud_Especialidad" Association="Self.FK_EspecialidadPorCentroDeSalud_Especialidad">
+            <End Role="Especialidad" EntitySet="Especialidad" />
+            <End Role="EspecialidadPorCentroDeSalud" EntitySet="EspecialidadPorCentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HorariosPorEspecialidadPorCentroDeSalud_EspecialidadPorCentroDeSalud" Association="Self.FK_HorariosPorEspecialidadPorCentroDeSalud_EspecialidadPorCentroDeSalud">
+            <End Role="EspecialidadPorCentroDeSalud" EntitySet="EspecialidadPorCentroDeSalud" />
+            <End Role="HorariosPorEspecialidadPorCentroDeSalud" EntitySet="HorariosPorEspecialidadPorCentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HorariosPorEspecialidadPorCentroDeSalud_Horarios" Association="Self.FK_HorariosPorEspecialidadPorCentroDeSalud_Horarios">
+            <End Role="Horarios" EntitySet="Horarios" />
+            <End Role="HorariosPorEspecialidadPorCentroDeSalud" EntitySet="HorariosPorEspecialidadPorCentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HorariosPorEspecialidadPorCentroDeSalud_Horarios1" Association="Self.FK_HorariosPorEspecialidadPorCentroDeSalud_Horarios1">
+            <End Role="Horarios" EntitySet="Horarios" />
+            <End Role="HorariosPorEspecialidadPorCentroDeSalud" EntitySet="HorariosPorEspecialidadPorCentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LineaColectivoPorCentroDeSalud_CentroDeSalud" Association="Self.FK_LineaColectivoPorCentroDeSalud_CentroDeSalud">
+            <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
+            <End Role="LineaColectivoPorCentroDeSalud" EntitySet="LineaColectivoPorCentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LineaColectivoPorCentroDeSalud_LineaColectivo" Association="Self.FK_LineaColectivoPorCentroDeSalud_LineaColectivo">
+            <End Role="LineaColectivo" EntitySet="LineaColectivo" />
+            <End Role="LineaColectivoPorCentroDeSalud" EntitySet="LineaColectivoPorCentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Localidad_Departamento" Association="Self.FK_Localidad_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Localidad" EntitySet="Localidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_Organismo" Association="Self.FK_Matricula_Organismo">
+            <End Role="Organismo" EntitySet="Organismo" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_Persona" Association="Self.FK_Matricula_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_TipoEstadoMatricula" Association="Self.FK_Matricula_TipoEstadoMatricula">
+            <End Role="TipoEstadoMatricula" EntitySet="TipoEstadoMatricula" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_Titulo" Association="Self.FK_Matricula_Titulo">
+            <End Role="Titulo" EntitySet="Titulo" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Menu1" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRoles_AspNetRoles" Association="Self.FK_MenuAspNetRoles_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRoles_Menu" Association="Self.FK_MenuAspNetRoles_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRolesAccion_Accion" Association="Self.FK_MenuAspNetRolesAccion_Accion">
+            <End Role="Accion" EntitySet="Accion" />
+            <End Role="MenuAspNetRolesAccion" EntitySet="MenuAspNetRolesAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRolesAccion_MenuAspNetRoles" Association="Self.FK_MenuAspNetRolesAccion_MenuAspNetRoles">
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+            <End Role="MenuAspNetRolesAccion" EntitySet="MenuAspNetRolesAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organismo_Provincia" Association="Self.FK_Organismo_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Organismo" EntitySet="Organismo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_Pais" Association="Self.FK_Persona_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_TipoDNI" Association="Self.FK_Persona_TipoDNI">
+            <End Role="TipoDNI" EntitySet="TipoDNI" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_TipoEstadoCivil" Association="Self.FK_Persona_TipoEstadoCivil">
+            <End Role="TipoEstadoCivil" EntitySet="TipoEstadoCivil" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_TipoSexo" Association="Self.FK_Persona_TipoSexo">
+            <End Role="TipoSexo" EntitySet="TipoSexo" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profesional_Persona" Association="Self.FK_Profesional_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Profesional" EntitySet="Profesional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provincia_Pais" Association="Self.FK_Provincia_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Provincia" EntitySet="Provincia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Titulo_CarreraMatriculada" Association="Self.FK_Titulo_CarreraMatriculada">
+            <End Role="CarreraMatriculada" EntitySet="CarreraMatriculada" />
+            <End Role="Titulo" EntitySet="Titulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Titulo_TipoFormacion" Association="Self.FK_Titulo_TipoFormacion">
+            <End Role="TipoFormacion" EntitySet="TipoFormacion" />
+            <End Role="Titulo" EntitySet="Titulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Titulo_TipoNivelAcademico" Association="Self.FK_Titulo_TipoNivelAcademico">
+            <End Role="TipoNivelAcademico" EntitySet="TipoNivelAcademico" />
+            <End Role="Titulo" EntitySet="Titulo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <NavigationProperty Name="MenuAspNetRoles" Relationship="Model.FK_MenuAspNetRoles_AspNetRoles" FromRole="AspNetRoles" ToRole="MenuAspNetRoles" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CarreraMatriculada">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ResolucionHabilitante" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ResolucionCierre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+          <Property Name="TipoEstadoProfesionID" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="TipoEstadoProfesion" Relationship="Self.FK_CarreraMatriculada_TipoEstadoProfesion" FromRole="CarreraMatriculada" ToRole="TipoEstadoProfesion" />
+          <NavigationProperty Name="Titulo" Relationship="Self.FK_Titulo_CarreraMatriculada" FromRole="CarreraMatriculada" ToRole="Titulo" />
+        </EntityType>
+        <EntityType Name="CentroDeSalud">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Latitud" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Longitud" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="URLImagenDelCentroDeSalud" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LocalidadID" Type="Int16" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="FechaUltimaActualizacion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Localidad" Relationship="Self.FK_CentroDeSalud_Localidad" FromRole="CentroDeSalud" ToRole="Localidad" />
+          <NavigationProperty Name="EspecialidadPorCentroDeSalud" Relationship="Self.FK_EspecialidadPorCentroDeSalud_CentroDeSalud" FromRole="CentroDeSalud" ToRole="EspecialidadPorCentroDeSalud" />
+          <NavigationProperty Name="LineaColectivoPorCentroDeSalud" Relationship="Self.FK_LineaColectivoPorCentroDeSalud_CentroDeSalud" FromRole="CentroDeSalud" ToRole="LineaColectivoPorCentroDeSalud" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProvinciaID" Type="Byte" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <Property Name="id_access" Type="Int32" />
+          <Property Name="Zona" Type="Byte" />
+          <NavigationProperty Name="Provincia" Relationship="Self.FK_Departamento_Provincia" FromRole="Departamento" ToRole="Provincia" />
+          <NavigationProperty Name="Localidad" Relationship="Self.FK_Localidad_Departamento" FromRole="Departamento" ToRole="Localidad" />
+        </EntityType>
+        <EntityType Name="Especialidad">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EspecialidadPorCentroDeSalud" Relationship="Self.FK_EspecialidadPorCentroDeSalud_Especialidad" FromRole="Especialidad" ToRole="EspecialidadPorCentroDeSalud" />
+        </EntityType>
+        <EntityType Name="EspecialidadPorCentroDeSalud">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CentroDeSaludID" Type="Int16" Nullable="false" />
+          <Property Name="EspecialidadID" Type="Int16" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CentroDeSalud" Relationship="Self.FK_EspecialidadPorCentroDeSalud_CentroDeSalud" FromRole="EspecialidadPorCentroDeSalud" ToRole="CentroDeSalud" />
+          <NavigationProperty Name="Especialidad" Relationship="Self.FK_EspecialidadPorCentroDeSalud_Especialidad" FromRole="EspecialidadPorCentroDeSalud" ToRole="Especialidad" />
+          <NavigationProperty Name="HorariosPorEspecialidadPorCentroDeSalud" Relationship="Self.FK_HorariosPorEspecialidadPorCentroDeSalud_EspecialidadPorCentroDeSalud" FromRole="EspecialidadPorCentroDeSalud" ToRole="HorariosPorEspecialidadPorCentroDeSalud" />
+        </EntityType>
+        <EntityType Name="Horarios">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Hora" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="HorariosPorEspecialidadPorCentroDeSalud" Relationship="Self.FK_HorariosPorEspecialidadPorCentroDeSalud_Horarios" FromRole="Horarios" ToRole="HorariosPorEspecialidadPorCentroDeSalud" />
+          <NavigationProperty Name="HorariosPorEspecialidadPorCentroDeSalud1" Relationship="Self.FK_HorariosPorEspecialidadPorCentroDeSalud_Horarios1" FromRole="Horarios" ToRole="HorariosPorEspecialidadPorCentroDeSalud" />
+        </EntityType>
+        <EntityType Name="HorariosPorEspecialidadPorCentroDeSalud">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HorarioIDEntrada" Type="Int16" Nullable="false" />
+          <Property Name="HorarioIDSalida" Type="Int16" Nullable="false" />
+          <Property Name="EspecialidadPorCentroDeSaludID" Type="Int32" Nullable="false" />
+          <Property Name="Dia" Type="Byte" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EspecialidadPorCentroDeSalud" Relationship="Self.FK_HorariosPorEspecialidadPorCentroDeSalud_EspecialidadPorCentroDeSalud" FromRole="HorariosPorEspecialidadPorCentroDeSalud" ToRole="EspecialidadPorCentroDeSalud" />
+          <NavigationProperty Name="Horarios" Relationship="Self.FK_HorariosPorEspecialidadPorCentroDeSalud_Horarios" FromRole="HorariosPorEspecialidadPorCentroDeSalud" ToRole="Horarios" />
+          <NavigationProperty Name="Horarios1" Relationship="Self.FK_HorariosPorEspecialidadPorCentroDeSalud_Horarios1" FromRole="HorariosPorEspecialidadPorCentroDeSalud" ToRole="Horarios" />
+        </EntityType>
+        <EntityType Name="LineaColectivo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LineaColectivoPorCentroDeSalud" Relationship="Self.FK_LineaColectivoPorCentroDeSalud_LineaColectivo" FromRole="LineaColectivo" ToRole="LineaColectivoPorCentroDeSalud" />
+        </EntityType>
+        <EntityType Name="LineaColectivoPorCentroDeSalud">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LineaColectivoID" Type="Int16" Nullable="false" />
+          <Property Name="CentroDeSaludID" Type="Int16" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CentroDeSalud" Relationship="Self.FK_LineaColectivoPorCentroDeSalud_CentroDeSalud" FromRole="LineaColectivoPorCentroDeSalud" ToRole="CentroDeSalud" />
+          <NavigationProperty Name="LineaColectivo" Relationship="Self.FK_LineaColectivoPorCentroDeSalud_LineaColectivo" FromRole="LineaColectivoPorCentroDeSalud" ToRole="LineaColectivo" />
+        </EntityType>
+        <EntityType Name="Localidad">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DepartamentoID" Type="Int16" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <Property Name="id_access" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CentroDeSalud" Relationship="Self.FK_CentroDeSalud_Localidad" FromRole="Localidad" ToRole="CentroDeSalud" />
+          <NavigationProperty Name="Departamento" Relationship="Self.FK_Localidad_Departamento" FromRole="Localidad" ToRole="Departamento" />
+        </EntityType>
+        <EntityType Name="Matricula">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonaID" Type="Int32" Nullable="false" />
+          <Property Name="TituloID" Type="Int32" Nullable="false" />
+          <Property Name="OrganismoID" Type="Int32" Nullable="false" />
+          <Property Name="Revalido" Type="Boolean" />
+          <Property Name="FechaDiploma" Type="DateTime" Precision="3" />
+          <Property Name="ObservacionDiploma" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FechaInscripcion" Type="DateTime" Precision="3" />
+          <Property Name="NroMatricula" Type="Int32" Nullable="false" />
+          <Property Name="Folio" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="libro" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="Habilitada" Type="Boolean" Nullable="false" />
+          <Property Name="TipoEstadoMatriculaID" Type="Byte" Nullable="false" />
+          <Property Name="Retirado" Type="Boolean" Nullable="false" />
+          <Property Name="FechaRetiro" Type="DateTime" Precision="3" />
+          <Property Name="ObservacionMatricula" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TieneAnalitico" Type="Boolean" Nullable="false" />
+          <Property Name="TieneTitulo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Organismo" Relationship="Self.FK_Matricula_Organismo" FromRole="Matricula" ToRole="Organismo" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_Matricula_Persona" FromRole="Matricula" ToRole="Persona" />
+          <NavigationProperty Name="TipoEstadoMatricula" Relationship="Self.FK_Matricula_TipoEstadoMatricula" FromRole="Matricula" ToRole="TipoEstadoMatricula" />
+          <NavigationProperty Name="Titulo" Relationship="Self.FK_Matricula_Titulo" FromRole="Matricula" ToRole="Titulo" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PadreID" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Orden" Type="Byte" />
+          <Property Name="Icono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Accion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Controlador" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="mnuId" Type="Int32" />
+          <NavigationProperty Name="Menu1" Relationship="Self.FK_Menu_Menu" FromRole="Menu" ToRole="Menu1" />
+          <NavigationProperty Name="Menu2" Relationship="Self.FK_Menu_Menu" FromRole="Menu1" ToRole="Menu" />
+          <NavigationProperty Name="MenuAspNetRoles" Relationship="Model.FK_MenuAspNetRoles_Menu" FromRole="Menu" ToRole="MenuAspNetRoles" />
+          <NavigationProperty Name="Accion1" Relationship="Model.AspNetMenuAccion" FromRole="Menu" ToRole="Accion" />
+        </EntityType>
+        <EntityType Name="Organismo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProvinciaID" Type="Byte" Nullable="false" />
+          <Property Name="id_access" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Matricula" Relationship="Self.FK_Matricula_Organismo" FromRole="Organismo" ToRole="Matricula" />
+          <NavigationProperty Name="Provincia" Relationship="Self.FK_Organismo_Provincia" FromRole="Organismo" ToRole="Provincia" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <Property Name="id_access" Type="Int32" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_Persona_Pais" FromRole="Pais" ToRole="Persona" />
+          <NavigationProperty Name="Provincia" Relationship="Self.FK_Provincia_Pais" FromRole="Pais" ToRole="Provincia" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TipodniID" Type="Byte" Nullable="false" />
+          <Property Name="NroDocumento" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="EstadoCivilID" Type="Byte" />
+          <Property Name="SexoID" Type="Byte" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="LocalidadID" Type="Int16" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DomicilioCalle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DomicilioNumero" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DomicilioManzana" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DomicilioPiso" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DomicilioDepto" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CalleReferencia1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CalleReferencia2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BarrioID" Type="Int32" />
+          <Property Name="TelefonoFijo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TelefonoCelular" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="LocalidadNacimientoID" Type="Int32" />
+          <Property Name="NacionalidadID" Type="Int32" />
+          <Property Name="CUIL" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="Fallecido" Type="Boolean" Nullable="false" />
+          <Property Name="FechaActualizacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFallecido" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Matricula" Relationship="Self.FK_Matricula_Persona" FromRole="Persona" ToRole="Matricula" />
+          <NavigationProperty Name="Pais" Relationship="Self.FK_Persona_Pais" FromRole="Persona" ToRole="Pais" />
+          <NavigationProperty Name="TipoDNI" Relationship="Self.FK_Persona_TipoDNI" FromRole="Persona" ToRole="TipoDNI" />
+          <NavigationProperty Name="TipoEstadoCivil" Relationship="Self.FK_Persona_TipoEstadoCivil" FromRole="Persona" ToRole="TipoEstadoCivil" />
+          <NavigationProperty Name="TipoSexo" Relationship="Self.FK_Persona_TipoSexo" FromRole="Persona" ToRole="TipoSexo" />
+          <Property Name="DomicilioLaboralCalle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DomicilioLaboralNumero" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DomicilioLaboralManzana" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DomicilioLaboralPiso" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DomicilioLaboralDepto" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Profesional" Relationship="Model.FK_Profesional_Persona" FromRole="Persona" ToRole="Profesional" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PaisID" Type="Int32" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <Property Name="id_access" Type="Int32" />
+          <NavigationProperty Name="Departamento" Relationship="Self.FK_Departamento_Provincia" FromRole="Provincia" ToRole="Departamento" />
+          <NavigationProperty Name="Organismo" Relationship="Self.FK_Organismo_Provincia" FromRole="Provincia" ToRole="Organismo" />
+          <NavigationProperty Name="Pais" Relationship="Self.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pais" />
+        </EntityType>
+        <EntityType Name="RegistroActualizacionTablas">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreTabla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FechaUltimaActualizacion" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="TipoDNI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_Persona_TipoDNI" FromRole="TipoDNI" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="TipoEstadoCivil">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_Persona_TipoEstadoCivil" FromRole="TipoEstadoCivil" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="TipoEstadoMatricula">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Habilitada" Type="Boolean" Nullable="false" />
+          <Property Name="PermiteCambio" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Matricula" Relationship="Self.FK_Matricula_TipoEstadoMatricula" FromRole="TipoEstadoMatricula" ToRole="Matricula" />
+        </EntityType>
+        <EntityType Name="TipoEstadoProfesion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CarreraMatriculada" Relationship="Self.FK_CarreraMatriculada_TipoEstadoProfesion" FromRole="TipoEstadoProfesion" ToRole="CarreraMatriculada" />
+        </EntityType>
+        <EntityType Name="TipoFormacion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Titulo" Relationship="Self.FK_Titulo_TipoFormacion" FromRole="TipoFormacion" ToRole="Titulo" />
+        </EntityType>
+        <EntityType Name="TipoNivelAcademico">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Titulo" Relationship="Self.FK_Titulo_TipoNivelAcademico" FromRole="TipoNivelAcademico" ToRole="Titulo" />
+        </EntityType>
+        <EntityType Name="TipoSexo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_Persona_TipoSexo" FromRole="TipoSexo" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="Titulo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TipoFormacionID" Type="Byte" Nullable="false" />
+          <Property Name="TipoNivelAcademicoID" Type="Byte" Nullable="false" />
+          <Property Name="CarreraMatriculadaID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CarreraMatriculada" Relationship="Self.FK_Titulo_CarreraMatriculada" FromRole="Titulo" ToRole="CarreraMatriculada" />
+          <NavigationProperty Name="Matricula" Relationship="Self.FK_Matricula_Titulo" FromRole="Titulo" ToRole="Matricula" />
+          <NavigationProperty Name="TipoFormacion" Relationship="Self.FK_Titulo_TipoFormacion" FromRole="Titulo" ToRole="TipoFormacion" />
+          <NavigationProperty Name="TipoNivelAcademico" Relationship="Self.FK_Titulo_TipoNivelAcademico" FromRole="Titulo" ToRole="TipoNivelAcademico" />
+        </EntityType>
+        <EntityType Name="AsignacionTipo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarreraMatriculada_TipoEstadoProfesion">
+          <End Role="TipoEstadoProfesion" Type="Self.TipoEstadoProfesion" Multiplicity="1" />
+          <End Role="CarreraMatriculada" Type="Self.CarreraMatriculada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEstadoProfesion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CarreraMatriculada">
+              <PropertyRef Name="TipoEstadoProfesionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Titulo_CarreraMatriculada">
+          <End Role="CarreraMatriculada" Type="Self.CarreraMatriculada" Multiplicity="1" />
+          <End Role="Titulo" Type="Self.Titulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarreraMatriculada">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Titulo">
+              <PropertyRef Name="CarreraMatriculadaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CentroDeSalud_Localidad">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="1" />
+          <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CentroDeSalud">
+              <PropertyRef Name="LocalidadID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EspecialidadPorCentroDeSalud_CentroDeSalud">
+          <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="1" />
+          <End Role="EspecialidadPorCentroDeSalud" Type="Self.EspecialidadPorCentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroDeSalud">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EspecialidadPorCentroDeSalud">
+              <PropertyRef Name="CentroDeSaludID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LineaColectivoPorCentroDeSalud_CentroDeSalud">
+          <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="1" />
+          <End Role="LineaColectivoPorCentroDeSalud" Type="Self.LineaColectivoPorCentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroDeSalud">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LineaColectivoPorCentroDeSalud">
+              <PropertyRef Name="CentroDeSaludID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Departamento_Provincia">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Departamento">
+              <PropertyRef Name="ProvinciaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Localidad_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Localidad">
+              <PropertyRef Name="DepartamentoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EspecialidadPorCentroDeSalud_Especialidad">
+          <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
+          <End Role="EspecialidadPorCentroDeSalud" Type="Self.EspecialidadPorCentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidad">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EspecialidadPorCentroDeSalud">
+              <PropertyRef Name="EspecialidadID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HorariosPorEspecialidadPorCentroDeSalud_EspecialidadPorCentroDeSalud">
+          <End Role="EspecialidadPorCentroDeSalud" Type="Self.EspecialidadPorCentroDeSalud" Multiplicity="1" />
+          <End Role="HorariosPorEspecialidadPorCentroDeSalud" Type="Self.HorariosPorEspecialidadPorCentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EspecialidadPorCentroDeSalud">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HorariosPorEspecialidadPorCentroDeSalud">
+              <PropertyRef Name="EspecialidadPorCentroDeSaludID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HorariosPorEspecialidadPorCentroDeSalud_Horarios">
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="1" />
+          <End Role="HorariosPorEspecialidadPorCentroDeSalud" Type="Self.HorariosPorEspecialidadPorCentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Horarios">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HorariosPorEspecialidadPorCentroDeSalud">
+              <PropertyRef Name="HorarioIDEntrada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HorariosPorEspecialidadPorCentroDeSalud_Horarios1">
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="1" />
+          <End Role="HorariosPorEspecialidadPorCentroDeSalud" Type="Self.HorariosPorEspecialidadPorCentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Horarios">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HorariosPorEspecialidadPorCentroDeSalud">
+              <PropertyRef Name="HorarioIDSalida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LineaColectivoPorCentroDeSalud_LineaColectivo">
+          <End Role="LineaColectivo" Type="Self.LineaColectivo" Multiplicity="1" />
+          <End Role="LineaColectivoPorCentroDeSalud" Type="Self.LineaColectivoPorCentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LineaColectivo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LineaColectivoPorCentroDeSalud">
+              <PropertyRef Name="LineaColectivoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_Organismo">
+          <End Role="Organismo" Type="Self.Organismo" Multiplicity="1" />
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organismo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="OrganismoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="PersonaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_TipoEstadoMatricula">
+          <End Role="TipoEstadoMatricula" Type="Self.TipoEstadoMatricula" Multiplicity="1" />
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEstadoMatricula">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="TipoEstadoMatriculaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_Titulo">
+          <End Role="Titulo" Type="Self.Titulo" Multiplicity="1" />
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Titulo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="TituloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Menu1">
+              <PropertyRef Name="PadreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organismo_Provincia">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
+          <End Role="Organismo" Type="Self.Organismo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Organismo">
+              <PropertyRef Name="ProvinciaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_Pais">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="NacionalidadID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provincia_Pais">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Provincia">
+              <PropertyRef Name="PaisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_TipoDNI">
+          <End Role="TipoDNI" Type="Self.TipoDNI" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDNI">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="TipodniID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_TipoEstadoCivil">
+          <End Role="TipoEstadoCivil" Type="Self.TipoEstadoCivil" Multiplicity="0..1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEstadoCivil">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="EstadoCivilID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_TipoSexo">
+          <End Role="TipoSexo" Type="Self.TipoSexo" Multiplicity="0..1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoSexo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="SexoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Titulo_TipoFormacion">
+          <End Role="TipoFormacion" Type="Self.TipoFormacion" Multiplicity="1" />
+          <End Role="Titulo" Type="Self.Titulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoFormacion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Titulo">
+              <PropertyRef Name="TipoFormacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Titulo_TipoNivelAcademico">
+          <End Role="TipoNivelAcademico" Type="Self.TipoNivelAcademico" Multiplicity="1" />
+          <End Role="Titulo" Type="Self.Titulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoNivelAcademico">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Titulo">
+              <PropertyRef Name="TipoNivelAcademicoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="TurAppEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="CarreraMatriculada" EntityType="Self.CarreraMatriculada" />
+          <EntitySet Name="CentroDeSalud" EntityType="Self.CentroDeSalud" />
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" />
+          <EntitySet Name="Especialidad" EntityType="Self.Especialidad" />
+          <EntitySet Name="EspecialidadPorCentroDeSalud" EntityType="Self.EspecialidadPorCentroDeSalud" />
+          <EntitySet Name="Horarios" EntityType="Self.Horarios" />
+          <EntitySet Name="HorariosPorEspecialidadPorCentroDeSalud" EntityType="Self.HorariosPorEspecialidadPorCentroDeSalud" />
+          <EntitySet Name="LineaColectivo" EntityType="Self.LineaColectivo" />
+          <EntitySet Name="LineaColectivoPorCentroDeSalud" EntityType="Self.LineaColectivoPorCentroDeSalud" />
+          <EntitySet Name="Localidad" EntityType="Self.Localidad" />
+          <EntitySet Name="Matricula" EntityType="Self.Matricula" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" />
+          <EntitySet Name="Organismo" EntityType="Self.Organismo" />
+          <EntitySet Name="Pais" EntityType="Self.Pais" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" />
+          <EntitySet Name="RegistroActualizacionTablas" EntityType="Self.RegistroActualizacionTablas" />
+          <EntitySet Name="TipoDNI" EntityType="Self.TipoDNI" />
+          <EntitySet Name="TipoEstadoCivil" EntityType="Self.TipoEstadoCivil" />
+          <EntitySet Name="TipoEstadoMatricula" EntityType="Self.TipoEstadoMatricula" />
+          <EntitySet Name="TipoEstadoProfesion" EntityType="Self.TipoEstadoProfesion" />
+          <EntitySet Name="TipoFormacion" EntityType="Self.TipoFormacion" />
+          <EntitySet Name="TipoNivelAcademico" EntityType="Self.TipoNivelAcademico" />
+          <EntitySet Name="TipoSexo" EntityType="Self.TipoSexo" />
+          <EntitySet Name="Titulo" EntityType="Self.Titulo" />
+          <EntitySet Name="AsignacionTipo" EntityType="Self.AsignacionTipo" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarreraMatriculada_TipoEstadoProfesion" Association="Self.FK_CarreraMatriculada_TipoEstadoProfesion">
+            <End Role="TipoEstadoProfesion" EntitySet="TipoEstadoProfesion" />
+            <End Role="CarreraMatriculada" EntitySet="CarreraMatriculada" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Titulo_CarreraMatriculada" Association="Self.FK_Titulo_CarreraMatriculada">
+            <End Role="CarreraMatriculada" EntitySet="CarreraMatriculada" />
+            <End Role="Titulo" EntitySet="Titulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CentroDeSalud_Localidad" Association="Self.FK_CentroDeSalud_Localidad">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EspecialidadPorCentroDeSalud_CentroDeSalud" Association="Self.FK_EspecialidadPorCentroDeSalud_CentroDeSalud">
+            <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
+            <End Role="EspecialidadPorCentroDeSalud" EntitySet="EspecialidadPorCentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LineaColectivoPorCentroDeSalud_CentroDeSalud" Association="Self.FK_LineaColectivoPorCentroDeSalud_CentroDeSalud">
+            <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
+            <End Role="LineaColectivoPorCentroDeSalud" EntitySet="LineaColectivoPorCentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Departamento_Provincia" Association="Self.FK_Departamento_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Departamento" EntitySet="Departamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Localidad_Departamento" Association="Self.FK_Localidad_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Localidad" EntitySet="Localidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EspecialidadPorCentroDeSalud_Especialidad" Association="Self.FK_EspecialidadPorCentroDeSalud_Especialidad">
+            <End Role="Especialidad" EntitySet="Especialidad" />
+            <End Role="EspecialidadPorCentroDeSalud" EntitySet="EspecialidadPorCentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HorariosPorEspecialidadPorCentroDeSalud_EspecialidadPorCentroDeSalud" Association="Self.FK_HorariosPorEspecialidadPorCentroDeSalud_EspecialidadPorCentroDeSalud">
+            <End Role="EspecialidadPorCentroDeSalud" EntitySet="EspecialidadPorCentroDeSalud" />
+            <End Role="HorariosPorEspecialidadPorCentroDeSalud" EntitySet="HorariosPorEspecialidadPorCentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HorariosPorEspecialidadPorCentroDeSalud_Horarios" Association="Self.FK_HorariosPorEspecialidadPorCentroDeSalud_Horarios">
+            <End Role="Horarios" EntitySet="Horarios" />
+            <End Role="HorariosPorEspecialidadPorCentroDeSalud" EntitySet="HorariosPorEspecialidadPorCentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HorariosPorEspecialidadPorCentroDeSalud_Horarios1" Association="Self.FK_HorariosPorEspecialidadPorCentroDeSalud_Horarios1">
+            <End Role="Horarios" EntitySet="Horarios" />
+            <End Role="HorariosPorEspecialidadPorCentroDeSalud" EntitySet="HorariosPorEspecialidadPorCentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LineaColectivoPorCentroDeSalud_LineaColectivo" Association="Self.FK_LineaColectivoPorCentroDeSalud_LineaColectivo">
+            <End Role="LineaColectivo" EntitySet="LineaColectivo" />
+            <End Role="LineaColectivoPorCentroDeSalud" EntitySet="LineaColectivoPorCentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_Organismo" Association="Self.FK_Matricula_Organismo">
+            <End Role="Organismo" EntitySet="Organismo" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_Persona" Association="Self.FK_Matricula_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_TipoEstadoMatricula" Association="Self.FK_Matricula_TipoEstadoMatricula">
+            <End Role="TipoEstadoMatricula" EntitySet="TipoEstadoMatricula" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_Titulo" Association="Self.FK_Matricula_Titulo">
+            <End Role="Titulo" EntitySet="Titulo" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Menu1" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organismo_Provincia" Association="Self.FK_Organismo_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Organismo" EntitySet="Organismo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_Pais" Association="Self.FK_Persona_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provincia_Pais" Association="Self.FK_Provincia_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Provincia" EntitySet="Provincia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_TipoDNI" Association="Self.FK_Persona_TipoDNI">
+            <End Role="TipoDNI" EntitySet="TipoDNI" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_TipoEstadoCivil" Association="Self.FK_Persona_TipoEstadoCivil">
+            <End Role="TipoEstadoCivil" EntitySet="TipoEstadoCivil" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_TipoSexo" Association="Self.FK_Persona_TipoSexo">
+            <End Role="TipoSexo" EntitySet="TipoSexo" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Titulo_TipoFormacion" Association="Self.FK_Titulo_TipoFormacion">
+            <End Role="TipoFormacion" EntitySet="TipoFormacion" />
+            <End Role="Titulo" EntitySet="Titulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Titulo_TipoNivelAcademico" Association="Self.FK_Titulo_TipoNivelAcademico">
+            <End Role="TipoNivelAcademico" EntitySet="TipoNivelAcademico" />
+            <End Role="Titulo" EntitySet="Titulo" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Accion" EntityType="Model.Accion" />
+          <EntitySet Name="MenuAspNetRoles" EntityType="Model.MenuAspNetRoles" />
+          <EntitySet Name="MenuAspNetRolesAccion" EntityType="Model.MenuAspNetRolesAccion" />
+          <AssociationSet Name="FK_MenuAspNetRolesAccion_Accion" Association="Model.FK_MenuAspNetRolesAccion_Accion">
+            <End Role="Accion" EntitySet="Accion" />
+            <End Role="MenuAspNetRolesAccion" EntitySet="MenuAspNetRolesAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRoles_AspNetRoles" Association="Model.FK_MenuAspNetRoles_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRoles_Menu" Association="Model.FK_MenuAspNetRoles_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRolesAccion_MenuAspNetRoles" Association="Model.FK_MenuAspNetRolesAccion_MenuAspNetRoles">
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+            <End Role="MenuAspNetRolesAccion" EntitySet="MenuAspNetRolesAccion" />
+          </AssociationSet>
+          <FunctionImport Name="GetPermisosPorNombreDeUsuario" ReturnType="Collection(Model.GetPermisosPorNombreDeUsuario_Result)">
+          <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
+          <AssociationSet Name="AspNetMenuAccion" Association="Model.AspNetMenuAccion">
+            <End Role="Accion" EntitySet="Accion" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <EntitySet Name="Profesional" EntityType="Model.Profesional" />
+          <AssociationSet Name="FK_Profesional_Persona" Association="Model.FK_Profesional_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Profesional" EntitySet="Profesional" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Accion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Icono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MenuAspNetRolesAccion" Relationship="Model.FK_MenuAspNetRolesAccion_Accion" FromRole="Accion" ToRole="MenuAspNetRolesAccion" />
+          <NavigationProperty Name="Menu" Relationship="Model.AspNetMenuAccion" FromRole="Accion" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="MenuAspNetRoles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuId" Type="Int32" Nullable="false" />
+          <Property Name="AspNetRolesId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Model.FK_MenuAspNetRoles_AspNetRoles" FromRole="MenuAspNetRoles" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Menu" Relationship="Model.FK_MenuAspNetRoles_Menu" FromRole="MenuAspNetRoles" ToRole="Menu" />
+          <NavigationProperty Name="MenuAspNetRolesAccion" Relationship="Model.FK_MenuAspNetRolesAccion_MenuAspNetRoles" FromRole="MenuAspNetRoles" ToRole="MenuAspNetRolesAccion" />
+        </EntityType>
+        <EntityType Name="MenuAspNetRolesAccion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccionId" Type="Int32" Nullable="false" />
+          <Property Name="MenuAspNetRolesId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accion" Relationship="Model.FK_MenuAspNetRolesAccion_Accion" FromRole="MenuAspNetRolesAccion" ToRole="Accion" />
+          <NavigationProperty Name="MenuAspNetRoles" Relationship="Model.FK_MenuAspNetRolesAccion_MenuAspNetRoles" FromRole="MenuAspNetRolesAccion" ToRole="MenuAspNetRoles" />
+        </EntityType>
+        <Association Name="FK_MenuAspNetRolesAccion_Accion">
+          <End Type="Model.Accion" Role="Accion" Multiplicity="1" />
+          <End Type="Model.MenuAspNetRolesAccion" Role="MenuAspNetRolesAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRolesAccion">
+              <PropertyRef Name="AccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRoles_AspNetRoles">
+          <End Type="Model.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
+          <End Type="Model.MenuAspNetRoles" Role="MenuAspNetRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuAspNetRoles">
+              <PropertyRef Name="AspNetRolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRoles_Menu">
+          <End Type="Model.Menu" Role="Menu" Multiplicity="1" />
+          <End Type="Model.MenuAspNetRoles" Role="MenuAspNetRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRoles">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRolesAccion_MenuAspNetRoles">
+          <End Type="Model.MenuAspNetRoles" Role="MenuAspNetRoles" Multiplicity="1" />
+          <End Type="Model.MenuAspNetRolesAccion" Role="MenuAspNetRolesAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuAspNetRoles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRolesAccion">
+              <PropertyRef Name="MenuAspNetRolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="PadreID" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Byte" Name="Orden" Nullable="true" />
+          <Property Type="String" Name="Icono" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Accion" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Controlador" Nullable="false" MaxLength="150" />
+          <Property Type="Boolean" Name="Activo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAlta" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="mnuId" Nullable="true" />
+        </ComplexType>
+        <Association Name="AspNetMenuAccion">
+          <End Type="Model.Accion" Role="Accion" Multiplicity="*" />
+          <End Type="Model.Menu" Role="Menu" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Profesional">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonaId" Type="Int32" Nullable="false" />
+          <Property Name="SisaId" Type="Int32" />
+          <Property Name="FechaInscripionSisa" Type="DateTime" Precision="3" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="ActualizadoSisa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Persona" Relationship="Model.FK_Profesional_Persona" FromRole="Profesional" ToRole="Persona" />
+        </EntityType>
+        <Association Name="FK_Profesional_Persona">
+          <End Type="Model.Persona" Role="Persona" Multiplicity="1" />
+          <End Type="Model.Profesional" Role="Profesional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Profesional">
+              <PropertyRef Name="PersonaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="TurAppEntities">
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="Model.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="Model.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="Model.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Model.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarreraMatriculada">
+            <EntityTypeMapping TypeName="Model.CarreraMatriculada">
+              <MappingFragment StoreEntitySet="CarreraMatriculada">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="ResolucionHabilitante" ColumnName="ResolucionHabilitante" />
+                <ScalarProperty Name="ResolucionCierre" ColumnName="ResolucionCierre" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="TipoEstadoProfesionID" ColumnName="TipoEstadoProfesionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CentroDeSalud">
+            <EntityTypeMapping TypeName="Model.CentroDeSalud">
+              <MappingFragment StoreEntitySet="CentroDeSalud">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="EMail" ColumnName="EMail" />
+                <ScalarProperty Name="URLImagenDelCentroDeSalud" ColumnName="URLImagenDelCentroDeSalud" />
+                <ScalarProperty Name="LocalidadID" ColumnName="LocalidadID" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechaUltimaActualizacion" ColumnName="FechaUltimaActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departamento">
+            <EntityTypeMapping TypeName="Model.Departamento">
+              <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ProvinciaID" ColumnName="ProvinciaID" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="id_access" ColumnName="id_access" />
+                <ScalarProperty Name="Zona" ColumnName="Zona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Especialidad">
+            <EntityTypeMapping TypeName="Model.Especialidad">
+              <MappingFragment StoreEntitySet="Especialidad">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EspecialidadPorCentroDeSalud">
+            <EntityTypeMapping TypeName="Model.EspecialidadPorCentroDeSalud">
+              <MappingFragment StoreEntitySet="EspecialidadPorCentroDeSalud">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CentroDeSaludID" ColumnName="CentroDeSaludID" />
+                <ScalarProperty Name="EspecialidadID" ColumnName="EspecialidadID" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Horarios">
+            <EntityTypeMapping TypeName="Model.Horarios">
+              <MappingFragment StoreEntitySet="Horarios">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HorariosPorEspecialidadPorCentroDeSalud">
+            <EntityTypeMapping TypeName="Model.HorariosPorEspecialidadPorCentroDeSalud">
+              <MappingFragment StoreEntitySet="HorariosPorEspecialidadPorCentroDeSalud">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HorarioIDEntrada" ColumnName="HorarioIDEntrada" />
+                <ScalarProperty Name="HorarioIDSalida" ColumnName="HorarioIDSalida" />
+                <ScalarProperty Name="EspecialidadPorCentroDeSaludID" ColumnName="EspecialidadPorCentroDeSaludID" />
+                <ScalarProperty Name="Dia" ColumnName="Dia" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LineaColectivo">
+            <EntityTypeMapping TypeName="Model.LineaColectivo">
+              <MappingFragment StoreEntitySet="LineaColectivo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LineaColectivoPorCentroDeSalud">
+            <EntityTypeMapping TypeName="Model.LineaColectivoPorCentroDeSalud">
+              <MappingFragment StoreEntitySet="LineaColectivoPorCentroDeSalud">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LineaColectivoID" ColumnName="LineaColectivoID" />
+                <ScalarProperty Name="CentroDeSaludID" ColumnName="CentroDeSaludID" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Localidad">
+            <EntityTypeMapping TypeName="Model.Localidad">
+              <MappingFragment StoreEntitySet="Localidad">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="DepartamentoID" ColumnName="DepartamentoID" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="id_access" ColumnName="id_access" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matricula">
+            <EntityTypeMapping TypeName="Model.Matricula">
+              <MappingFragment StoreEntitySet="Matricula">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+                <ScalarProperty Name="TituloID" ColumnName="TituloID" />
+                <ScalarProperty Name="OrganismoID" ColumnName="OrganismoID" />
+                <ScalarProperty Name="Revalido" ColumnName="Revalido" />
+                <ScalarProperty Name="FechaDiploma" ColumnName="FechaDiploma" />
+                <ScalarProperty Name="ObservacionDiploma" ColumnName="ObservacionDiploma" />
+                <ScalarProperty Name="FechaInscripcion" ColumnName="FechaInscripcion" />
+                <ScalarProperty Name="NroMatricula" ColumnName="NroMatricula" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="libro" ColumnName="libro" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="Habilitada" ColumnName="Habilitada" />
+                <ScalarProperty Name="TipoEstadoMatriculaID" ColumnName="TipoEstadoMatriculaID" />
+                <ScalarProperty Name="Retirado" ColumnName="Retirado" />
+                <ScalarProperty Name="FechaRetiro" ColumnName="FechaRetiro" />
+                <ScalarProperty Name="ObservacionMatricula" ColumnName="ObservacionMatricula" />
+                <ScalarProperty Name="TieneAnalitico" ColumnName="TieneAnalitico" />
+                <ScalarProperty Name="TieneTitulo" ColumnName="TieneTitulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="Model.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PadreID" ColumnName="PadreID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Icono" ColumnName="Icono" />
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+                <ScalarProperty Name="Controlador" ColumnName="Controlador" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="mnuId" ColumnName="mnuId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organismo">
+            <EntityTypeMapping TypeName="Model.Organismo">
+              <MappingFragment StoreEntitySet="Organismo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ProvinciaID" ColumnName="ProvinciaID" />
+                <ScalarProperty Name="id_access" ColumnName="id_access" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pais">
+            <EntityTypeMapping TypeName="Model.Pais">
+              <MappingFragment StoreEntitySet="Pais">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="id_access" ColumnName="id_access" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persona">
+            <EntityTypeMapping TypeName="Model.Persona">
+              <MappingFragment StoreEntitySet="Persona">
+                <ScalarProperty Name="DomicilioLaboralDepto" ColumnName="DomicilioLaboralDepto" />
+                <ScalarProperty Name="DomicilioLaboralPiso" ColumnName="DomicilioLaboralPiso" />
+                <ScalarProperty Name="DomicilioLaboralManzana" ColumnName="DomicilioLaboralManzana" />
+                <ScalarProperty Name="DomicilioLaboralNumero" ColumnName="DomicilioLaboralNumero" />
+                <ScalarProperty Name="DomicilioLaboralCalle" ColumnName="DomicilioLaboralCalle" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="TipodniID" ColumnName="TipodniID" />
+                <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
+                <ScalarProperty Name="EstadoCivilID" ColumnName="EstadoCivilID" />
+                <ScalarProperty Name="SexoID" ColumnName="SexoID" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="LocalidadID" ColumnName="LocalidadID" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="DomicilioCalle" ColumnName="DomicilioCalle" />
+                <ScalarProperty Name="DomicilioNumero" ColumnName="DomicilioNumero" />
+                <ScalarProperty Name="DomicilioManzana" ColumnName="DomicilioManzana" />
+                <ScalarProperty Name="DomicilioPiso" ColumnName="DomicilioPiso" />
+                <ScalarProperty Name="DomicilioDepto" ColumnName="DomicilioDepto" />
+                <ScalarProperty Name="CalleReferencia1" ColumnName="CalleReferencia1" />
+                <ScalarProperty Name="CalleReferencia2" ColumnName="CalleReferencia2" />
+                <ScalarProperty Name="BarrioID" ColumnName="BarrioID" />
+                <ScalarProperty Name="TelefonoFijo" ColumnName="TelefonoFijo" />
+                <ScalarProperty Name="TelefonoCelular" ColumnName="TelefonoCelular" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LocalidadNacimientoID" ColumnName="LocalidadNacimientoID" />
+                <ScalarProperty Name="NacionalidadID" ColumnName="NacionalidadID" />
+                <ScalarProperty Name="CUIL" ColumnName="CUIL" />
+                <ScalarProperty Name="Fallecido" ColumnName="Fallecido" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="FechaFallecido" ColumnName="FechaFallecido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provincia">
+            <EntityTypeMapping TypeName="Model.Provincia">
+              <MappingFragment StoreEntitySet="Provincia">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="PaisID" ColumnName="PaisID" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="id_access" ColumnName="id_access" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistroActualizacionTablas">
+            <EntityTypeMapping TypeName="Model.RegistroActualizacionTablas">
+              <MappingFragment StoreEntitySet="RegistroActualizacionTablas">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NombreTabla" ColumnName="NombreTabla" />
+                <ScalarProperty Name="FechaUltimaActualizacion" ColumnName="FechaUltimaActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDNI">
+            <EntityTypeMapping TypeName="Model.TipoDNI">
+              <MappingFragment StoreEntitySet="TipoDNI">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoEstadoCivil">
+            <EntityTypeMapping TypeName="Model.TipoEstadoCivil">
+              <MappingFragment StoreEntitySet="TipoEstadoCivil">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoEstadoMatricula">
+            <EntityTypeMapping TypeName="Model.TipoEstadoMatricula">
+              <MappingFragment StoreEntitySet="TipoEstadoMatricula">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Habilitada" ColumnName="Habilitada" />
+                <ScalarProperty Name="PermiteCambio" ColumnName="PermiteCambio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoEstadoProfesion">
+            <EntityTypeMapping TypeName="Model.TipoEstadoProfesion">
+              <MappingFragment StoreEntitySet="TipoEstadoProfesion">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoFormacion">
+            <EntityTypeMapping TypeName="Model.TipoFormacion">
+              <MappingFragment StoreEntitySet="TipoFormacion">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoNivelAcademico">
+            <EntityTypeMapping TypeName="Model.TipoNivelAcademico">
+              <MappingFragment StoreEntitySet="TipoNivelAcademico">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoSexo">
+            <EntityTypeMapping TypeName="Model.TipoSexo">
+              <MappingFragment StoreEntitySet="TipoSexo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Titulo">
+            <EntityTypeMapping TypeName="Model.Titulo">
+              <MappingFragment StoreEntitySet="Titulo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="TipoFormacionID" ColumnName="TipoFormacionID" />
+                <ScalarProperty Name="TipoNivelAcademicoID" ColumnName="TipoNivelAcademicoID" />
+                <ScalarProperty Name="CarreraMatriculadaID" ColumnName="CarreraMatriculadaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AsignacionTipo">
+            <EntityTypeMapping TypeName="Model.AsignacionTipo">
+              <MappingFragment StoreEntitySet="AsignacionTipo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Accion">
+            <EntityTypeMapping TypeName="Model.Accion">
+              <MappingFragment StoreEntitySet="Accion">
+                <ScalarProperty Name="Icono" ColumnName="Icono" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuAspNetRoles">
+            <EntityTypeMapping TypeName="Model.MenuAspNetRoles">
+              <MappingFragment StoreEntitySet="MenuAspNetRoles">
+                <ScalarProperty Name="AspNetRolesId" ColumnName="AspNetRolesId" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuAspNetRolesAccion">
+            <EntityTypeMapping TypeName="Model.MenuAspNetRolesAccion">
+              <MappingFragment StoreEntitySet="MenuAspNetRolesAccion">
+                <ScalarProperty Name="MenuAspNetRolesId" ColumnName="MenuAspNetRolesId" />
+                <ScalarProperty Name="AccionId" ColumnName="AccionId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetPermisosPorNombreDeUsuario" FunctionName="Model.Store.GetPermisosPorNombreDeUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetPermisosPorNombreDeUsuario_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PadreID" ColumnName="PadreID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Icono" ColumnName="Icono" />
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+                <ScalarProperty Name="Controlador" ColumnName="Controlador" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="mnuId" ColumnName="mnuId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <AssociationSetMapping Name="AspNetMenuAccion" TypeName="Model.AspNetMenuAccion" StoreEntitySet="AspNetMenuAccion">
+            <EndProperty Name="Menu">
+              <ScalarProperty Name="ID" ColumnName="IdMenu" />
+            </EndProperty>
+            <EndProperty Name="Accion">
+              <ScalarProperty Name="ID" ColumnName="IdAccion" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Profesional">
+            <EntityTypeMapping TypeName="Model.Profesional">
+              <MappingFragment StoreEntitySet="Profesional">
+                <ScalarProperty Name="ActualizadoSisa" ColumnName="ActualizadoSisa" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="FechaInscripionSisa" ColumnName="FechaInscripionSisa" />
+                <ScalarProperty Name="SisaId" ColumnName="SisaId" />
+                <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

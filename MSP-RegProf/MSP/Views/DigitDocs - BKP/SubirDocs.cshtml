@@ -1,0 +1,96 @@
+﻿@model MSP_RegProf.Models.TituloProfVM
+
+
+@*@using (Html.BeginForm())*@
+@using (Html.BeginForm("SubirDocs", "DigitDocs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @ViewBag.Message
+        <div class="form-group">
+
+            <label class="control-label col-md-3" for="Firma">Titulo:</label>
+            <div class="col-md-8 ">
+                @Html.TextBox("docTitulo", "", htmlAttributes: new { @class = "form-control fileUpload", type = "file" })
+                @ViewBag.Message1
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label class="control-label col-md-3" for="Firma">Analítico:</label>
+            <div class="col-md-8 ">
+                @Html.TextBox("docAnalitico", "", htmlAttributes: new { @class = "form-control fileUpload", type = "file" })
+                @ViewBag.Message2
+            </div>
+        </div>
+
+        @*@Html.HiddenFor(model=>Model.titId)*@
+        @*@Html.HiddenFor(model => Model.titId)*@
+
+    </div>
+}
+
+
+<script>
+    $(function () {
+        //Click "Guardar"
+        $("#btnGuardar").click(function () {
+            //debugger
+            $('#contenidoModal form').submit()
+        });
+
+        //Submit
+        $('form').submit(function () {
+            debugger
+            // Checking whether FormData is available in browser
+            if (window.FormData !== undefined) {
+                // Create FormData object
+                var fileData = new FormData();
+
+                //File 1
+                var fileUpload1 = $("#docTitulo").get(0);
+                if (fileUpload1.files.length) {
+                    var file1 = fileUpload1.files;
+                    fileData.append("docTitulo", file1[0]);
+                }
+                
+
+                //File 2
+                var fileUpload2 = $("#docAnalitico").get(0);
+                if (fileUpload2.files.length) {
+                    var file2 = fileUpload2.files;
+                    fileData.append("docAnalitico", file2[0]);
+                }
+
+               
+
+
+            }
+
+
+            debugger
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    //data: $(this).serialize(),
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    data: fileData,
+                    beforeSend: function (xhr) {
+                        abrirWaiting();
+                    },
+                    success: function (result) {
+                        //debugger
+                        $("#contenidoModal").html(result);
+                        cerrarWaiting();
+                    },
+                });
+            }
+            return false;
+        });
+    });
+
+</script>

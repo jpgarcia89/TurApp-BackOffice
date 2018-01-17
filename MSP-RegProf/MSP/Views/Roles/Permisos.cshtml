@@ -1,0 +1,131 @@
+﻿@model TurApp.Models.PermisosVM
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>jsTree test</title>
+    <!-- 2 load the theme CSS file -->
+    <link href="~/Scripts/plugins/jsTree/themes/default/style.min.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- 3 setup a container element -->
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div id="jstree">
+            <ul>
+                @TurApp.Helpers.HtmlHelperExtensions.RenderTreeMenu(Model.Menu)
+            </ul>
+        </div>
+
+        @Html.HiddenFor(r => r.idRol);
+    }
+
+    <!-- 4 include the jQuery library -->
+    <!-- 5 include the minified jstree source -->
+    <script src="~/Scripts/plugins/jsTree/jstree.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // 6 create an instance when the DOM is ready
+            $('#jstree').jstree({
+                "core": {
+                    "themes": {
+                        "variant": "large"
+                    }
+                },
+                "checkbox": {
+                    "keep_selected_style": false
+                },
+                "plugins": ["wholerow", "checkbox"]
+            });
+
+            // 7 bind to events triggered on the tree
+            $('#jstree').on("changed.jstree", function (e, data) {
+                //debugger
+                console.log(data.selected);
+            });
+
+            GetPermisosRol("@Model.idRol");            
+        });
+
+        //Click "Guardar"
+        $("#btnGuardar").unbind("click");
+        $("#btnGuardar").click(function () {
+            //debugger
+
+            $('#contenidoModal form').submit()
+
+        });
+
+
+        //Submit
+        $('form').submit(function () {
+            //debugger
+
+            var _data = {
+                __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
+                idRol: $("#idRol").val(),
+                permisos: $('#jstree').jstree().get_selected()//get_bottom_selected()
+            }
+
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: _data,//$(this).serialize(),
+                    beforeSend: function (xhr) {
+                        abrirWaiting();
+                    },
+                    success: function (result) {
+                        //debugger
+                        cerrarWaiting();
+
+                        //if (result.ok == "true") {
+                        //    window.location.href = window.location.href;
+                        //    cerrarModal();
+                        //    return;
+                        //}
+
+                        //$('#contenidoModal').html(result);
+
+                    },
+                    error: function () {
+                        cerrarWaiting();
+                    }
+                });
+            }
+            return false;
+        });
+
+
+        //GetPermisosRol
+        function GetPermisosRol(idRol) {
+            //debugger
+            var _url = GetPathApp("/Roles/GetPermisosRol/" + idRol);
+
+            $.ajax({
+                url: _url,
+                type: "GET",
+                //data: { "idRol": idRol },
+                beforeSend: function (xhr) {
+                    abrirWaiting();
+                },
+                success: function (result) {
+                    //debugger
+                    cerrarWaiting();
+                    $('#jstree').jstree().select_node(result)
+                    //alert(result);
+                },
+                error: function () {
+                cerrarWaiting();
+            }
+            });
+        }
+    </script>
+</body>
+</html>

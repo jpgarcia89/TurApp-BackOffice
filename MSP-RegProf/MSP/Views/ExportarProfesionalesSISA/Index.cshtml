@@ -1,0 +1,105 @@
+﻿@model IEnumerable<MSP_RegProf.Models.Persona>
+
+@{
+    //Layout = null;
+    ViewBag.Title = "Exportación de Profesionales a SISA";
+}
+
+<style>
+    .modal-lg {
+        width: 70%;
+    }
+</style>
+
+
+<section class="content-header">
+    <h1>
+        Exportación de Profesionales a SISA
+    </h1>
+
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="#">Exportaciones</a></li>
+        <li class="active">Exportación de Profesionales a SISA</li>
+    </ol>
+</section>
+
+<section class="content">
+    <!--Header de Exportación de Profesionales a SISA-->
+    <div class="box box-primary">
+        <div class="row">
+            <table id="dtProfesionales" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Apellido</th>
+                        <th>Nombre</th>
+                        <th>DNI</th>
+                        <th>Sexo</th>
+                        <th>Fecha Nacimiento</th>
+                        <th>Pais</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Apellido)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.NroDocumento)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TipoSexo.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.FechaNacimiento)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Pais.Nombre)</td>
+                            <td>
+                                <div class="btn-group-sm">
+                                    <!-- btn-Edit -->
+                                    @*<span data-placement="top" title="Editar" data-toggle="tooltip">
+                                    <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Profesionales/Edit/@item.ID','Editar','Profesionales')"></a>
+                                </span>*@
+
+                                    <!-- btn-Details -->
+                                    <span data-placement="top" title="Detalles" data-toggle="tooltip">
+                                        <a class="btn btn-info fa fa-file-text-o" href="@Url.Action("Index", "Matriculas", new {profId = item.ID })"></a>
+                                    </span>
+
+                                    @*<span data-placement="top" title="Detalles" data-toggle="tooltip">
+                                    <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Profesionales/Details/@item.ID','Detalle','Profesionales')"></a>
+                                </span>*@
+
+                                    <!-- btn-Delete -->
+                                    <span data-placement="top" title="Eliminar" data-toggle="tooltip">
+                                        <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Profesionales/Delete/@item.ID','Eliminar','Profesionales')"></a>
+                                    </span>
+
+                                    <!-- btn-Matriculas -->
+                                    @*<span data-placement="top" title="Matriculas" data-toggle="tooltip">
+                                    <a class="btn btn-success fa fa-certificate" href="@Url.Action("Index", "Matriculas", new {profId = item.ID })"></a>
+                                </span>*@
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</section>
+<script>
+    $(function () {
+        if (!$.fn.dataTable.isDataTable('#dtProfesionales')) {
+
+            $('#dtProfesionales').DataTable({
+                "language": DataTableEsp(),
+                responsive: true
+            });
+
+            //$('#dtProfesionales_paginate').removeClass('dataTables_paginate')
+        }
+
+
+
+    });
+
+
+</script>

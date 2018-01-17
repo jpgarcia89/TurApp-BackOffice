@@ -1,0 +1,365 @@
+﻿@model MSP_RegProf.Models.EspecialidadPorCentroDeSalud
+@using MSP_RegProf.Models
+
+
+<style>
+    legend {
+        border-bottom: 1px solid #3c8dbc;
+    }
+
+    .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+    }
+</style>
+
+<div id="divError" class="alert alert-danger" style="display:none">
+    <button type="button" class="close" onclick="$('#divError').hide()">×</button>    
+    <h4><i class="icon fa fa-ban"></i> Atencion!</h4>
+    <span id="MsjError"></span>
+</div>
+
+@using (Html.BeginForm("CreateEspecialidad", "CentroDeSalud", FormMethod.Post))
+{
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        <input type="hidden" id="csId" value="@ViewBag.csId" />
+        
+
+        <div class="container">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <!-- Grupo 1 -Especialidad -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-md-offset-1" for="Especialidad">Especialidad:</label>
+                        <div class="col-md-8">
+                            @Html.DropDownList("EspecialidadID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.EspecialidadID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <!-- Grupo 3 -Dias y Horarios (Mejor programado)-->
+            <div class="row">
+                <fieldset id="fsDiasYHorarios">
+                    <legend>Dias y Horarios:</legend>
+
+                    @for (int i = 1; i <= 7; i++)
+                    {
+                        <!-- Check @((Dias)i) -->
+                        <div class="container">
+                            <div class="checkbox">
+                                <label>
+                                    <input name="checkDia_@(i)_1" type="checkbox" value="@i">
+                                    @((Dias)i)
+                                </label>
+                            </div>
+                            <div id="rowHorario_@(i)_1" class="row">
+                                <!-- id="rowHorario_[Id_Dia]_[Nro_Fila]" -->
+                                <div class="col-md-5">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-4 col-md-offset-2" for="HoraDesde">Desde: </label>
+                                        <div class="col-md-5 ">
+                                            @*<input type="text" class="form-control " id="HoraDesde_@(i)_1" placeholder="08:00">*@
+                                            @Html.DropDownList("HorariosID", null, htmlAttributes: new { @class = "form-control", @id = "HoraDesde_" + i + "_1" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-4" for="HoraHasta">Hasta: </label>
+                                        <div class="col-md-5 ">
+                                            @*<input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraHasta_@(i)_1" placeholder="13:00">*@
+                                            @Html.DropDownList("HorariosID", null, htmlAttributes: new { @class = "form-control", @id = "HoraHasta_" + i + "_1" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="divBtns_@(i)_1" class="col-md-2">
+                                    <button id="btnAdd_@(i)_1" type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-plus"></i></button>
+                                    @*<button id="btnDelete_1_1" type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-minus"></i></button>*@
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+                    
+
+                  
+
+                </fieldset>
+            </div>
+
+        </div><!-- Fin Container -->
+
+
+
+
+
+    </div>
+}
+
+
+
+
+<script>
+    var HorariosCount = {
+        1: 1,
+        2: 1,
+        3: 1,
+        4: 1,
+        5: 1,
+        6: 1,
+        7: 1,
+    }
+
+    var optionsHorarios = "";
+
+    //Initial function
+    $(function () {
+        //Get Options of "Horarios" select input
+        optionsHorarios = $('#HoraDesde_1_1').html();
+
+        //Hide all "rowHorario" divs
+        $("div[id^='rowHorario']").hide();
+
+        //Bind "change" event to checkboxs
+        $("input[type='checkbox']").on("change", ShowOrHideRowOnClick);
+
+        //Bind "click" event to all Add and Delete buttons
+        $("button[id^='btnAdd_']").click(AddRow);
+        $("button[id^='btnDelete_']").click(DeleteRow);
+
+
+        //Bind "change" event to all select controls
+        $("select[id^='HoraDesde_']").change(ChangeHoraDesde);
+        $("select[id^='HoraHasta_']").change(HoraHasta);
+        
+    });
+
+
+
+
+    function ShowOrHideRowOnClick() {
+        if ($(this).is(':checked')) {
+            //debugger
+            var chkId = $(this).val();
+            $("div[id^='rowHorario_" + chkId + "']").show('slow');
+        }
+        else {
+            //debugger
+            var chkId = $(this).val();
+            $("div[id^='rowHorario_" + chkId + "']").hide('slow');
+        }
+    }
+
+    function AddRow() {
+
+        //debugger
+        var split = $(this).attr('id').split('_');
+
+        var currentDiaId = parseInt(split[1]);
+        var currentRowId = parseInt(split[2]);
+
+        var currentNroId = '_' + currentDiaId + '_' + currentRowId;
+        var newNroId = '_' + currentDiaId + '_' + (currentRowId + 1);
+
+        //var newRowId = 'rowHorario' + newNroId;
+        //var newBtnAddId = 'btnAdd' + newNroId;
+        //var newBtnDeleteId = 'btnDelete' + newNroId;
+
+
+        var newRowHtml = '<div id="rowHorario' + newNroId + '" class="row">'
+                            + '<div class="col-md-5">'
+                                + '<div class="form-group">'
+                                    + '<label class="control-label col-md-4 col-md-offset-2" for="HoraDesde">Desde: </label>'
+                                    + '<div class="col-md-5">'
+                                        //+ '<input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraDesde_1_1" placeholder="08:00">'
+                                        + '<select class="form-control" id="HoraDesde' + newNroId + '" name="HorariosID">'
+                                            + optionsHorarios
+                                        + '</select>'
+                                    + '</div>'
+                                + '</div>'
+                            + '</div>'
+
+                            + '<div class="col-md-5">'
+                                + '<div class="form-group">'
+                                    + '<label class="control-label col-md-4" for="HoraHasta">Hasta: </label>'
+                                    + '<div class="col-md-5">'
+                                        //+ '<input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraHasta_1_1" placeholder="13:00">'
+                                        + '<select class="form-control" id="HoraHasta' + newNroId + '" name="HorariosID">'
+                                            + optionsHorarios
+                                        + '</select>'
+                                    + '</div>'
+                                + '</div>'
+                            + '</div>'
+
+                            + '<div id="divBtns' + newNroId + '" class="col-md-2">'
+                                + '<button id="btnAdd' + newNroId + '" type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-plus"></i></button>'
+                                + '<button id="btnDelete' + newNroId + '" type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-minus"></i></button>'
+                            + '</div>'
+                        + '</div>';
+
+
+        //AddNewRow(HTML)
+        $(this).parent().parent().after(newRowHtml);
+
+        //Hide Buttons
+        $('#divBtns' + currentNroId).hide('slow');
+
+
+        //Bind Events
+        $('#btnAdd' + newNroId).on('click', AddRow);
+        $('#btnDelete' + newNroId).on('click', DeleteRow);
+
+        //Entrance animation
+        $('#rowHorario' + newNroId).hide();
+        $('#rowHorario' + newNroId).show('slow');
+
+        HorariosCount[currentDiaId]++;
+    }
+
+    function DeleteRow() {
+        //debugger
+        var split = $(this).attr('id').split('_');
+
+        var currentDiaId = parseInt(split[1]);
+        var currentRowId = parseInt(split[2]);
+
+        var prevNroId = '_' + currentDiaId + '_' + (currentRowId-1);
+        var currentNroId = '_' + currentDiaId + '_' + currentRowId;
+        //var newNroId = '_' + currentDiaId + '_' + (currentRowId + 1);
+
+        $('#rowHorario' + currentNroId).hide('slow', function () {
+            $('#rowHorario' + currentNroId).remove();
+        });
+
+        $('#divBtns' + prevNroId).show('slow');
+
+        HorariosCount[currentDiaId]--;
+    }
+
+    function ChangeHoraDesde() {
+        debugger
+        var split = $(this).attr('id').split('_');
+
+        var currentDiaId = parseInt(split[1]);
+        var currentRowId = parseInt(split[2]);
+
+        var currentNroId = '_' + currentDiaId + '_' + currentRowId;
+        var newNroId = '_' + currentDiaId + '_' + (currentRowId + 1);
+    }
+
+    function HoraHasta() {
+        //debugger
+        var split = $(this).attr('id').split('_');
+
+        var currentDiaId = parseInt(split[1]);
+        var currentRowId = parseInt(split[2]);
+
+        var currentNroId = '_' + currentDiaId + '_' + currentRowId;
+        var newNroId = '_' + currentDiaId + '_' + (currentRowId + 1);
+    }
+
+
+
+    //Click "Guardar"
+    $("#btnGuardar").unbind("click");
+    $("#btnGuardar").click(function () {
+        //debugger
+        $('#contenidoModal form').submit()
+    });
+
+    //Submit
+    $('form').submit(function () {
+        debugger
+
+
+        data = {
+            __RequestVerificationToken: $("input[name='__RequestVerificationToken").val(),
+            ID:"",
+            CentroDeSaludID: $('#csId').val(),
+            EspecialidadID: $('#EspecialidadID').val(),
+            Activo:true,
+            HorariosPorEspecialidadPorCentroDeSalud:[],
+        };
+
+        $("input:checked[name^='checkDia_'] ").each(function () {
+            //console.log($(this).val());
+
+            var split = $(this).attr('name').split('_');
+
+            var currentDiaId = parseInt(split[1]);
+            //var currentRowId = parseInt(split[2]);
+            //var currentNroId = '_' + currentDiaId + '_' + currentRowId;
+
+            for (var i = 1; i <= HorariosCount[currentDiaId]; i++) {
+
+                var horario = {
+                    Dia: currentDiaId,
+                    HorarioIDEntrada: $("#HoraDesde_" + currentDiaId + "_"+i).val(),
+                    HorarioIDSalida: $("#HoraHasta_" + currentDiaId + "_"+i).val(),
+                    Activo: true,
+                };
+
+                data.HorariosPorEspecialidadPorCentroDeSalud.push(horario);
+
+            }
+        });
+
+        if (data.HorariosPorEspecialidadPorCentroDeSalud.length == 0) {
+            $('#MsjError').text("Debe seleccionar al menos un dia y horario de atencion.");
+            $('#divError').show();
+            this.preventDefault();
+            return
+        }
+
+
+        if ($(this).valid()) {
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: data,//$(this).serialize(),
+                beforeSend: function (xhr) {
+                    abrirWaiting();
+                },
+                success: function (result) {
+                    debugger
+                    cerrarWaiting();
+                    if (result.ok) {                       
+
+                        $('#EspecialidadPartial').load('/CentroDeSalud/EspecialidadesPartial/470');
+                        cerrarModal();
+                        return;
+                    }
+                    else {
+                        $('#MsjError').text(result.msj);
+                        $('#divError').show();
+                    }
+                    //$('#contenidoModal').html(result);
+                },
+                error: function () {
+                    cerrarWaiting();
+                }
+            });
+        }
+        return false;
+    });
+
+
+</script>

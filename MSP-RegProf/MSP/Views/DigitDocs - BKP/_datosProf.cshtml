@@ -1,0 +1,88 @@
+﻿@model MSP_RegProf.Models.ProfVM
+
+
+<!--Datos de Personales-->
+<div class="col-md-3">
+    <div class="box box-primary">
+        <div class="box-body box-profile">
+            <img class="profile-user-img img-responsive img-circle user-img" src="~/Content/img/nopic.png" alt="User profile picture">
+
+            <h3 class="profile-username text-center">@Model.profNombre @Model.profApellido</h3>
+
+            <p class="text-muted text-center">Profesional</p>
+
+            <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                    <b>DNI:</b> <a class="pull-right">@Model.profDni</a>
+                </li>
+                <li class="list-group-item">
+                    <b>Fecha Nacimiento</b> <a class="pull-right">@Html.DisplayFor(Model => Model.profFechaNac)</a>
+                </li>
+                <li class="list-group-item">
+                    <b>Nacionalidad</b> <a class="pull-right">@Html.DisplayFor(Model => Model.profPais)</a>
+                </li>
+            </ul>
+
+            <a href="#" class="btn btn-primary btn-block"><b>Editar Datos</b></a>
+        </div>
+        <!-- /.box-body -->
+    </div>
+</div>
+<!--Datos de Personales-->
+<!--Datos de Titulos-->
+<div class="col-md-9">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Listado de Titulos</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+
+            <!-- Button trigger modal -->
+            @*<button type="button" style="margin-bottom: 15px;" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Certificado/Create', 'Agregar', 'Certificado')">
+                    <i class="fa fa-plus"></i> Nuevo
+                </button>*@
+
+            <table id="dtCertificados" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center" style="width:120px;">
+                            @*  *@
+                        Acciones
+                    </th>
+                    <th class="text-center">
+                        Denominacion
+                    </th>
+                    <th class="text-center">
+                        Matricula
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ListaTitulos)
+                {
+                    <tr>
+                        <td>
+                            <div class="btn-group-sm text-center">
+                                <a class="btn btn-default fa fa-upload" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DigitDocs/SubirDocs/@Model.profId/@item.titId','Cargar','Documentos')"></a>
+                                <a class="btn btn-primary fa fa-eye" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DigitDocs/VerDocs/@Model.profId/@item.titId','Detalle','Documentos')"></a>
+                                @*<a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DigitDocs/Delete/@item.titId','Eliminar','Certificado')"></a>
+                                    <a class="btn btn-primary fa fa-print" onclick="reporte(@item.titId)"></a>*@
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.titDenominacion)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.titMatricula)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>
+</div>
+<!--Datos de Titulos-->
