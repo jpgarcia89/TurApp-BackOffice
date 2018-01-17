@@ -499,8 +499,6 @@
     <Content Include="Models\Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
-    <None Include="Properties\PublishProfiles\MSP-RegProf.pubxml" />
-    <None Include="Properties\PublishProfiles\MSP.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -1478,6 +1476,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="ExportaSISA\" />
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="UploadedFiles\" />
     <Folder Include="Views\Menu\" />
   </ItemGroup>
