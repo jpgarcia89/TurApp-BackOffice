@@ -29,6 +29,9 @@
         <AssociationConnector Association="TurAppModel.FK_Provincia_Pais" ManuallyRouted="false" />
         <AssociationConnector Association="TurAppModel.AspNetUserRoles" ManuallyRouted="false" />
         <AssociationConnector Association="TurAppModel.AspNetMenuAccion" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TurAppModel.Senderos" Width="1.5" PointX="10.375" PointY="6" />
+        <EntityTypeShape EntityType="TurAppModel.SenderosPuntos" Width="1.5" PointX="12.625" PointY="6.625" />
+        <AssociationConnector Association="TurAppModel.FK_SenderosPuntos_SenderosPuntos" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

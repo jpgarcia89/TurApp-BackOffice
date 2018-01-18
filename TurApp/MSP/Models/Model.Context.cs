@@ -39,6 +39,8 @@ namespace TurApp.Models
         public virtual DbSet<MenuAspNetRolesAccion> MenuAspNetRolesAccion { get; set; }
         public virtual DbSet<Pais> Pais { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
+        public virtual DbSet<Senderos> Senderos { get; set; }
+        public virtual DbSet<SenderosPuntos> SenderosPuntos { get; set; }
     
         public virtual ObjectResult<GetPermisosPorNombreDeUsuario_Result> GetPermisosPorNombreDeUsuario(string userName)
         {

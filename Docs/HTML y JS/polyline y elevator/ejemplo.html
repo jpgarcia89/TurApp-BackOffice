@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Ejemplo</title>
+    <style>
+      html,
+      body,
+      #map {
+        height: 100%;
+        width: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfmP3Pqo0aBdUZmidCxUsXQDS5NPYLang&libraries=geometry,drawing&ext=.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <input id="btn" value="get polyline data" type="button" />
+    <div id="map" style="width: 600px; height: 400px; text-align: center; position: relative; overflow: hidden;"></div>
+    <div id="elevChart"></div>
+    <div id="output"></div>
+    <script>
+      var polylines = [];
+      var marker;
+      var chartData = [];
+      var map;
+      var selectionPolyline;
+
+
+      function initMap() {
+        //set center coordinate
+        var myLat = -31.5351832 /*value*/ ;
+        var myLng = -68.5223334 /*value*/ ;
+        var center = {
+          lat: myLat,
+          lng: myLng
+        };
+
+        //create map
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 14,
+          center: center
+        });
+
+        addDrawingControl(map);
+      }
+
+      function addDrawingControl(map) {
+        //add drawing control
+        var drawingControl = new google.maps.drawing.DrawingManager({
+          drawingMode: null,
+          drawingControl: true,
+          drawingControlOptions: {
+            position: google.maps.ControlPosition.TOP_CENTER,
+            drawingModes: [
+              google.maps.drawing.OverlayType.POLYLINE
+            ]
+          },
+          polylineOptions: {
+            editable: true,
+            draggable: false,
+            geodesic: true,
+            strokeColor: "blue",
+            strokeOpacity: 0.5,
+            strokeWeight: 5,
+          }
+        });
+        drawingControl.setMap(map);
+        //end of add drawing control
+
+        //add event listener
+        google.maps.event.addListener(drawingControl, 'polylinecomplete', function(polyline) {
+          polylines.push(polyline);
+          var polylinePath = polyline.getPath();
+          console.log("polyline : " + polylinePath.getArray());
+        });
+
+        google.maps.event.addDomListener(document.getElementById('btn'), 'click', function() {
+          var htmlStr = "";
+          var path = [];
+          var xy;
+          for (var i = 0; i < polylines.length; i++) {
+          
+            htmlStr += "polyline #" + i + " # vertices=" + polylines[i].getPath().getLength() + " length=" + google.maps.geometry.spherical.computeLength(polylines[i].getPath()).toFixed(2) + " km<br>";
+            for (var j = 0; j < polylines[i].getPath().getLength(); j++) {
+              htmlStr += "&nbsp;&nbsp;" + polylines[i].getPath().getAt(j).toUrlValue(6) + "<br>";
+              path.push(polylines[i].getPath().getAt(j));
+            }
+        // Create an ElevationService.
+        var elevator = new google.maps.ElevationService;
+         elevator.getElevationAlongPath({
+          'path': path,
+          'samples': 256
+        }, plotElevation);
+
+          }
+          document.getElementById('output').innerHTML = htmlStr;
+        })
+      }
+      google.maps.event.addDomListener(window, "load", initMap);
+
+
+
+function plotElevation(returnedElevations) {
+    console.log(returnedElevations);
+    if (returnedElevations == null) {
+        return;
+    }
+    var elevationCalc = null;
+
+    var elevations = [];
+    var locations = [];
+    //GUARDAR ESTOS DATOS
+    console.log(returnedElevations[0].elevation);
+    console.log(returnedElevations[0].location.lat());
+    console.log(returnedElevations[0].location.lng());
+
+    for (var i = 0; i < returnedElevations.length; i++) {
+        elevations.push(returnedElevations[i].elevation);
+        locations.push(returnedElevations[i].location);
+    }
+
+    // smooth the data
+    // display the results
+    chartData = [];
+    var ascent = getClimbTotalAscent(elevations);
+    var descent = 0;
+    var minElevation = elevations[0];
+    var maxElevation = elevations[0];
+    var distance = 0;
+    var maxGradient = 0;
+    var maxGradientAt = 0;
+    var maxGradientDesc = 0;
+    var maxGradientDescAt = 0;
+    for (var i_10 = 0; i_10 < elevations.length; i_10++) {
+        minElevation = Math.min(elevations[i_10], minElevation);
+        maxElevation = Math.max(elevations[i_10], maxElevation);
+        // calculate distance
+        if (i_10 > 0) {
+            var d = google.maps.geometry.spherical.computeDistanceBetween(locations[i_10 - 1], locations[i_10]);
+            distance += d;
+        }
+        var elevation = elevations[i_10];
+       
+        var displayDistance = distance / 1000;
+       
+        chartData.push([displayDistance, elevation]);
+        if (i_10 > 0) {
+            var thisAscent = elevations[i_10] - elevations[i_10 - 1];
+            if (thisAscent < 0) {
+                descent -= thisAscent;
+            }
+        }
+    }
+    var elevChange = maxElevation - minElevation;
+    // chart
+        $("#elevChart").height(100);
+    if (elevChange < 50) {
+        $("#elevChart").height(100);
+    }
+    else if (elevChange >= 300) {
+        $("#elevChart").height(600);
+    }
+    else {
+        $("#elevChart").height(elevChange * 2);
+    }
+    var chart = $("#elevChart");
+    var chartMin = elevationChartMin(minElevation, maxElevation);
+    var chartMax = elevationChartMax(minElevation, maxElevation);
+
+    plot = $.plot(chart, [{ data: chartData, lines: { show: true, fill: true, fillColor: "#D9D9D9" } }], {
+        grid: {
+            hoverable: true,
+            aboveData: true
+        },
+        yaxis: {
+            min: chartMin,
+            max: chartMax
+        },
+        crosshair: {
+            mode: "x"
+        },
+        selection: {
+            mode: "x",
+            color: "red"
+        },
+        colors: ["#D9D9D9"]
+    });
+    
+    chart.on("mouseleave", function () {
+        $("#tooltip").hide();
+    });
+    chart.bind("plotunselected", function () {
+        if (selectionPolyline != null) {
+            selectionPolyline.setMap(null);
+        }
+    });
+    chart.bind("plotselected", function (event, ranges) {
+        var from = ranges.xaxis.from;
+        var to = ranges.xaxis.to;
+        // get the start and end altitudes
+        var fromIndex = getIndexForDistance(from);
+        var fromElevation = chartData[fromIndex][1];
+        var toIndex = getIndexForDistance(to);
+        var toElevation = chartData[toIndex][1];
+        var segmentDistance = to - from;
+        // selected average %age
+        var segmentDistanceInMetres = segmentDistance * 1000;
+        var climbInMetres = Math.abs(toElevation - fromElevation);
+
+        // show the segment on the map
+        if (selectionPolyline != null) {
+            selectionPolyline.setMap(null);
+        }
+        var sectionData = locations.slice(fromIndex, toIndex);
+        var polyOptions = {
+            map: map,
+            strokeColor: "red",
+            strokeWeight: 8,
+            path: sectionData,
+            zIndex: 1000
+        };
+        selectionPolyline = new google.maps.Polyline(polyOptions);
+    });
+    chart.bind("plothover", function (event, pos) {
+        var dataset = plot.getData();
+        var series = dataset[0];
+        var j = getIndexForDistance(pos.x);
+        $("#tooltip").hide();
+        var y = series.data[j][1];
+        var x = series.data[j][0];
+        var name = "Elevation: " +
+            addCommas(roundNumber(y, 0)) +
+            " Metros" +
+            "<br/>" +
+            "Distance: " +
+            addCommas(roundNumber(x, 1)) +
+            " KM";
+        showTooltip(pos.pageX, pos.pageY, name);
+        // add marker
+        if (marker == null || marker.getMap() == null) {
+            marker = new google.maps.Marker({
+                position: locations[j],
+                map: map,
+                icon: {
+                    url: "images/station6.png",
+                    anchor: new google.maps.Point(10, 10)
+                },
+                title: "Elevation: " +
+                    addCommas(roundNumber(y, 0)) +
+                    " Metros" +
+                    ", distance: " +
+                    addCommas(roundNumber(x, 1)) +
+                    " KM"
+            });
+        }
+        else {
+            marker.setPosition(locations[j]);
+        }
+    });
+}
+
+
+
+
+
+
+
+function showTooltip(n, t, i) {
+    $("#tooltip").length === 0 && $('<div id="tooltip"><\/div>').css({
+        position: "absolute",
+        display: "none",
+        border: "1px solid #fdd",
+        padding: "2px",
+        "min-width": "150px",
+        "background-color": "#fee",
+        opacity: .8
+    }).appendTo("body");
+    n > $("body").width() - $("#tooltip").width() - 30 ? n = n - $("#tooltip").width() - 20 : n += 20;
+    $("#tooltip").html(i).css({
+        top: t,
+        left: n
+    }).show()
+}
+
+function getClimbTotalAscent(elevations) {
+    "use strict";
+    var ascent = 0;
+    for (var i = 0; i < elevations.length; i++) {
+        if (i > 0) {
+            var thisAscent = elevations[i] - elevations[i - 1];
+            if (thisAscent > 0) {
+                ascent += thisAscent;
+            }
+        }
+    }
+    return ascent;
+}
+
+
+
+function elevationChartMin(n, t) {
+    var i = (t - n) / 5;
+    return n - i > 0 ? n - i : null
+}
+
+function elevationChartMax(n, t) {
+    var i = (t - n) / 5;
+    return t + i
+}
+
+function getIndexForDistance(distance) {
+    for (var i_11 = 0; i_11 < chartData.length; i_11++) {
+        if (chartData[i_11][0] >= distance) {
+            return i_11;
+        }
+    }
+    return chartData.length - 1;
+}
+
+function roundNumber(n, t) {
+    return Math.round(n * Math.pow(10, t)) / Math.pow(10, t)
+}
+
+function addCommas(n) {
+    for (var u = n.toString(), i = u.split("."), t = i[0], f = i.length > 1 ? "." + i[1] : "", r = /(\d+)(\d{3})/; r.test(t);) t = t.replace(r, "$1,$2");
+    return t + f
+}
+
+    </script>
+               <script language="javascript" type="text/javascript" src="js/jquery.flot.min.js"></script>
+               <script language="javascript" type="text/javascript" src="js/jquery.flot.selection.js"></script>
+  </body>
+</html>

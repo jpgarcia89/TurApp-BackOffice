@@ -215,6 +215,7 @@
     <Compile Include="Controllers\Menu\MenuController.cs" />
     <Compile Include="Controllers\Seguridad\RolesController.cs" />
     <Compile Include="Controllers\Seguridad\UsersController.cs" />
+    <Compile Include="Controllers\Administracion\Senderos\SenderosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -282,6 +283,12 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Provincia.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Senderos.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SenderosPuntos.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1472,6 +1479,11 @@
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\Permisos.cshtml" />
     <Content Include="Views\Users\SetRoles.cshtml" />
+    <Content Include="Views\Senderos\Create.cshtml" />
+    <Content Include="Views\Senderos\Delete.cshtml" />
+    <Content Include="Views\Senderos\Details.cshtml" />
+    <Content Include="Views\Senderos\Edit.cshtml" />
+    <Content Include="Views\Senderos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

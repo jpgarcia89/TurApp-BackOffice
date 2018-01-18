@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Ejemplo</title>
+    <style>
+      html,
+      body,
+      #map {
+        height: 100%;
+        width: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfmP3Pqo0aBdUZmidCxUsXQDS5NPYLang&libraries=geometry,drawing&ext=.js"></script>
+    <script src="https://www.google.com/jsapi"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <input id="btn" value="get polyline data" type="button" />
+    <div id="map"></div>
+    <div id="elevation_chart"></div>
+    <div id="output"></div>
+    <script>
+      var polylines = [];
+         // Load the Visualization API and the columnchart package.
+      google.load('visualization', '1', {packages: ['corechart']});
+
+      function initMap() {
+        //set center coordinate
+        var myLat = -31.5351832 /*value*/ ;
+        var myLng = -68.5223334 /*value*/ ;
+        var center = {
+          lat: myLat,
+          lng: myLng
+        };
+
+        //create map
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 16,
+          center: center
+        });
+
+        addDrawingControl(map);
+      }
+
+      function addDrawingControl(map) {
+        //add drawing control
+        var drawingControl = new google.maps.drawing.DrawingManager({
+          drawingMode: null,
+          drawingControl: true,
+          drawingControlOptions: {
+            position: google.maps.ControlPosition.TOP_CENTER,
+            drawingModes: [
+              google.maps.drawing.OverlayType.POLYLINE
+            ]
+          },
+          polylineOptions: {
+            editable: true,
+            draggable: false,
+            geodesic: true,
+            strokeColor: '#FF0000'
+          }
+        });
+        drawingControl.setMap(map);
+        //end of add drawing control
+
+        //add event listener
+        google.maps.event.addListener(drawingControl, 'polylinecomplete', function(polyline) {
+          polylines.push(polyline);
+          var polylinePath = polyline.getPath();
+          console.log("polyline : " + polylinePath.getArray());
+        });
+
+        google.maps.event.addDomListener(document.getElementById('btn'), 'click', function() {
+          var htmlStr = "";
+          var path = [];
+          var xy;
+          for (var i = 0; i < polylines.length; i++) {
+          
+            htmlStr += "polyline #" + i + " # vertices=" + polylines[i].getPath().getLength() + " length=" + google.maps.geometry.spherical.computeLength(polylines[i].getPath()).toFixed(2) + " km<br>";
+            for (var j = 0; j < polylines[i].getPath().getLength(); j++) {
+              htmlStr += "&nbsp;&nbsp;" + polylines[i].getPath().getAt(j).toUrlValue(6) + "<br>";
+              xy = polylines[i].getPath().getAt(j);
+              //path.push("{lat: " + xy.lat() + ', lng: ' + xy.lng() + "}");
+              path.push(polylines[i].getPath().getAt(j));
+            }
+            console.log(path);
+        // Create an ElevationService.
+        var elevator = new google.maps.ElevationService;
+         elevator.getElevationAlongPath({
+          'path': path,
+          'samples': 256
+        }, plotElevation);
+
+          }
+          document.getElementById('output').innerHTML = htmlStr;
+        })
+      }
+      google.maps.event.addDomListener(window, "load", initMap);
+
+      // Takes an array of ElevationResult objects, draws the path on the map
+      // and plots the elevation profile on a Visualization API ColumnChart.
+        // Create a new chart in the elevation_chart DIV.
+var marker;
+
+      function plotElevation(elevations, status) {
+        console.log(elevations);
+        var chartDiv = document.getElementById('elevation_chart');
+        if (status !== 'OK') {
+          // Show the error code inside the chartDiv.
+          chartDiv.innerHTML = 'Cannot show elevation: request failed because ' +
+              status;
+          return;
+        }
+
+        // Extract the data from which to populate the chart.
+        // Because the samples are equidistant, the 'Sample'
+        // column here does double duty as distance along the
+        // X axis.
+        var chart = new google.visualization.AreaChart(chartDiv);
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Sample');
+        data.addColumn('number', 'Elevation');
+        for (var i = 0; i < elevations.length; i++) {
+          data.addRow(['', elevations[i].elevation]);
+        }
+
+        // Draw the chart using the data within its DIV.
+        chart.draw(data, {
+          height: 150,
+          legend: 'none',
+          titleY: 'Elevation (m)'
+        });
+
+        google.visualization.events.addListener(chart, 'onmouseover', function(e) { 
+        // add marker
+        if (marker == null || marker.getMap() == null) {
+            marker = new google.maps.Marker({
+                position: locations[j],
+                map: map,
+                icon: {
+                    url: "images/station6.png",
+                    anchor: new google.maps.Point(10, 10)
+                }                
+            });
+        }
+        else {
+            marker.setPosition(locations[j]);
+        }
+        });
+      }
+         
+    </script>
+  </body>
+</html>
