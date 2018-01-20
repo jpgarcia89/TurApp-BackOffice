@@ -1,117 +1,756 @@
-﻿@model TurApp.Models.Senderos
+﻿@model TurApp.Models.Sendero
 
 @{
     //Layout = null;
+    ViewBag.Title = "Senderos";
+
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
-</head>
-<body>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        
-        <div class="form-horizontal">
-            <h4>Senderos</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.ID)
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.LugarInicio, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.LugarInicio, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.LugarInicio, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.LugarFin, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.LugarFin, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.LugarFin, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.TipoDificultadTecnicaID, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TipoDificultadTecnicaID, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.TipoDificultadTecnicaID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.TipoDificultadFisicaID, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TipoDificultadFisicaID, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.TipoDificultadFisicaID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.Desnivel, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Desnivel, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Desnivel, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.Distancia, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Distancia, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Distancia, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.AlturaMaxima, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.AlturaMaxima, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.AlturaMaxima, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.DuracionTotal, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.DuracionTotal, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.DuracionTotal, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
-                </div>
-            </div>
+
+
+<section class="content-header">
+    <h1>
+        Nuevo
+        <small>Sendero</small>
+    </h1>
+
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a>Administración</a></li>
+        <li><a href="@Url.Action("Index","Sendero")">Senderos</a></li>
+        <li class="active">Nuevo</li>
+    </ol>
+</section>
+
+
+
+
+
+<div class="content">
+
+    <!-- Box - Datos Centro de Salud -->
+    <div class="box box-primary">
+
+        <div class="box-header">
+            <h3 class="box-title">Datos Generales:</h3>
         </div>
-    }
-    
-    <div>
-        @Html.ActionLink("Back to List", "Index")
+
+        <div class="box-body">
+            @using (Html.BeginForm("edit", "Senderos", FormMethod.Post, new { @id = "formSendero" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <div class="container">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <!-- Grupo - Datos Generales -->
+                        <!-- Fila 1 - Nombre y Descripcion -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="Nombre">Nombre:</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="Descripcion">Descripcion:</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fila 2 - LugarInicio y LugarFin -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="LugarInicio">Lugar de Inicio:</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.LugarInicio, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.LugarInicio, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="LugarFin">Lugar de Fin:</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.LugarFin, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.LugarFin, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Fila 3 - TipoDificultadTecnicaID y TipoDificultadFisicaID -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="Apellido">Dificultad Tecnica:</label>
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("TipoDificultadTecnicaID", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.TipoDificultadTecnicaID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="TipoDificultadFisicaID">Dificultad Fisica:</label>
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("TipoDificultadFisicaID", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.TipoDificultadFisicaID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- Fila 4 - LugarInicio y LugarFin -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="Desnivel">Desnivel:</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Desnivel, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Desnivel, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="Distancia">Distancia:</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Distancia, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Distancia, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- Fila 5 - LugarInicio y LugarFin -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="AlturaMaxima">AlturaMaxima:</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.AlturaMaxima, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.AlturaMaxima, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2 col-md-offset-1" for="DuracionTotal">DuracionTotal:</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.DuracionTotal, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.DuracionTotal, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <input id="btnGuardar" type="submit" class="btn btn-primary" value="Guardar" />
+                    </div>
+                </div>
+            }
+        </div>
     </div>
-</body>
-</html>
+
+
+    <!-- Box - Datos Centro de Salud -->
+    <div class="box box-primary">
+
+        <div class="box-header">
+            <h3 class="box-title">Geolocalizacion:</h3>
+        </div>
+
+        <div class="box-body">
+            <input id="btn" value="get polyline data" type="button" />
+            <div id="map" style="width: 600px; height: 400px; text-align: center; position: relative; overflow: hidden;"></div>
+            <div id="elevChart"></div>
+            <div id="output"></div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfmP3Pqo0aBdUZmidCxUsXQDS5NPYLang&libraries=geometry,drawing&ext=.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+    //Click "Guardar"
+    //$("#btnGuardar").unbind("click");
+    //$("#btnGuardar").click(function () {
+    //    debugger
+    //    $('#contenidoModal form').submit()
+    //});
+
+    //Submit
+    $('#formSendero').submit(function () {
+
+        debugger
+
+        var data = {
+            Nombre: $("#Nombre").val(),
+            Descripcion: $("#Descripcion").val(),
+            LugarInicio: $("#LugarInicio").val(),
+            LugarFin: $("#LugarFin").val(),
+            TipoDificultadTecnicaID: $("#TipoDificultadTecnicaID").val(),
+            TipoDificultadFisicaID: $("#TipoDificultadFisicaID").val(),
+            Desnivel: $("#Desnivel").val(),
+            Distancia: $("#Distancia").val(),
+            AlturaMaxima: $("#AlturaMaxima").val(),
+            DuracionTotal: $("#DuracionTotal").val(),
+            SenderoPunto: pointsArray,
+        };
+
+
+
+
+
+
+        if ($(this).valid()) {
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: data,
+                beforeSend: function (xhr) {
+                    abrirWaiting();
+                },
+                success: function (result) {
+                    //debugger
+                    cerrarWaiting();
+                    if (result.ok) {
+                        window.location.href = window.location.href;
+                        cerrarModal();
+                        return;
+                    }
+                    $('#contenidoModal').html(result);
+                },
+                error: function () {
+                    cerrarWaiting();
+                }
+            });
+        }
+        return false;
+    });
+
+
+
+
+
+</script>
+
+<script>
+    var polylines = [];
+    var marker;
+    var chartData = [];
+    var map;
+    var selectionPolyline;
+    var pointsArray = [];
+    var flightPath;
+    var polylinePath;
+
+
+    function initMap() {
+        //set center coordinate
+        var myLat = -31.5351832 /*value*/;
+        var myLng = -68.5223334 /*value*/;
+        var center = {
+            lat: myLat,
+            lng: myLng
+        };
+
+        //create map
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: center
+        });
+
+        addDrawingControl(map);
+
+        //para editar
+        //var flightPathCoordinates = [
+        //  { lat: 37.772, lng: -122.214 },
+        //  { lat: 21.291, lng: -157.821 },
+        //  { lat: -18.142, lng: 178.431 },
+        //  { lat: -27.467, lng: 153.027 }
+        //];
+        var flightPathCoordinates = [
+            @foreach (var Punto in Model.SenderoPunto)
+            {
+                <text>
+                    { lat: parseFloat("@Punto.Latitud"), lng: parseFloat("@Punto.Longitud") },
+                </text>
+            }
+
+            //{ lat: -27.467, lng: 153.027 }
+        ];
+
+
+
+
+
+
+
+
+
+
+
+
+        flightPath = new google.maps.Polyline({
+            path: flightPathCoordinates,
+            editable: true,
+            draggable: false,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+        addLine();
+    }
+
+    function addLine() {
+        flightPath.setMap(map);
+    }
+
+    function addDrawingControl(map) {
+        //add drawing control
+        var drawingControl = new google.maps.drawing.DrawingManager({
+            drawingMode: null,
+            drawingControl: true,
+            drawingControlOptions: {
+                position: google.maps.ControlPosition.TOP_CENTER,
+                drawingModes: [
+                  google.maps.drawing.OverlayType.POLYLINE
+                ]
+            },
+            polylineOptions: {
+                editable: true,
+                draggable: false,
+                geodesic: true,
+                strokeColor: "#00b3fd",
+                strokeOpacity: 0.5,
+                strokeWeight: 5,
+            }
+        });
+        drawingControl.setMap(map);
+        //end of add drawing control
+
+        //add event listener
+        google.maps.event.addListener(drawingControl, 'polylinecomplete', function (polyline) {
+            polylines.push(polyline);
+            polylinePath = polyline.getPath();
+        });
+
+        google.maps.event.addDomListener(document.getElementById('btn'), 'click', function () {
+            var htmlStr = "";
+            var path = [];
+            var xy;
+            for (var i = 0; i < polylines.length; i++) {
+
+                htmlStr += "polyline #" + i + " # vertices=" + polylines[i].getPath().getLength() + " length=" + google.maps.geometry.spherical.computeLength(polylines[i].getPath()).toFixed(2) + " km<br>";
+                for (var j = 0; j < polylines[i].getPath().getLength() ; j++) {
+                    htmlStr += "&nbsp;&nbsp;" + polylines[i].getPath().getAt(j).toUrlValue(6) + "<br>";
+                    path.push(polylines[i].getPath().getAt(j));
+                }
+                // Create an ElevationService.
+                var elevator = new google.maps.ElevationService;
+                elevator.getElevationAlongPath({
+                    'path': path,
+                    'samples': 256
+                }, plotElevation);
+
+            }
+            document.getElementById('output').innerHTML = htmlStr;
+        })
+    }
+    google.maps.event.addDomListener(window, "load", initMap);
+
+
+
+    function plotElevation(returnedElevations) {
+        if (returnedElevations == null) {
+            return;
+        }
+        var elevationCalc = null;
+
+        pointsArray = [];
+        var elevations = [];
+        var locations = [];
+        //GUARDAR ESTOS DATOS
+        for (var i = 0; i < returnedElevations.length; i++) {
+            elevations.push(returnedElevations[i].elevation);
+            locations.push(returnedElevations[i].location);
+
+            var point = {
+                Latitud: returnedElevations[i].location.lat(),
+                Longitud: returnedElevations[i].location.lng(),
+                Altura: returnedElevations[i].elevation,
+                original:false
+            }
+
+
+            if (searchPointInArray(returnedElevations[i].location.lat(), returnedElevations[i].location.lng(), polylinePath)) {
+                point.original = true;
+            }
+           
+
+
+            pointsArray.push(point)
+        }
+        // smooth the data
+        // display the results
+        chartData = [];
+        var ascent = getClimbTotalAscent(elevations);
+        var descent = 0;
+        var minElevation = elevations[0];
+        var maxElevation = elevations[0];
+        var distance = 0;
+        var maxGradient = 0;
+        var maxGradientAt = 0;
+        var maxGradientDesc = 0;
+        var maxGradientDescAt = 0;
+        for (var i_10 = 0; i_10 < elevations.length; i_10++) {
+            minElevation = Math.min(elevations[i_10], minElevation);
+            maxElevation = Math.max(elevations[i_10], maxElevation);
+            // calculate distance
+            if (i_10 > 0) {
+                var d = google.maps.geometry.spherical.computeDistanceBetween(locations[i_10 - 1], locations[i_10]);
+                distance += d;
+            }
+            var elevation = elevations[i_10];
+
+            var displayDistance = distance / 1000;
+
+            chartData.push([displayDistance, elevation]);
+            if (i_10 > 0) {
+                var thisAscent = elevations[i_10] - elevations[i_10 - 1];
+                if (thisAscent < 0) {
+                    descent -= thisAscent;
+                }
+            }
+        }
+        var elevChange = maxElevation - minElevation;
+        // chart
+        var chart = $("#elevChart");
+        chart.height(150);
+        var chartMin = elevationChartMin(minElevation, maxElevation);
+        var chartMax = elevationChartMax(minElevation, maxElevation);
+
+        plot = $.plot(chart, [{ data: chartData, lines: { show: true, fill: true, fillColor: "#D9D9D9" } }], {
+            grid: {
+                hoverable: true,
+                aboveData: true
+            },
+            yaxis: {
+                min: chartMin,
+                max: chartMax
+            },
+            crosshair: {
+                mode: "x"
+            },
+            selection: {
+                mode: "x",
+                color: "red"
+            },
+            colors: ["#D9D9D9"]
+        });
+
+        chart.on("mouseleave", function () {
+            $("#tooltip").hide();
+        });
+        chart.bind("plotunselected", function () {
+            if (selectionPolyline != null) {
+                selectionPolyline.setMap(null);
+            }
+        });
+        chart.bind("plotselected", function (event, ranges) {
+            var from = ranges.xaxis.from;
+            var to = ranges.xaxis.to;
+            // get the start and end altitudes
+            var fromIndex = getIndexForDistance(from);
+            var fromElevation = chartData[fromIndex][1];
+            var toIndex = getIndexForDistance(to);
+            var toElevation = chartData[toIndex][1];
+            var segmentDistance = to - from;
+            // selected average %age
+            var segmentDistanceInMetres = segmentDistance * 1000;
+            var climbInMetres = Math.abs(toElevation - fromElevation);
+
+            // show the segment on the map
+            if (selectionPolyline != null) {
+                selectionPolyline.setMap(null);
+            }
+            var sectionData = locations.slice(fromIndex, toIndex);
+            var polyOptions = {
+                map: map,
+                strokeColor: "red",
+                strokeWeight: 8,
+                path: sectionData,
+                zIndex: 1000
+            };
+            selectionPolyline = new google.maps.Polyline(polyOptions);
+        });
+        chart.bind("plothover", function (event, pos) {
+            var dataset = plot.getData();
+            var series = dataset[0];
+            var j = getIndexForDistance(pos.x);
+            $("#tooltip").hide();
+            var y = series.data[j][1];
+            var x = series.data[j][0];
+            var name = "Elevation: " +
+                addCommas(roundNumber(y, 0)) +
+                " Metros" +
+                "<br/>" +
+                "Distance: " +
+                addCommas(roundNumber(x, 1)) +
+                " KM";
+            showTooltip(pos.pageX, pos.pageY, name);
+            // add marker
+            if (marker == null || marker.getMap() == null) {
+                marker = new google.maps.Marker({
+                    position: locations[j],
+                    map: map,
+                    icon: {
+                        url: "@Url.Content("~/Content/images/station6.png")",// "~/Content/images/station6.png",
+                        anchor: new google.maps.Point(10, 10)
+                    },
+                    title: "Elevation: " +
+                        addCommas(roundNumber(y, 0)) +
+                        " Metros" +
+                        ", distance: " +
+                        addCommas(roundNumber(x, 1)) +
+                        " KM"
+                });
+            }
+            else {
+                marker.setPosition(locations[j]);
+            }
+        });
+    }
+
+
+
+
+
+
+
+    function showTooltip(n, t, i) {
+        $("#tooltip").length === 0 && $('<div id="tooltip"><\/div>').css({
+            position: "absolute",
+            display: "none",
+            border: "1px solid #fdd",
+            padding: "2px",
+            "min-width": "150px",
+            "background-color": "#fee",
+            opacity: .8
+        }).appendTo("body");
+        n > $("body").width() - $("#tooltip").width() - 30 ? n = n - $("#tooltip").width() - 20 : n += 20;
+        $("#tooltip").html(i).css({
+            top: t,
+            left: n
+        }).show()
+    }
+
+    function getClimbTotalAscent(elevations) {
+        "use strict";
+        var ascent = 0;
+        for (var i = 0; i < elevations.length; i++) {
+            if (i > 0) {
+                var thisAscent = elevations[i] - elevations[i - 1];
+                if (thisAscent > 0) {
+                    ascent += thisAscent;
+                }
+            }
+        }
+        return ascent;
+    }
+
+
+
+    function elevationChartMin(n, t) {
+        var i = (t - n) / 5;
+        return n - i > 0 ? n - i : null
+    }
+
+    function elevationChartMax(n, t) {
+        var i = (t - n) / 5;
+        return t + i
+    }
+
+    function getIndexForDistance(distance) {
+        for (var i_11 = 0; i_11 < chartData.length; i_11++) {
+            if (chartData[i_11][0] >= distance) {
+                return i_11;
+            }
+        }
+        return chartData.length - 1;
+    }
+
+    function roundNumber(n, t) {
+        return Math.round(n * Math.pow(10, t)) / Math.pow(10, t)
+    }
+
+    function addCommas(n) {
+        for (var u = n.toString(), i = u.split("."), t = i[0], f = i.length > 1 ? "." + i[1] : "", r = /(\d+)(\d{3})/; r.test(t) ;) t = t.replace(r, "$1,$2");
+        return t + f
+    }
+
+    function searchPointInArray(ArgLat, ArgLng, ArgPointsArray) {
+        for (var i = 0; i < ArgPointsArray.length; i++) {
+            if (ArgPointsArray.b[0].lat().toFixed(4) == ArgLat.toFixed(4) && ArgPointsArray.b[0].lng().toFixed(4) == ArgLng.toFixed(4)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+</script>
+<script src="~/Scripts/plugins/elevation/jquery.flot.min.js"></script>
+<script src="~/Scripts/plugins/elevation/jquery.flot.selection.js"></script>
+@*<script language="javascript" type="text/javascript" src="js/jquery.flot.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/jquery.flot.selection.js"></script>*@
+
+
+
+
+
+
+
+
+
+
+
+@*<!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Edit</title>
+    </head>
+    <body>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Senderos</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LugarInicio, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.LugarInicio, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LugarInicio, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LugarFin, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.LugarFin, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LugarFin, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TipoDificultadTecnicaID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TipoDificultadTecnicaID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TipoDificultadTecnicaID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TipoDificultadFisicaID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TipoDificultadFisicaID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TipoDificultadFisicaID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Desnivel, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Desnivel, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Desnivel, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Distancia, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Distancia, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Distancia, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AlturaMaxima, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.AlturaMaxima, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.AlturaMaxima, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DuracionTotal, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DuracionTotal, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DuracionTotal, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </body>
+    </html>*@

@@ -12,12 +12,12 @@ namespace TurApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Senderos
+    public partial class Sendero
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Senderos()
+        public Sendero()
         {
-            this.SenderosPuntos = new HashSet<SenderosPuntos>();
+            this.SenderoPunto = new HashSet<SenderoPunto>();
         }
     
         public int ID { get; set; }
@@ -33,6 +33,6 @@ namespace TurApp.Models
         public string DuracionTotal { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SenderosPuntos> SenderosPuntos { get; set; }
+        public virtual ICollection<SenderoPunto> SenderoPunto { get; set; }
     }
 }

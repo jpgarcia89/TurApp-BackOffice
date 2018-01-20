@@ -248,6 +248,7 @@
     <Compile Include="Models\App Models\ManageViewModels.cs" />
     <Compile Include="Models\App Models\Menu\MenuVM.cs" />
     <Compile Include="Models\App Models\Seguridad\AspNetUsersVM.cs" />
+    <Compile Include="Models\EF Extended Models\SenderoVM.cs" />
     <Compile Include="Models\EnumDias.cs" />
     <Compile Include="Models\GetPermisosPorNombreDeUsuario_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -285,10 +286,16 @@
     <Compile Include="Models\Provincia.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Senderos.cs">
+    <Compile Include="Models\Sendero.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SenderosPuntos.cs">
+    <Compile Include="Models\SenderoPunto.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoDificultadFisica.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoDificultadTecnica.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -315,6 +322,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\images\station3.png" />
+    <Content Include="Content\images\station6.png" />
     <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
@@ -1153,6 +1162,13 @@
     <Content Include="Scripts\plugins\DhtmlxScheduler\imgs_glossy\white_tab.png" />
     <Content Include="Scripts\plugins\DhtmlxScheduler\imgs_glossy\white_tab_wide.png" />
     <Content Include="Scripts\plugins\DhtmlxScheduler\locale\locale_es.js" />
+    <Content Include="Scripts\plugins\elevation\ElevationCalculator.js" />
+    <Content Include="Scripts\plugins\elevation\jquery.flot.min.js" />
+    <Content Include="Scripts\plugins\elevation\jquery.flot.selection.js" />
+    <Content Include="Scripts\plugins\elevation\RouteElevation.js" />
+    <Content Include="Scripts\plugins\elevation\siteBundle.js" />
+    <Content Include="Scripts\plugins\elevation\siteBundle.min.js" />
+    <Content Include="Scripts\plugins\elevation\StravaCommon.js" />
     <Content Include="Scripts\plugins\fastclick\fastclick.js" />
     <Content Include="Scripts\plugins\fastclick\fastclick.min.js" />
     <Content Include="Scripts\plugins\flot\excanvas.js" />

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TurApp.Models.Senderos>
+﻿@model IEnumerable<TurApp.Models.Sendero>
 
 @{
     //Layout = null;
@@ -29,10 +29,10 @@
             <h3 class="box-title">Listado de Senderos</h3>
 
             @*<button type="button" style="margin-right:25px;" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Roles/Create', 'Agregar', 'Roles')">
-                <i class="fa fa-plus"></i> Nuevo
-            </button>*@
+                    <i class="fa fa-plus"></i> Nuevo
+                </button>*@
 
-            <a href="@Url.Action("Create","Senderos")" style="margin-right:25px;" class="btn btn-primary btn-md pull-right" >
+            <a href="@Url.Action("Create","Senderos")" style="margin-right:25px;" class="btn btn-primary btn-md pull-right">
                 <i class="fa fa-plus"></i> Nuevo
             </a>
         </div>
@@ -41,33 +41,39 @@
                 <thead>
                     <tr>
                         <th>Sendero</th>
-
+                        <th>Desnivel</th>
+                        <th>Distancia</th>
+                        <th>AlturaMaxima</th>
+                        <th>DuracionTotal</th>
                         <th style="width:140px">Acciones</th>
-                        
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@Html.DisplayNameFor(model => model.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Desnivel)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Distancia)</td>
+                            <td>@Html.DisplayFor(modelItem => item.AlturaMaxima)</td>
+                            <td>@Html.DisplayFor(modelItem => item.DuracionTotal)</td>
 
-                            <td>
-                                <div class="btn-group-sm">
-                                    <span data-placement="top" title="Editar" data-toggle="tooltip">
-                                        <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Senderos/Edit/@item.ID','Editar','Sendero')"></a>
-                                    </span>
+                        <td>
+                            <div class="btn-group-sm">
+                                <span data-placement="top" title="Editar" data-toggle="tooltip">
+                                    <a class="btn btn-info fa fa-pencil-square-o" href="@Url.Action("Edit","Senderos", new {id=item.ID})" '/Senderos/Edit/@item.ID'></a>
+                                </span>
 
-                                    <span data-placement="top" title="Detalles" data-toggle="tooltip">
-                                        <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Senderos/Details/@item.ID','Detalle','Sendero')"></a>
-                                    </span>
-                                    <span data-placement="top" title="Eliminar" data-toggle="tooltip">
-                                        <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Senderos/Delete/@item.ID','Eliminar','Sendero')"></a>
-                                    </span>                                    
-                                </div>
-                            </td>
-                            
-                        </tr>
+                                <span data-placement="top" title="Detalles" data-toggle="tooltip">
+                                    <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Senderos/Details/@item.ID','Detalle','Sendero')"></a>
+                                </span>
+                                <span data-placement="top" title="Eliminar" data-toggle="tooltip">
+                                    <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Senderos/Delete/@item.ID','Eliminar','Sendero')"></a>
+                                </span>
+                            </div>
+                        </td>
+
+                    </tr>
                     }
                 </tbody>
             </table>
@@ -96,93 +102,3 @@
 
 
 
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LugarInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LugarFin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoDificultadTecnicaID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoDificultadFisicaID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Desnivel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Distancia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AlturaMaxima)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DuracionTotal)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LugarInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LugarFin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoDificultadTecnicaID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoDificultadFisicaID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Desnivel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Distancia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AlturaMaxima)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DuracionTotal)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-            </td>
-        </tr>
-    }
-    
-    </table>
-</body>
-</html>
