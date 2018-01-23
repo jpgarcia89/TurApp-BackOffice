@@ -10,7 +10,7 @@
 *.pdb
 *.FileListAbsolute.txt
 *.txt
-*.config
+##*.config
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -252,5 +252,5 @@ ModelManifest.xml
 
 
 *.cache
-*.config
+##*.config
 *.suo
