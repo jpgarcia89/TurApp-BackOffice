@@ -12,12 +12,13 @@ namespace TurApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SenderoPunto
+    public partial class SenderoPuntoElevacion
     {
         public int ID { get; set; }
         public int SenderoID { get; set; }
         public string Latitud { get; set; }
         public string Longitud { get; set; }
+        public string Altura { get; set; }
     
         public virtual Sendero Sendero { get; set; }
     }

@@ -18,6 +18,7 @@ namespace TurApp.Models
         public Sendero()
         {
             this.SenderoPunto = new HashSet<SenderoPunto>();
+            this.SenderoPuntoElevacion = new HashSet<SenderoPuntoElevacion>();
         }
     
         public int ID { get; set; }
@@ -34,5 +35,7 @@ namespace TurApp.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SenderoPunto> SenderoPunto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SenderoPuntoElevacion> SenderoPuntoElevacion { get; set; }
     }
 }

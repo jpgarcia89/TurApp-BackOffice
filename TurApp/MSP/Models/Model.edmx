@@ -171,8 +171,16 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
           <Property Name="SenderoID" Type="int" Nullable="false" />
           <Property Name="Latitud" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Longitud" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SenderoPuntoElevacion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SenderoID" Type="int" Nullable="false" />
+          <Property Name="Latitud" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Longitud" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Altura" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Original" Type="bit" />
         </EntityType>
         <EntityType Name="TipoDificultadFisica">
           <Key>
@@ -364,7 +372,7 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SenderosPuntos_SenderosPuntos">
+        <Association Name="FK_SenderoPunto_Sendero">
           <End Role="Sendero" Type="Self.Sendero" Multiplicity="1" />
           <End Role="SenderoPunto" Type="Self.SenderoPunto" Multiplicity="*" />
           <ReferentialConstraint>
@@ -372,6 +380,18 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="SenderoPunto">
+              <PropertyRef Name="SenderoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SenderoPuntoElevacion_Sendero">
+          <End Role="Sendero" Type="Self.Sendero" Multiplicity="1" />
+          <End Role="SenderoPuntoElevacion" Type="Self.SenderoPuntoElevacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sendero">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SenderoPuntoElevacion">
               <PropertyRef Name="SenderoID" />
             </Dependent>
           </ReferentialConstraint>
@@ -395,6 +415,7 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sendero" EntityType="Self.Sendero" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SenderoPunto" EntityType="Self.SenderoPunto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SenderoPuntoElevacion" EntityType="Self.SenderoPuntoElevacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoDificultadFisica" EntityType="Self.TipoDificultadFisica" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoDificultadTecnica" EntityType="Self.TipoDificultadTecnica" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetMenuAccion" EntityType="Self.AspNetMenuAccion" store:Type="Tables" store:Schema="dbo">
@@ -459,9 +480,13 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Provincia" EntitySet="Provincia" />
           </AssociationSet>
-          <AssociationSet Name="FK_SenderosPuntos_SenderosPuntos" Association="Self.FK_SenderosPuntos_SenderosPuntos">
+          <AssociationSet Name="FK_SenderoPunto_Sendero" Association="Self.FK_SenderoPunto_Sendero">
             <End Role="Sendero" EntitySet="Sendero" />
             <End Role="SenderoPunto" EntitySet="SenderoPunto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SenderoPuntoElevacion_Sendero" Association="Self.FK_SenderoPuntoElevacion_Sendero">
+            <End Role="Sendero" EntitySet="Sendero" />
+            <End Role="SenderoPuntoElevacion" EntitySet="SenderoPuntoElevacion" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -816,9 +841,14 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
           <EntitySet Name="TipoDificultadTecnica" EntityType="TurAppModel.TipoDificultadTecnica" />
           <EntitySet Name="Sendero" EntityType="TurAppModel.Sendero" />
           <EntitySet Name="SenderoPunto" EntityType="TurAppModel.SenderoPunto" />
-          <AssociationSet Name="FK_SenderosPuntos_SenderosPuntos1" Association="TurAppModel.FK_SenderosPuntos_SenderosPuntos1">
+          <EntitySet Name="SenderoPuntoElevacion" EntityType="TurAppModel.SenderoPuntoElevacion" />
+          <AssociationSet Name="FK_SenderoPunto_Sendero" Association="TurAppModel.FK_SenderoPunto_Sendero">
             <End Role="Sendero" EntitySet="Sendero" />
             <End Role="SenderoPunto" EntitySet="SenderoPunto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SenderoPuntoElevacion_Sendero" Association="TurAppModel.FK_SenderoPuntoElevacion_Sendero">
+            <End Role="Sendero" EntitySet="Sendero" />
+            <End Role="SenderoPuntoElevacion" EntitySet="SenderoPuntoElevacion" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
@@ -862,21 +892,31 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
           <Property Name="Distancia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AlturaMaxima" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DuracionTotal" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SenderoPunto" Relationship="TurAppModel.FK_SenderosPuntos_SenderosPuntos1" FromRole="Sendero" ToRole="SenderoPunto" />
+          <NavigationProperty Name="SenderoPunto" Relationship="TurAppModel.FK_SenderoPunto_Sendero" FromRole="Sendero" ToRole="SenderoPunto" />
+          <NavigationProperty Name="SenderoPuntoElevacion" Relationship="TurAppModel.FK_SenderoPuntoElevacion_Sendero" FromRole="Sendero" ToRole="SenderoPuntoElevacion" />
         </EntityType>
         <EntityType Name="SenderoPunto">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SenderoID" Type="Int32" Nullable="false" />
+          <Property Name="Latitud" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Longitud" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sendero" Relationship="TurAppModel.FK_SenderoPunto_Sendero" FromRole="SenderoPunto" ToRole="Sendero" />
+        </EntityType>
+        <EntityType Name="SenderoPuntoElevacion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SenderoID" Type="Int32" Nullable="false" />
           <Property Name="Latitud" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Longitud" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Altura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Sendero" Relationship="TurAppModel.FK_SenderosPuntos_SenderosPuntos1" FromRole="SenderoPunto" ToRole="Sendero" />
-          <Property Name="Original" Type="Boolean" />
+          <NavigationProperty Name="Sendero" Relationship="TurAppModel.FK_SenderoPuntoElevacion_Sendero" FromRole="SenderoPuntoElevacion" ToRole="Sendero" />
         </EntityType>
-        <Association Name="FK_SenderosPuntos_SenderosPuntos1">
+        <Association Name="FK_SenderoPunto_Sendero">
           <End Type="TurAppModel.Sendero" Role="Sendero" Multiplicity="1" />
           <End Type="TurAppModel.SenderoPunto" Role="SenderoPunto" Multiplicity="*" />
           <ReferentialConstraint>
@@ -884,6 +924,18 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="SenderoPunto">
+              <PropertyRef Name="SenderoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SenderoPuntoElevacion_Sendero">
+          <End Type="TurAppModel.Sendero" Role="Sendero" Multiplicity="1" />
+          <End Type="TurAppModel.SenderoPuntoElevacion" Role="SenderoPuntoElevacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sendero">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SenderoPuntoElevacion">
               <PropertyRef Name="SenderoID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1096,7 +1148,16 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
           <EntitySetMapping Name="SenderoPunto">
             <EntityTypeMapping TypeName="TurAppModel.SenderoPunto">
               <MappingFragment StoreEntitySet="SenderoPunto">
-                <ScalarProperty Name="Original" ColumnName="Original" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="SenderoID" ColumnName="SenderoID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SenderoPuntoElevacion">
+            <EntityTypeMapping TypeName="TurAppModel.SenderoPuntoElevacion">
+              <MappingFragment StoreEntitySet="SenderoPuntoElevacion">
                 <ScalarProperty Name="Altura" ColumnName="Altura" />
                 <ScalarProperty Name="Longitud" ColumnName="Longitud" />
                 <ScalarProperty Name="Latitud" ColumnName="Latitud" />

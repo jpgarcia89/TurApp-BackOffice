@@ -43,6 +43,7 @@ namespace TurApp.Models
         public virtual DbSet<TipoDificultadTecnica> TipoDificultadTecnica { get; set; }
         public virtual DbSet<Sendero> Sendero { get; set; }
         public virtual DbSet<SenderoPunto> SenderoPunto { get; set; }
+        public virtual DbSet<SenderoPuntoElevacion> SenderoPuntoElevacion { get; set; }
     
         public virtual ObjectResult<GetPermisosPorNombreDeUsuario_Result> GetPermisosPorNombreDeUsuario(string userName)
         {

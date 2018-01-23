@@ -304,8 +304,6 @@
                     { lat: parseFloat("@Punto.Latitud"), lng: parseFloat("@Punto.Longitud") },
                 </text>
             }
-
-            //{ lat: -27.467, lng: 153.027 }
         ];
 
 
@@ -319,7 +317,7 @@
 
 
 
-        flightPath = new google.maps.Polyline({
+        polylinePath = new google.maps.Polyline({
             path: flightPathCoordinates,
             editable: true,
             draggable: false,
@@ -332,7 +330,7 @@
     }
 
     function addLine() {
-        flightPath.setMap(map);
+        polylinePath.setMap(map);
     }
 
     function addDrawingControl(map) {
@@ -365,6 +363,10 @@
         });
 
         google.maps.event.addDomListener(document.getElementById('btn'), 'click', function () {
+
+            debugger
+
+
             var htmlStr = "";
             var path = [];
             var xy;
@@ -391,6 +393,8 @@
 
 
     function plotElevation(returnedElevations) {
+
+        debugger
         if (returnedElevations == null) {
             return;
         }
@@ -630,127 +634,3 @@
 </script>
 <script src="~/Scripts/plugins/elevation/jquery.flot.min.js"></script>
 <script src="~/Scripts/plugins/elevation/jquery.flot.selection.js"></script>
-@*<script language="javascript" type="text/javascript" src="js/jquery.flot.min.js"></script>
-    <script language="javascript" type="text/javascript" src="js/jquery.flot.selection.js"></script>*@
-
-
-
-
-
-
-
-
-
-
-
-@*<!DOCTYPE html>
-
-    <html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>Edit</title>
-    </head>
-    <body>
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-horizontal">
-                <h4>Senderos</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.ID)
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.LugarInicio, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.LugarInicio, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.LugarInicio, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.LugarFin, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.LugarFin, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.LugarFin, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.TipoDificultadTecnicaID, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.TipoDificultadTecnicaID, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TipoDificultadTecnicaID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.TipoDificultadFisicaID, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.TipoDificultadFisicaID, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TipoDificultadFisicaID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Desnivel, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Desnivel, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Desnivel, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Distancia, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Distancia, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Distancia, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.AlturaMaxima, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.AlturaMaxima, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.AlturaMaxima, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.DuracionTotal, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.DuracionTotal, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.DuracionTotal, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save" class="btn btn-default" />
-                    </div>
-                </div>
-            </div>
-        }
-
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    </body>
-    </html>*@

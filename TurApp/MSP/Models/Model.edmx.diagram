@@ -17,7 +17,19 @@
         <EntityTypeShape EntityType="TurAppModel.MenuAspNetRolesAccion" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TurAppModel.Pais" Width="1.5" PointX="9.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="TurAppModel.Provincia" Width="1.5" PointX="12" PointY="2.375" IsExpanded="true" />
-        <AssociationConnector Association="TurAppModel.FK_MenuAspNetRolesAccion_Accion" ManuallyRouted="false" />
+        <AssociationConnector Association="TurAppModel.FK_MenuAspNetRolesAccion_Accion" ManuallyRouted="true" >
+          <ConnectorPoint PointX="1.5" PointY="4.5" />
+          <ConnectorPoint PointX="1.5" PointY="4.25" />
+          <ConnectorPoint PointX="2.75" PointY="4.25" />
+          <ConnectorPoint PointX="2.75" PointY="8.18850376202706" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="8.18850376202706" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="8.18850376202706" />
+          <ConnectorPoint PointX="5" PointY="8.18850376202706" />
+          <ConnectorPoint PointX="5" PointY="6.922587890625" />
+          <ConnectorPoint PointX="7.125" PointY="6.922587890625" />
+          <ConnectorPoint PointX="7.125" PointY="5.6151432291666659" />
+          <ConnectorPoint PointX="7.5" PointY="5.6151432291666659" />
+        </AssociationConnector>
         <AssociationConnector Association="TurAppModel.FK_MenuAspNetRoles_AspNetRoles" ManuallyRouted="false" />
         <AssociationConnector Association="TurAppModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="TurAppModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
@@ -31,10 +43,12 @@
         <AssociationConnector Association="TurAppModel.AspNetMenuAccion" ManuallyRouted="false" />
         <EntityTypeShape EntityType="TurAppModel.TipoDificultadFisica" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="TurAppModel.TipoDificultadTecnica" Width="1.5" PointX="0.75" PointY="8.75" />
-        <EntityTypeShape EntityType="TurAppModel.Sendero" Width="1.5" PointX="10.375" PointY="11" />
-        <EntityTypeShape EntityType="TurAppModel.SenderoPunto" Width="1.5" PointX="12.625" PointY="11.625" />
-        <AssociationConnector Association="TurAppModel.FK_SenderosPuntos_SenderosPuntos1" />
-      </Diagram>
+        <EntityTypeShape EntityType="TurAppModel.Sendero" Width="1.5" PointX="10.375" PointY="6.75" />
+        <EntityTypeShape EntityType="TurAppModel.SenderoPunto" Width="1.5" PointX="12.625" PointY="6.125" />
+        <EntityTypeShape EntityType="TurAppModel.SenderoPuntoElevacion" Width="1.5" PointX="12.625" PointY="8.75" />
+        <AssociationConnector Association="TurAppModel.FK_SenderoPunto_Sendero" />
+        <AssociationConnector Association="TurAppModel.FK_SenderoPuntoElevacion_Sendero" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

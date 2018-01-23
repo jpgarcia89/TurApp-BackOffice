@@ -292,6 +292,9 @@
     <Compile Include="Models\SenderoPunto.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SenderoPuntoElevacion.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TipoDificultadFisica.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
