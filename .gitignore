@@ -254,4 +254,3 @@ ModelManifest.xml
 *.cache
 ##*.config
 *.suo
-TurApp/MSP/Web.config
