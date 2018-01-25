@@ -167,7 +167,11 @@
                         </div>
 
 
-                        <input id="btnGuardar" type="submit" class="btn btn-primary" value="Guardar" />
+                        <div class="row pull-right" style="margin-right: 5%;">
+                            <a href="@Url.Action("Index","Senderos")" class="btn btn-default">Cancelar</a>
+
+                            <input id="btnGuardar" type="submit" class="btn btn-primary" value="Guardar" />
+                        </div>
                     </div>
                 </div>
             }
@@ -220,12 +224,23 @@
             TipoDificultadFisicaID: $("#TipoDificultadFisicaID").val(),
             Desnivel: $("#Desnivel").val(),
             Distancia: $("#Distancia").val(),
-            AlturaMaxima: $("#AlturaMaxima").val(),
+            AlturaMaxima: $("#AlturaMaxima").val(),            
             DuracionTotal: $("#DuracionTotal").val(),
-            SenderoPunto: pointsArray,
+            Latitud: map.getCenter().lat(),
+            Longitud: map.getCenter().lng(),
+            SenderoPuntoElevacion: pointsArray,//Puntos con elevacion... 255 puntos para dibujar graficos
+            SenderoPunto: [] // Puntos originales para formar polyline
         };
 
+        for (var i = 0; i < polylinePath.length; i++) {
 
+            var SenderoPunto = {
+                Latitud: polylinePath.b[i].lat(),
+                Longitud: polylinePath.b[i].lng()
+            };
+
+            data.SenderoPunto.push(SenderoPunto);
+        }
 
 
 
@@ -241,12 +256,12 @@
                 success: function (result) {
                     //debugger
                     cerrarWaiting();
-                    if (result.ok) {
-                        window.location.href = window.location.href;
-                        cerrarModal();
-                        return;
-                    }
-                    $('#contenidoModal').html(result);
+                    //if (result.ok) {
+                    //    window.location.href = window.location.href;
+                    //    cerrarModal();
+                    //    return;
+                    //}
+                    //$('#contenidoModal').html(result);
                 },
                 error: function () {
                     cerrarWaiting();
@@ -275,8 +290,8 @@
 
     function initMap() {
         //set center coordinate
-        var myLat = -31.5351832 /*value*/;
-        var myLng = -68.5223334 /*value*/;
+        var myLat = @(String.IsNullOrEmpty(Model.Latitud)? "-31.5351832" : Model.Latitud)/*value*/;
+        var myLng = @(String.IsNullOrEmpty(Model.Longitud)? "-68.5223334" : Model.Longitud) /*value*/;
         var center = {
             lat: myLat,
             lng: myLng
@@ -284,11 +299,12 @@
 
         //create map
         map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 10,
-            center: center
+            zoom: 13,
+            center: center,
+            mapTypeId: 'satellite'
         });
 
-        addDrawingControl(map);
+
 
         //para editar
         //var flightPathCoordinates = [
@@ -297,7 +313,7 @@
         //  { lat: -18.142, lng: 178.431 },
         //  { lat: -27.467, lng: 153.027 }
         //];
-        var flightPathCoordinates = [
+        var x = [
             @foreach (var Punto in Model.SenderoPunto)
             {
                 <text>
@@ -307,33 +323,32 @@
         ];
 
 
-
-
-
-
-
-
-
-
-
-
-        polylinePath = new google.maps.Polyline({
-            path: flightPathCoordinates,
+        var PolylineSaved = new google.maps.Polyline({
+            path: x,
             editable: true,
             draggable: false,
             geodesic: true,
-            strokeColor: '#FF0000',
-            strokeOpacity: 1.0,
-            strokeWeight: 2
+            strokeColor: "#00b3fd",
+            strokeOpacity: 0.5,
+            strokeWeight: 5,
         });
-        addLine();
+
+        polylines.push(PolylineSaved);
+        polylinePath = PolylineSaved.getPath();
+        PolylineSaved.setMap(map);
+        
+
+        addDrawingControl(map);
+        $('#btn').click();
     }
 
     function addLine() {
+        debugger
         polylinePath.setMap(map);
     }
 
     function addDrawingControl(map) {
+        debugger
         //add drawing control
         var drawingControl = new google.maps.drawing.DrawingManager({
             drawingMode: null,
@@ -358,6 +373,7 @@
 
         //add event listener
         google.maps.event.addListener(drawingControl, 'polylinecomplete', function (polyline) {
+            debugger
             polylines.push(polyline);
             polylinePath = polyline.getPath();
         });
@@ -403,6 +419,8 @@
         pointsArray = [];
         var elevations = [];
         var locations = [];
+
+
         //GUARDAR ESTOS DATOS
         for (var i = 0; i < returnedElevations.length; i++) {
             elevations.push(returnedElevations[i].elevation);
@@ -411,16 +429,8 @@
             var point = {
                 Latitud: returnedElevations[i].location.lat(),
                 Longitud: returnedElevations[i].location.lng(),
-                Altura: returnedElevations[i].elevation,
-                original:false
+                Altura: returnedElevations[i].elevation
             }
-
-
-            if (searchPointInArray(returnedElevations[i].location.lat(), returnedElevations[i].location.lng(), polylinePath)) {
-                point.original = true;
-            }
-           
-
 
             pointsArray.push(point)
         }
@@ -622,14 +632,14 @@
         return t + f
     }
 
-    function searchPointInArray(ArgLat, ArgLng, ArgPointsArray) {
-        for (var i = 0; i < ArgPointsArray.length; i++) {
-            if (ArgPointsArray.b[0].lat().toFixed(4) == ArgLat.toFixed(4) && ArgPointsArray.b[0].lng().toFixed(4) == ArgLng.toFixed(4)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    //function searchPointInArray(ArgLat, ArgLng, ArgPointsArray) {
+    //    for (var i = 0; i < ArgPointsArray.length; i++) {
+    //        if (ArgPointsArray.b[0].lat().toFixed(4) == ArgLat.toFixed(4) && ArgPointsArray.b[0].lng().toFixed(4) == ArgLng.toFixed(4)) {
+    //            return true;
+    //        }
+    //    }
+    //    return false;
+    //}
 
 </script>
 <script src="~/Scripts/plugins/elevation/jquery.flot.min.js"></script>

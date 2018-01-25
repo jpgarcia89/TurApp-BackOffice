@@ -32,6 +32,8 @@ namespace TurApp.Models
         public string Distancia { get; set; }
         public string AlturaMaxima { get; set; }
         public string DuracionTotal { get; set; }
+        public string Latitud { get; set; }
+        public string Longitud { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SenderoPunto> SenderoPunto { get; set; }

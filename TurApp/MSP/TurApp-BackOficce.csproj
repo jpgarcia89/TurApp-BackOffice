@@ -313,6 +313,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AdminLTE-green.min.css" />
     <Content Include="Content\AdminLTE.min.css" />
     <Content Include="Content\Alerts\help.gif" />
     <Content Include="Content\Alerts\important.gif" />
@@ -327,6 +328,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\images\station3.png" />
     <Content Include="Content\images\station6.png" />
+    <Content Include="Content\skin-green.css" />
     <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>

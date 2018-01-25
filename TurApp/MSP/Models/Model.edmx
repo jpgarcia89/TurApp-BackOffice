@@ -162,6 +162,8 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
           <Property Name="Distancia" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AlturaMaxima" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DuracionTotal" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Latitud" Type="nvarchar" MaxLength="50" />
+          <Property Name="Longitud" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="SenderoPunto">
           <Key>
@@ -894,6 +896,8 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
           <Property Name="DuracionTotal" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SenderoPunto" Relationship="TurAppModel.FK_SenderoPunto_Sendero" FromRole="Sendero" ToRole="SenderoPunto" />
           <NavigationProperty Name="SenderoPuntoElevacion" Relationship="TurAppModel.FK_SenderoPuntoElevacion_Sendero" FromRole="Sendero" ToRole="SenderoPuntoElevacion" />
+          <Property Name="Latitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Longitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SenderoPunto">
           <Key>
@@ -1131,6 +1135,8 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
           <EntitySetMapping Name="Sendero">
             <EntityTypeMapping TypeName="TurAppModel.Sendero">
               <MappingFragment StoreEntitySet="Sendero">
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
                 <ScalarProperty Name="DuracionTotal" ColumnName="DuracionTotal" />
                 <ScalarProperty Name="AlturaMaxima" ColumnName="AlturaMaxima" />
                 <ScalarProperty Name="Distancia" ColumnName="Distancia" />

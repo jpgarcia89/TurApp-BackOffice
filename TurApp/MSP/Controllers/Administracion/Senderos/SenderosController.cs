@@ -95,8 +95,8 @@ namespace TurApp.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.TipoDificultadFisicaID = new SelectList(db.TipoDificultadFisica, "ID", "Descripcion");
-            ViewBag.TipoDificultadTecnicaID = new SelectList(db.TipoDificultadTecnica, "ID", "Descripcion");
+            ViewBag.TipoDificultadFisicaID = new SelectList(db.TipoDificultadFisica, "ID", "Descripcion",Sendero.TipoDificultadFisicaID);
+            ViewBag.TipoDificultadTecnicaID = new SelectList(db.TipoDificultadTecnica, "ID", "Descripcion", Sendero.TipoDificultadTecnicaID);
 
             return View(Sendero);
         }
@@ -110,10 +110,35 @@ namespace TurApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                //var SenderoEntidad = db.Sendero.Find(Sendero.ID);
+
+                if (db.SenderoPunto.Any(r => r.SenderoID == Sendero.ID))
+                {
+                    //Delete old objects
+                    db.SenderoPunto.RemoveRange(db.SenderoPunto.Where(r => r.SenderoID == Sendero.ID));
+
+                    //Add new objects
+                    Sendero.SenderoPunto.ToList().ForEach(r => r.SenderoID = Sendero.ID);
+                    db.SenderoPunto.AddRange(Sendero.SenderoPunto);
+                }
+
+                if (db.SenderoPuntoElevacion.Any(r => r.SenderoID == Sendero.ID))
+                {
+                    //Delete old objects
+                    db.SenderoPuntoElevacion.RemoveRange(db.SenderoPuntoElevacion.Where(r => r.SenderoID == Sendero.ID));
+
+                    //Add new objects
+                    Sendero.SenderoPuntoElevacion.ToList().ForEach(r => r.SenderoID = Sendero.ID);
+                    db.SenderoPuntoElevacion.AddRange(Sendero.SenderoPuntoElevacion);
+                }
+
+
+
+
                 db.Entry(Sendero).State = EntityState.Modified;
                 db.SaveChanges();
                 //return 
-                RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
 
 

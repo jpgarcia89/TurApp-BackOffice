@@ -32,10 +32,10 @@ namespace TurApp
                       "~/Content/bootstrap.css",        //Bootstrap 3.3.6  .min
                       "~/Content/font-awesome.css",     //Font Awesome
                       "~/Content/ionicons.min.css",         //Ionicons
-                      "~/Content/AdminLTE.min.css",         //Theme style
+                      "~/Content/AdminLTE-green.min.css",         //Theme style
                       "~/Scripts/plugins/select2/select2.min.css",         //Select2
                       //"~/Scripts/plugins/select2/select2-bootstrap.css",
-                      "~/Content/skin-blue.css",//AdminLTE Skins
+                      "~/Content/skin-green.css",//AdminLTE Skins
                       "~/Content/jquery.alerts.css",//jQuery Alerts css 
                       "~/Content/jquery-ui.min.css",
                       "~/Scripts/plugins/datatables/dataTables.bootstrap.css",
