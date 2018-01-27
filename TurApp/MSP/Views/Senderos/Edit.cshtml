@@ -187,10 +187,55 @@
         </div>
 
         <div class="box-body">
-            <input id="btn" value="get polyline data" type="button" />
-            <div id="map" style="width: 600px; height: 400px; text-align: center; position: relative; overflow: hidden;"></div>
-            <div id="elevChart"></div>
-            <div id="output"></div>
+            <div class="container">
+                <!-- Botones -->
+                <div class="row">
+                    <div class="col-md-12" style="margin-bottom: 15px;">
+                        <input id="btn" class="btn btn-info" value="Obtener Elevacion" type="button" />
+                    </div>
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <!-- Mapa -->
+                        <div class="row">
+                            <div id="map" style="width: 100%; height: 450px; text-align: center; position: relative; overflow: hidden;"></div>
+                        </div>
+
+                        <!-- Chart -->
+                        <div class="row" style="text-align:center; margi">
+                            <h4><b>Grafico de Elevación</b></h4>
+                            <div id="elevChart"></div>
+                        </div>
+                    </div>
+
+                    <!-- Tabla -->
+                    <div class="col-md-4">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr><td colspan="4" style="text-align:center;background-color: #55b9a1;color: white; border-radius: 4px;"><b>Coordenadas</b></td></tr>    
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Lat</th>
+                                        <th>Long</th>
+                                        <th>Accion</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblRows">
+                                </tbody>
+                            </table>
+                        </div>
+
+                        @*<div id="output"></div>*@
+                    </div>
+                </div>
+
+
+            </div>
+
         </div>
     </div>
 
@@ -224,7 +269,7 @@
             TipoDificultadFisicaID: $("#TipoDificultadFisicaID").val(),
             Desnivel: $("#Desnivel").val(),
             Distancia: $("#Distancia").val(),
-            AlturaMaxima: $("#AlturaMaxima").val(),            
+            AlturaMaxima: $("#AlturaMaxima").val(),
             DuracionTotal: $("#DuracionTotal").val(),
             Latitud: map.getCenter().lat(),
             Longitud: map.getCenter().lng(),
@@ -336,7 +381,7 @@
         polylines.push(PolylineSaved);
         polylinePath = PolylineSaved.getPath();
         PolylineSaved.setMap(map);
-        
+
 
         addDrawingControl(map);
         $('#btn').click();
@@ -384,13 +429,17 @@
 
 
             var htmlStr = "";
+            var tableRows="";
             var path = [];
             var xy;
             for (var i = 0; i < polylines.length; i++) {
 
                 htmlStr += "polyline #" + i + " # vertices=" + polylines[i].getPath().getLength() + " length=" + google.maps.geometry.spherical.computeLength(polylines[i].getPath()).toFixed(2) + " km<br>";
+
+                
                 for (var j = 0; j < polylines[i].getPath().getLength() ; j++) {
-                    htmlStr += "&nbsp;&nbsp;" + polylines[i].getPath().getAt(j).toUrlValue(6) + "<br>";
+                    //htmlStr += "&nbsp;&nbsp;" + polylines[i].getPath().getAt(j).toUrlValue(6) + "<br>";
+                    tableRows +='<tr><td>'+ j +'</td><td>'+ polylines[i].getPath().b[j].lat().toFixed(4) +'</td><td>'+ polylines[i].getPath().b[j].lng().toFixed(4) +'</td><td><a href="#">Eliminar</a></td></tr>';
                     path.push(polylines[i].getPath().getAt(j));
                 }
                 // Create an ElevationService.
@@ -401,7 +450,8 @@
                 }, plotElevation);
 
             }
-            document.getElementById('output').innerHTML = htmlStr;
+            //document.getElementById('output').innerHTML = htmlStr;
+            document.getElementById('tblRows').innerHTML = tableRows;
         })
     }
     google.maps.event.addDomListener(window, "load", initMap);
