@@ -129,12 +129,24 @@ namespace TurApp.Controllers
                     Sendero.SenderoPunto.ToList().ForEach(r => r.SenderoID = Sendero.ID);
                     db.SenderoPunto.AddRange(Sendero.SenderoPunto);
                 }
+                else
+                {
+                    //Add new objects
+                    Sendero.SenderoPunto.ToList().ForEach(r => r.SenderoID = Sendero.ID);
+                    db.SenderoPunto.AddRange(Sendero.SenderoPunto);
+                }
 
                 if (db.SenderoPuntoElevacion.Any(r => r.SenderoID == Sendero.ID))
                 {
                     //Delete old objects
                     db.SenderoPuntoElevacion.RemoveRange(db.SenderoPuntoElevacion.Where(r => r.SenderoID == Sendero.ID));
 
+                    //Add new objects
+                    Sendero.SenderoPuntoElevacion.ToList().ForEach(r => r.SenderoID = Sendero.ID);
+                    db.SenderoPuntoElevacion.AddRange(Sendero.SenderoPuntoElevacion);
+                }
+                else
+                {
                     //Add new objects
                     Sendero.SenderoPuntoElevacion.ToList().ForEach(r => r.SenderoID = Sendero.ID);
                     db.SenderoPuntoElevacion.AddRange(Sendero.SenderoPuntoElevacion);
@@ -146,7 +158,11 @@ namespace TurApp.Controllers
                 db.Entry(Sendero).State = EntityState.Modified;
                 db.SaveChanges();
                 //return 
-                return RedirectToAction("Index");
+                return Json(new
+                {
+                    ok = true
+                });
+                //return RedirectToAction("Index");
             }
 
 
