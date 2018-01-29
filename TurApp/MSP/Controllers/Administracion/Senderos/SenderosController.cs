@@ -59,8 +59,10 @@ namespace TurApp.Controllers
                 if (ModelState.IsValid)
                 {
                     db.Sendero.Add(Sendero);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    //db.SaveChanges();
+                    return Json(new {
+                        ok = true
+                    });
                 }
             }
             catch (DbEntityValidationException ex)
@@ -72,6 +74,12 @@ namespace TurApp.Controllers
                         Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
                     }
                 }
+
+                //return Json(new
+                //{
+                //    ok = false,
+                //    msj= ex.InnerException.Message
+                //});
             }
 
 

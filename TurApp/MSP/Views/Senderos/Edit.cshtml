@@ -191,7 +191,8 @@
                 <!-- Botones -->
                 <div class="row">
                     <div class="col-md-12" style="margin-bottom: 15px;">
-                        <input id="btn" class="btn btn-info" value="Obtener Elevacion" type="button" />
+                        <input id="btnGetElevacion" class="btn btn-info" value="Obtener Elevacion" type="button" />
+                        <input id="btnDeletePolyline" class="btn btn-default" value="Borrar Sendero" type="button" />
                     </div>
                 </div>
 
@@ -216,7 +217,7 @@
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
-                                    <tr><td colspan="4" style="text-align:center;background-color: #55b9a1;color: white; border-radius: 4px;"><b>Coordenadas</b></td></tr>    
+                                    <tr><td colspan="4" style="text-align:center;background-color: #55b9a1;color: white; border-radius: 4px;"><b>Coordenadas</b></td></tr>
                                     <tr>
                                         <th>#</th>
                                         <th>Lat</th>
@@ -224,8 +225,7 @@
                                         <th>Accion</th>
                                     </tr>
                                 </thead>
-                                <tbody id="tblRows">
-                                </tbody>
+                                <tbody id="tblRows"></tbody>
                             </table>
                         </div>
 
@@ -299,17 +299,21 @@
                     abrirWaiting();
                 },
                 success: function (result) {
-                    //debugger
+                    debugger
                     cerrarWaiting();
-                    //if (result.ok) {
-                    //    window.location.href = window.location.href;
-                    //    cerrarModal();
-                    //    return;
-                    //}
-                    //$('#contenidoModal').html(result);
+                    if (result.ok) {
+                        window.location.href='@Url.Action("Index","Senderos")';
+                        return;
+                    }
+                    else {
+                        alert(result.msj);
+                    }
+
                 },
-                error: function () {
+                error: function (error) {
+                    debugger
                     cerrarWaiting();
+                    alert(error);
                 }
             });
         }
@@ -323,14 +327,15 @@
 </script>
 
 <script>
-    var polylines = [];
+    var polyline ;//= [];//Array de "Polylines"
+    var polylinePath; // Almacena "Polyline.getPath();"
     var marker;
     var chartData = [];
     var map;
     var selectionPolyline;
     var pointsArray = [];
-    var flightPath;
-    var polylinePath;
+
+    var drawingManager;
 
 
     function initMap() {
@@ -344,21 +349,15 @@
 
         //create map
         map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 13,
+            zoom: 10,
             center: center,
             mapTypeId: 'satellite'
         });
 
 
 
-        //para editar
-        //var flightPathCoordinates = [
-        //  { lat: 37.772, lng: -122.214 },
-        //  { lat: 21.291, lng: -157.821 },
-        //  { lat: -18.142, lng: 178.431 },
-        //  { lat: -27.467, lng: 153.027 }
-        //];
-        var x = [
+        //Recupera los puntos Guardados(Sendero)
+        var SenderoPuntos = [
             @foreach (var Punto in Model.SenderoPunto)
             {
                 <text>
@@ -367,24 +366,35 @@
             }
         ];
 
+        if (SenderoPuntos.length>0) {
+            //Genera "Polyline" con los puntos Guardados(Sendero)
+            var PolylineSaved = new google.maps.Polyline({
+                path: SenderoPuntos,
+                editable: true,
+                draggable: false,
+                geodesic: true,
+                strokeColor: "#00b3fd",
+                strokeOpacity: 0.5,
+                strokeWeight: 5,
+            });
 
-        var PolylineSaved = new google.maps.Polyline({
-            path: x,
-            editable: true,
-            draggable: false,
-            geodesic: true,
-            strokeColor: "#00b3fd",
-            strokeOpacity: 0.5,
-            strokeWeight: 5,
-        });
+            //Se agrega el Polyline(Sendero) al Arry de "Polylines" (global)
+            polyline=PolylineSaved;;
 
-        polylines.push(PolylineSaved);
-        polylinePath = PolylineSaved.getPath();
-        PolylineSaved.setMap(map);
+            //se guarda la ruta del Polyline en una variable global
+            polylinePath = PolylineSaved.getPath();
+
+            //se dibuja en el mapa el Sendero
+            PolylineSaved.setMap(map);
+
+            $('#btnGetElevacion').click();
+        }
+
+
 
 
         addDrawingControl(map);
-        $('#btn').click();
+
     }
 
     function addLine() {
@@ -394,8 +404,8 @@
 
     function addDrawingControl(map) {
         debugger
-        //add drawing control
-        var drawingControl = new google.maps.drawing.DrawingManager({
+        //Create(Initialize) Drawing Manager
+        drawingManager = new google.maps.drawing.DrawingManager({
             drawingMode: null,
             drawingControl: true,
             drawingControlOptions: {
@@ -404,7 +414,7 @@
                   google.maps.drawing.OverlayType.POLYLINE
                 ]
             },
-            polylineOptions: {
+            polylineOptions: {//add drawing control
                 editable: true,
                 draggable: false,
                 geodesic: true,
@@ -413,47 +423,93 @@
                 strokeWeight: 5,
             }
         });
-        drawingControl.setMap(map);
+
+
+
+
+        drawingManager.setMap(map);
         //end of add drawing control
 
         //add event listener
-        google.maps.event.addListener(drawingControl, 'polylinecomplete', function (polyline) {
+        google.maps.event.addListener(drawingManager, 'polylinecomplete', function (xpolyline) {
             debugger
-            polylines.push(polyline);
-            polylinePath = polyline.getPath();
+            //polylines.push(polyline);
+            drawingManager.setOptions({
+                drawingControl: false
+            });
+            polyline =xpolyline;
+            polylinePath = xpolyline.getPath();
         });
 
-        google.maps.event.addDomListener(document.getElementById('btn'), 'click', function () {
 
-            debugger
+    }
+
+    
+    $('#btnGetElevacion').click(function () {
+
+        debugger
+
+        if (polyline !=null) {
 
 
-            var htmlStr = "";
+            //var htmlStr = "";
             var tableRows="";
-            var path = [];
+            var path=[];
             var xy;
-            for (var i = 0; i < polylines.length; i++) {
 
-                htmlStr += "polyline #" + i + " # vertices=" + polylines[i].getPath().getLength() + " length=" + google.maps.geometry.spherical.computeLength(polylines[i].getPath()).toFixed(2) + " km<br>";
 
-                
-                for (var j = 0; j < polylines[i].getPath().getLength() ; j++) {
-                    //htmlStr += "&nbsp;&nbsp;" + polylines[i].getPath().getAt(j).toUrlValue(6) + "<br>";
-                    tableRows +='<tr><td>'+ j +'</td><td>'+ polylines[i].getPath().b[j].lat().toFixed(4) +'</td><td>'+ polylines[i].getPath().b[j].lng().toFixed(4) +'</td><td><a href="#">Eliminar</a></td></tr>';
-                    path.push(polylines[i].getPath().getAt(j));
-                }
-                // Create an ElevationService.
-                var elevator = new google.maps.ElevationService;
-                elevator.getElevationAlongPath({
-                    'path': path,
-                    'samples': 256
-                }, plotElevation);
+            //htmlStr += "polyline " + i + " # vertices=" + polylinePath.getLength() + " length=" + google.maps.geometry.spherical.computeLength(polylinePath).toFixed(2) + " km<br>";
 
+
+            for (var j = 0; j < polylinePath.b.length ; j++) {
+                //htmlStr += "&nbsp;&nbsp;" + polylines[i].getPath().getAt(j).toUrlValue(6) + "<br>";
+                tableRows +='<tr><td>'+ j +'</td><td>'+ polylinePath.b[j].lat().toFixed(4) +'</td><td>'+ polylinePath.b[j].lng().toFixed(4) +'</td><td><a href="#">Eliminar</a></td></tr>';
+                path.push(polylinePath.getAt(j));
             }
+
+            // Create an ElevationService.
+            var elevator = new google.maps.ElevationService;
+            //elevator.getElevationAlongPath({
+            //    'path': path,
+            //    'samples': 256
+            //}, plotElevation);
+            $('#elevChart').show();
+            elevator.getElevationAlongPath({
+                'path': path,
+                'samples': 256
+            },plotElevation);
+
+            
+
             //document.getElementById('output').innerHTML = htmlStr;
             document.getElementById('tblRows').innerHTML = tableRows;
-        })
-    }
+        }
+
+
+    });
+
+
+
+    $('#btnDeletePolyline').click(function() {
+        debugger
+
+        if (polyline != null) {
+            //eliminar polyline
+            polyline.setMap(null);
+            polyline=null;
+            polylinePath=null;
+            drawingManager.setOptions({
+                drawingControl: true
+            });
+            $('#elevChart').hide();
+        }
+        else {
+           
+        }
+
+    });
+
+
     google.maps.event.addDomListener(window, "load", initMap);
 
 
@@ -690,6 +746,20 @@
     //    }
     //    return false;
     //}
+
+    function removeVertex() {
+        debugger
+        var path = this.get('path');
+        var vertex = this.get('vertex');
+
+        if (!path || vertex == undefined) {
+            this.close();
+            return;
+        }
+
+        path.removeAt(vertex);
+        this.close();
+    };
 
 </script>
 <script src="~/Scripts/plugins/elevation/jquery.flot.min.js"></script>

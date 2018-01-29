@@ -256,14 +256,18 @@
                     debugger
                     cerrarWaiting();
                     if (result.ok) {
-                        window.location.href = window.location.href;
-                        cerrarModal();
+                        window.location.href = '@Url.Action("Index","Senderos")';
                         return;
                     }
-                    $('#contenidoModal').html(result);
+                    else {
+                        alert(result.msj);
+                    }
+
                 },
-                error: function () {
+                error: function (error) {
+                    debugger
                     cerrarWaiting();
+                    alert(error);
                 }
             });
         }
@@ -363,6 +367,7 @@
                 htmlStr += "polyline #" + i + " # vertices=" + polylines[i].getPath().getLength() + " length=" + google.maps.geometry.spherical.computeLength(polylines[i].getPath()).toFixed(2) + " km<br>";
                 for (var j = 0; j < polylines[i].getPath().getLength() ; j++) {
                     htmlStr += "&nbsp;&nbsp;" + polylines[i].getPath().getAt(j).toUrlValue(6) + "<br>";
+                    debugger
                     path.push(polylines[i].getPath().getAt(j));
                 }
                 // Create an ElevationService.
