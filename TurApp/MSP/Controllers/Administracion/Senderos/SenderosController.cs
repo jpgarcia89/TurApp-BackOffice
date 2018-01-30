@@ -59,7 +59,7 @@ namespace TurApp.Controllers
                 if (ModelState.IsValid)
                 {
                     db.Sendero.Add(Sendero);
-                    //db.SaveChanges();
+                    db.SaveChanges();
                     return Json(new {
                         ok = true
                     });

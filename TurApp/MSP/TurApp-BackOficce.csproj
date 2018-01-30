@@ -929,6 +929,8 @@
     <Content Include="Scripts\plugins\fullcalendar\fullcalendar.min.js" />
     <Content Include="Scripts\plugins\fullcalendar\fullcalendar.print.css" />
     <Content Include="Scripts\plugins\fullcalendar\locale\es.js" />
+    <Content Include="Scripts\plugins\geoxml3-kmz\geoxml3.js" />
+    <Content Include="Scripts\plugins\geoxml3-kmz\ZipFile.complete.js" />
     <Content Include="Scripts\plugins\iCheck\all.css" />
     <Content Include="Scripts\plugins\iCheck\flat\aero%402x.png" />
     <Content Include="Scripts\plugins\iCheck\flat\aero.css" />
@@ -1217,6 +1219,7 @@
     <Content Include="Views\Senderos\Details.cshtml" />
     <Content Include="Views\Senderos\Edit.cshtml" />
     <Content Include="Views\Senderos\Index.cshtml" />
+    <Content Include="Views\Senderos\OLD_Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1256,7 +1259,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>32287</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
