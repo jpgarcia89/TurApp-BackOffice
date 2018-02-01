@@ -534,6 +534,7 @@
     <Content Include="Models\Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\MapResource\quebradaZonda.zip" />
     <None Include="Properties\PublishProfiles\TurApp-Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />

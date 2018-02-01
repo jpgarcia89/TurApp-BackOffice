@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -52,18 +53,24 @@ namespace TurApp.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Create(Sendero Sendero)//[Bind(Include = "ID,Nombre,Descripcion,LugarInicio,LugarFin,TipoDificultadTecnicaID,TipoDificultadFisicaID,Desnivel,Distancia,AlturaMaxima,DuracionTotal")] 
+        public ActionResult Create(Sendero Sendero, HttpPostedFileBase senderoImg)//[Bind(Include = "ID,Nombre,Descripcion,LugarInicio,LugarFin,TipoDificultadTecnicaID,TipoDificultadFisicaID,Desnivel,Distancia,AlturaMaxima,DuracionTotal")] 
         {
+            var x =Request.Files.Count;
+
+            var ssendero = Request.Form["Sendero"];
+
+            //Sendero= JsonConvert.DeserializeObject<Sendero>(Request.Form["Sendero"]);
+
 
             try
             {
                 if (ModelState.IsValid)
                 {
-                    db.Sendero.Add(Sendero);
-                    db.SaveChanges();
-                    return Json(new {
-                        ok = true
-                    });
+                    //db.Sendero.Add(Sendero);
+                    //db.SaveChanges();
+                    //return Json(new {
+                    //    ok = true
+                    //});
                 }
             }
             catch (DbEntityValidationException ex)
