@@ -528,13 +528,15 @@
 
             document.getElementById('tblRows').innerHTML = tableRows;
 
+            $.fn.DataTable.ext.pager.numbers_length=4;
             table = $('#dtCoordenadas').DataTable({
                 "language": DataTableEsp(),
                 "dom": 'tp',
                 "ordering": false,
                 "lengthChange": false,
             });
-
+            
+            //$('#dtCoordenadas').DataTable().draw()
             //table.page.len( 10 ).draw();
             //}
         }

@@ -11,6 +11,7 @@ using TurApp.Models;
 
 namespace TurApp.Controllers
 {
+    [Authorize]
     public class SenderosController : Controller
     {
         private TurAppEntities db = new TurAppEntities();

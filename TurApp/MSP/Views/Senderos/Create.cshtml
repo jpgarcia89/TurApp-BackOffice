@@ -525,6 +525,8 @@
 
             document.getElementById('tblRows').innerHTML = tableRows;
 
+            $.fn.DataTable.ext.pager.numbers_length = 4;
+
             table = $('#dtCoordenadas').DataTable({
                 "language": DataTableEsp(),
                 "dom": 'tp',
