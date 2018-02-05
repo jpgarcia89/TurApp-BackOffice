@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -49,18 +50,17 @@ namespace TurApp.Controllers
         }
 
         // POST: Sendero/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Create(Sendero Sendero, HttpPostedFileBase senderoImg)//[Bind(Include = "ID,Nombre,Descripcion,LugarInicio,LugarFin,TipoDificultadTecnicaID,TipoDificultadFisicaID,Desnivel,Distancia,AlturaMaxima,DuracionTotal")] 
+        public ActionResult Create(Sendero sendero, HttpPostedFileBase senderoImg, HttpPostedFileBase zipMapa)//[Bind(Include = "ID,Nombre,Descripcion,LugarInicio,LugarFin,TipoDificultadTecnicaID,TipoDificultadFisicaID,Desnivel,Distancia,AlturaMaxima,DuracionTotal")] 
         {
-            var x =Request.Files.Count;
+            sendero = JsonConvert.DeserializeObject<Sendero>(Request.Form["Sendero"]);
+            //var x =Request.Files.Count;
+            //var ssendero = Request.Form["Sendero"];
+            sendero.ID = 2;//dato de prueba
 
-            var ssendero = Request.Form["Sendero"];
-
-            //Sendero= JsonConvert.DeserializeObject<Sendero>(Request.Form["Sendero"]);
-
+            ModelState["sendero"].Errors.Clear();
+            UpdateModel<Sendero>(sendero);
 
             try
             {
@@ -68,9 +68,83 @@ namespace TurApp.Controllers
                 {
                     //db.Sendero.Add(Sendero);
                     //db.SaveChanges();
-                    //return Json(new {
-                    //    ok = true
-                    //});
+
+
+                    if (Request.Files.Count > 0)
+                    {
+                        //Ej. ruta de recursos(imagen) de senderos: "~/Content/Senderos/2/Img/senderoImg_2.jpg"                                                
+                        //Ej. ruta de recursos(mapa offline) de senderos: "~/Content/Senderos/2/Mapa/senderoMapa_2.zip"  
+
+
+
+                        //SenderoImg
+                        #region process SenderoImg
+                        if (senderoImg != null)
+                        {
+                            if (senderoImg.ContentLength > 0)
+                            {
+                                //Validate file extension
+                                string fileExtension = Path.GetExtension(senderoImg.FileName);
+                                if (new[] { ".jpg", ".png" }.Any(c => fileExtension == c))
+                                {
+                                    //Create name and paths
+                                    string fileName = "senderoImg_" + sendero.ID + Path.GetExtension(senderoImg.FileName);  //Ej: "senderoiImg_2.jpg"
+                                    string virtualDirectoryPath = "~/Content/Senderos/" + sendero.ID + "/Img";              //Ej: "~/Content/Senderos/2/Img/"
+                                    string phisicaldirectoryPath = Server.MapPath(virtualDirectoryPath);                    //Ej: "F:/Sistemas/GitHub-Repositorios/TurApp-BackOffice/TurApp/MSP/Content/Senderos/2/Img"
+                                    string fullVirtualPath = virtualDirectoryPath + "/" + fileName;
+                                    string fullPhisicalPath = Path.Combine(phisicaldirectoryPath, fileName);                //Ej: "~/Content/Senderos/2/Img/senderoiImg_2.jpg"
+
+                                    //CreateDirectory
+                                    System.IO.Directory.CreateDirectory(phisicaldirectoryPath);
+
+                                    //Save file in a phisicaldirectoryPath
+                                    senderoImg.SaveAs(fullPhisicalPath);
+
+                                    //Update in DB Sendero file path        
+                                    sendero.RutaImagen = fullVirtualPath;
+                                    //db.SaveChanges();
+                                }
+                            }
+                            ViewBag.Message1 = "Titulo subido correctamente!!";
+                        }
+                        #endregion
+
+                        //ZipMapa
+                        #region process ZipMapa
+                        if (zipMapa != null)
+                        {
+                            if (zipMapa.ContentLength > 0)
+                            {
+                                //Validate file extension
+                                string fileExtension = Path.GetExtension(senderoImg.FileName);
+                                if (new[] { ".zip" }.Any(c => fileExtension == c))
+                                {
+                                    //Create name and paths
+                                    string fileName = "senderoMapa_" + sendero.ID + Path.GetExtension(zipMapa.FileName);        //Ej: "senderoiMapa_2.jpg"
+                                    string virtualDirectoryPath = "~/Content/Senderos/" + sendero.ID + "/Mapa";                 //Ej: "~/Content/Senderos/2/Mapa/"
+                                    string phisicaldirectoryPath = Server.MapPath(virtualDirectoryPath);
+                                    string fullVirtualPath = Path.Combine(virtualDirectoryPath, fileName);
+                                    string fullPhisicalPath = Path.Combine(phisicaldirectoryPath, fileName);                    //Ej: "~/Content/Senderos/2/Img/senderoiImg_2.jpg"
+
+                                    //CreateDirectory
+                                    System.IO.Directory.CreateDirectory(phisicaldirectoryPath);
+
+                                    //Save file in a phisicaldirectoryPath
+                                    senderoImg.SaveAs(fullPhisicalPath);
+
+                                    //Update in DB Sendero file path            
+                                    sendero.RutZipMapa = fullVirtualPath;
+                                    //db.SaveChanges();       
+                                }
+                            }
+                            ViewBag.Message1 = "Titulo subido correctamente!!";
+                        }
+                        #endregion
+
+                        //return Json(new {
+                        //    ok = true
+                        //});
+                    }
                 }
             }
             catch (DbEntityValidationException ex)
@@ -91,11 +165,11 @@ namespace TurApp.Controllers
             }
 
 
-            
+
 
             ViewBag.TipoDificultadFisicaID = new SelectList(db.TipoDificultadFisica, "ID", "Descripcion");
             ViewBag.TipoDificultadTecnicaID = new SelectList(db.TipoDificultadTecnica, "ID", "Descripcion");
-            return View(Sendero);
+            return View(sendero);
         }
 
         // GET: Sendero/Edit/5
@@ -111,7 +185,7 @@ namespace TurApp.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.TipoDificultadFisicaID = new SelectList(db.TipoDificultadFisica, "ID", "Descripcion",Sendero.TipoDificultadFisicaID);
+            ViewBag.TipoDificultadFisicaID = new SelectList(db.TipoDificultadFisica, "ID", "Descripcion", Sendero.TipoDificultadFisicaID);
             ViewBag.TipoDificultadTecnicaID = new SelectList(db.TipoDificultadTecnica, "ID", "Descripcion", Sendero.TipoDificultadTecnicaID);
 
             return View(Sendero);

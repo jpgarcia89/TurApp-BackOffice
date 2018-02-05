@@ -14,8 +14,8 @@
           <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
           <Property Name="Icono" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="AspNetMenuAccion">
           <Key>
             <PropertyRef Name="IdMenu" />
@@ -164,6 +164,8 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
           <Property Name="DuracionTotal" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Latitud" Type="nvarchar" MaxLength="50" />
           <Property Name="Longitud" Type="nvarchar" MaxLength="50" />
+          <Property Name="RutaImagen" Type="nvarchar" MaxLength="100" />
+          <Property Name="RutZipMapa" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="SenderoPunto">
           <Key>
@@ -898,6 +900,8 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
           <NavigationProperty Name="SenderoPuntoElevacion" Relationship="TurAppModel.FK_SenderoPuntoElevacion_Sendero" FromRole="Sendero" ToRole="SenderoPuntoElevacion" />
           <Property Name="Latitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Longitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RutaImagen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RutZipMapa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SenderoPunto">
           <Key>
@@ -1135,6 +1139,8 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
           <EntitySetMapping Name="Sendero">
             <EntityTypeMapping TypeName="TurAppModel.Sendero">
               <MappingFragment StoreEntitySet="Sendero">
+                <ScalarProperty Name="RutZipMapa" ColumnName="RutZipMapa" />
+                <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
                 <ScalarProperty Name="Longitud" ColumnName="Longitud" />
                 <ScalarProperty Name="Latitud" ColumnName="Latitud" />
                 <ScalarProperty Name="DuracionTotal" ColumnName="DuracionTotal" />

@@ -180,24 +180,26 @@
                         </div>
 
 
-                        <!-- Fila 5 - Imagen y zipRecursos -->
+                        <!-- Fila 5 - Imagen y zipRecursosMapaOffline -->
                         <div class="row">
+                            <!-- Imagen -->
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="control-label col-md-2 col-md-offset-1" for="Imagen">Imagen:</label>
                                     <div class="col-md-8">
-                                        @Html.TextBox("senderoImg", "", htmlAttributes: new { @class = "form-control fileUpload", type = "file", accept = "image/*" })
+                                        @Html.TextBox("senderoImg", "", htmlAttributes: new { @class = "form-control", type = "file", accept = "image/*" })
                                         <p class="text-success">@ViewBag.Message1</p>
                                     </div>
                                 </div>
                             </div>
 
+                            <!-- zipRecursosMapaOffline --> 
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="control-label col-md-2 col-md-offset-1" for="RecursoOffline">Zip mapa offline:</label>
+                                    <label class="control-label col-md-2 col-md-offset-1" for="zipMapa">Zip Mapa:</label>
                                     <div class="col-md-8">
-                                        <input type="file" id="exampleInputFile">
-                                        <p class="help-block">Example block-level help text here.</p>
+                                        @Html.TextBox("zipMapa", "", htmlAttributes: new { @class = "form-control", type = "file", accept = ".zip" })
+                                        <p class="text-success">@ViewBag.Message2</p>
                                     </div>
                                 </div>
                             </div>
@@ -292,6 +294,41 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfmP3Pqo0aBdUZmidCxUsXQDS5NPYLang&libraries=geometry,drawing&ext=.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<!-- Form and validations -->
+<script>
+    $('#senderoImg').change(function () {
+        var ext = this.value.match(/\.([^\.]+)$/)[1];
+        switch (ext) {
+            case 'jpg':
+            //case 'bmp':
+            case 'png':
+            //case 'tif':
+                //alert('allowed');
+                break;
+            default:
+                alert('Formato de archivo no valido.');
+                this.value = '';
+        }
+
+    });
+
+    $('#zipMapa').change(function () {
+        var ext = this.value.match(/\.([^\.]+)$/)[1];
+        switch (ext) {
+            case 'zip':
+            //case 'bmp':
+            //case 'png':
+            //case 'tif':
+                //alert('allowed');
+                break;
+            default:
+                alert('Formato de archivo no valido.');
+                this.value = '';
+        }
+
+    });
+</script>
+
 <!-- Submit -->
 <script>
 
@@ -343,14 +380,15 @@
                 formData.append("senderoImg", file1[0]);
             }
 
-            //File 2
-            //var fileUpload2 = $("#docAnalitico").get(0);
-            //if (fileUpload2.files.length) {
-            //    var file2 = fileUpload2.files;
-            //    fileData.append("docAnalitico", file2[0]);
-            //}
-
             
+            //File 2
+            var fileUpload2 = $("#zipMapa").get(0);
+            if (fileUpload2.files.length) {
+                var file2 = fileUpload2.files;
+                formData.append("zipMapa", file2[0]);
+            }
+
+            //Append "data" to "formData"
             formData.append("Sendero", JSON.stringify(data));
 
         }
