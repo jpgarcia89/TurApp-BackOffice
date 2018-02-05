@@ -57,7 +57,7 @@ namespace TurApp.Controllers
             sendero = JsonConvert.DeserializeObject<Sendero>(Request.Form["Sendero"]);
             //var x =Request.Files.Count;
             //var ssendero = Request.Form["Sendero"];
-            sendero.ID = 2;//dato de prueba
+            //sendero.ID = 2;//dato de prueba
 
             ModelState["sendero"].Errors.Clear();
             UpdateModel<Sendero>(sendero);
@@ -66,8 +66,8 @@ namespace TurApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    //db.Sendero.Add(Sendero);
-                    //db.SaveChanges();
+                    db.Sendero.Add(sendero);
+                    db.SaveChanges();
 
 
                     if (Request.Files.Count > 0)
@@ -101,8 +101,8 @@ namespace TurApp.Controllers
                                     senderoImg.SaveAs(fullPhisicalPath);
 
                                     //Update in DB Sendero file path        
-                                    sendero.RutaImagen = fullVirtualPath;
-                                    //db.SaveChanges();
+                                    sendero.RutaImagen = fullVirtualPath.Substring(1, fullVirtualPath.Length-1);
+                                    db.SaveChanges();
                                 }
                             }
                             ViewBag.Message1 = "Titulo subido correctamente!!";
@@ -134,16 +134,17 @@ namespace TurApp.Controllers
 
                                     //Update in DB Sendero file path            
                                     sendero.RutZipMapa = fullVirtualPath;
-                                    //db.SaveChanges();       
+                                    db.SaveChanges();       
                                 }
                             }
                             ViewBag.Message1 = "Titulo subido correctamente!!";
                         }
                         #endregion
 
-                        //return Json(new {
-                        //    ok = true
-                        //});
+                        return Json(new
+                        {
+                            ok = true
+                        });
                     }
                 }
             }

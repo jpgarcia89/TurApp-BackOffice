@@ -36,12 +36,12 @@
         <div class="box-header">
             <h3 class="box-title">Listado de Usuarios</h3>
 
-            @if (Permisos.Any(r => r.menu.Nombre == "Usuarios" && r.accion.Any(x => x.Nombre == "Agregar")))
-            {
+            @*@if (Permisos.Any(r => r.menu.Nombre == "Usuarios" && r.accion.Any(x => x.Nombre == "Agregar")))
+            {*@
                 <button type="button" style="margin-right:25px;" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Users/Create', 'Agregar', 'Usuario')">
                     <i class="fa fa-plus"></i> Nuevo
                 </button>
-            }
+                @*}*@
         </div>
         <div class="box-body">
             <table id="dtUsuarios" class="table table-bordered table-striped">

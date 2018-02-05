@@ -1220,7 +1220,6 @@
     <Content Include="Views\Senderos\Details.cshtml" />
     <Content Include="Views\Senderos\Edit.cshtml" />
     <Content Include="Views\Senderos\Index.cshtml" />
-    <Content Include="Views\Senderos\OLD_Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

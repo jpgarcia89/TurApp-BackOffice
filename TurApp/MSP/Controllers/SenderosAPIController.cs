@@ -30,7 +30,9 @@ namespace TurApp.Controllers
                 r.DuracionTotal,
                 r.AlturaMaxima,
                 SenderoPunto = r.SenderoPunto.Select(x => new { x.Latitud, x.Longitud }),
-                SenderoPuntoElevacion = r.SenderoPuntoElevacion.Select(x => new {x.Latitud,x.Longitud,x.Altura })
+                SenderoPuntoElevacion = r.SenderoPuntoElevacion.Select(x => new {x.Latitud,x.Longitud,x.Altura }),
+                r.RutaImagen,
+                r.RutZipMapa
             });
 
 
@@ -41,13 +43,30 @@ namespace TurApp.Controllers
         [ResponseType(typeof(Sendero))]
         public IHttpActionResult GetSendero(int id)
         {
-            Sendero sendero = db.Sendero.Find(id);
-            if (sendero == null)
+            //Sendero sendero = db.Sendero.Find(id);
+            var data = db.Sendero.Where(x => x.ID == id).Select(r => new {
+                r.ID,
+                r.Nombre,
+                r.Descripcion,
+                r.LugarInicio,
+                r.LugarFin,
+                r.Distancia,
+                r.Desnivel,
+                r.DuracionTotal,
+                r.AlturaMaxima,
+                SenderoPunto = r.SenderoPunto.Select(x => new { x.Latitud, x.Longitud }),
+                SenderoPuntoElevacion = r.SenderoPuntoElevacion.Select(x => new { x.Latitud, x.Longitud, x.Altura }),
+                r.RutaImagen,
+                r.RutZipMapa
+            });
+
+            if (data == null)
             {
                 return NotFound();
             }
 
-            return Ok(sendero);
+            
+            return Json(data);
         }
 
         // PUT: api/SenderosAPI/5
