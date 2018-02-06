@@ -110,7 +110,7 @@
                             <div class="form-group">
                                 <label class="control-label" for="Desnivel">Desnivel:</label>
                                 <div class="input-group">
-                                    @Html.EditorFor(model => model.Desnivel, new { htmlAttributes = new { @class = "form-control" , @readonly = "readonly" } })
+                                    @Html.EditorFor(model => model.Desnivel  ,new { htmlAttributes = new { @class = "form-control" , @readonly = "readonly" } })
                                     <div class="input-group-addon">Metros</div>
                                     @Html.ValidationMessageFor(model => model.Desnivel, "", new { @class = "text-danger" })
                                 </div>
@@ -487,6 +487,11 @@
             default:
                 alert('Formato de archivo no valido.');
                 this.value = '';
+                
+                var img = '<img src="/Content/img/noimage.jpg" class="img-responsive img-thumbnail" alt="Responsive image" style="min-width: 100%;">';
+                $("#divImg").empty();
+                $("#divImg").append(img);
+
                 return;
         }
 
@@ -496,39 +501,24 @@
     });
 
     function handleFileSelect(evt) {
-        var file = evt.target.files[0]; // FileList object
-
-        // Loop through the FileList and render image files as thumbnails.
-        //for (var i = 0, f; f = files[i]; i++) {
-
-            // Only process image files.
-            //if (!f.type.match('image.*')) {
-            //    R
-            //}
-
+        var file = evt.target.files[0]; 
+       
             var reader = new FileReader();
 
             // Closure to capture the file information.
             reader.onload = (function (theFile) {
                 return function (e) {
-                    // Render thumbnail.
-
-                    //<img src="~/Content/img/noimage.jpg" class="img-responsive img-thumbnail" alt="Responsive image" style="min-width: 100%;">
-
 
                     var img = '<img src="' + e.target.result + '" class="img-responsive img-thumbnail" alt="Responsive image" style="min-width: 100%;">';
                     $("#divImg").empty();
                     $("#divImg").append(img);
 
-
-                    //span.innerHTML = ['<img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
-                    //document.getElementById('list').insertBefore(span, null);
                 };
             })(file);
 
             // Read in the image file as a data URL.
             reader.readAsDataURL(file);
-        //}
+        
     }
 
 
@@ -883,16 +873,26 @@
 
 
             $('#elevChart').hide();
+
+            removeFormData();
         }
     }
 
 
     google.maps.event.addDomListener(window, "load", initMap);
 
-    fillFormData(maxElevation, elevChange, distance)
+    function fillFormData(maxElevation, elevChange, distance)
     {
-
+        $("#AlturaMaxima").val(maxElevation.toFixed(2));   //m.s.n.m
+        $("#Desnivel").val(elevChange.toFixed(2));         //metros
+        $("#Distancia").val((distance/1000).toFixed(2));          //Kms
     }
+    function removeFormData() {
+        $("#AlturaMaxima").val(null);   //m.s.n.m
+        $("#Desnivel").val(null);         //metros
+        $("#Distancia").val(null);          //Kms
+    }
+
 
     function plotElevation(returnedElevations) {
 

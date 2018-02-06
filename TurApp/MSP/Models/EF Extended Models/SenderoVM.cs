@@ -10,11 +10,38 @@ namespace TurApp.Models
     [MetadataType(typeof(SenderoMetadata))]
     public partial class Sendero
     {
+        public string FullDesnivel
+        {
+            get
+            {
+                return this.Desnivel + " m";
+            }
+        }
+
+        public string FullDistancia
+        {
+            get
+            {
+                return this.Distancia + " Kms";
+            }
+        }
+
+        public string FullAlturaMaxima
+        {
+            get
+            {
+                return this.AlturaMaxima + " m.s.n.m";
+            }
+        }
+
+
     }
 
     public class SenderoMetadata
     {
 
+        
+        
 
         public int ID { get; set; }
 

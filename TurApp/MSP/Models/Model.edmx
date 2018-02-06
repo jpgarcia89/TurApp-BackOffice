@@ -14,8 +14,8 @@
           <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
           <Property Name="Icono" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AspNetMenuAccion">
           <Key>
             <PropertyRef Name="IdMenu" />
@@ -158,10 +158,10 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
           <Property Name="LugarFin" Type="nvarchar" MaxLength="100" />
           <Property Name="TipoDificultadTecnicaID" Type="int" Nullable="false" />
           <Property Name="TipoDificultadFisicaID" Type="int" Nullable="false" />
-          <Property Name="Desnivel" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Distancia" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="AlturaMaxima" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="DuracionTotal" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Desnivel" Type="nvarchar" MaxLength="50" />
+          <Property Name="Distancia" Type="float" />
+          <Property Name="AlturaMaxima" Type="float" />
+          <Property Name="DuracionTotal" Type="nvarchar" MaxLength="50" />
           <Property Name="Latitud" Type="nvarchar" MaxLength="50" />
           <Property Name="Longitud" Type="nvarchar" MaxLength="50" />
           <Property Name="RutaImagen" Type="nvarchar" MaxLength="100" />
@@ -854,7 +854,7 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
             <End Role="Sendero" EntitySet="Sendero" />
             <End Role="SenderoPuntoElevacion" EntitySet="SenderoPuntoElevacion" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="Int32" Name="PadreID" Nullable="true" />
@@ -892,16 +892,16 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
           <Property Name="LugarFin" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="TipoDificultadTecnicaID" Type="Int32" Nullable="false" />
           <Property Name="TipoDificultadFisicaID" Type="Int32" Nullable="false" />
-          <Property Name="Desnivel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Distancia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AlturaMaxima" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DuracionTotal" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SenderoPunto" Relationship="TurAppModel.FK_SenderoPunto_Sendero" FromRole="Sendero" ToRole="SenderoPunto" />
-          <NavigationProperty Name="SenderoPuntoElevacion" Relationship="TurAppModel.FK_SenderoPuntoElevacion_Sendero" FromRole="Sendero" ToRole="SenderoPuntoElevacion" />
+          <Property Name="Desnivel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Distancia" Type="Double" />
+          <Property Name="AlturaMaxima" Type="Double" />
+          <Property Name="DuracionTotal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Latitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Longitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RutaImagen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="RutZipMapa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SenderoPunto" Relationship="TurAppModel.FK_SenderoPunto_Sendero" FromRole="Sendero" ToRole="SenderoPunto" />
+          <NavigationProperty Name="SenderoPuntoElevacion" Relationship="TurAppModel.FK_SenderoPuntoElevacion_Sendero" FromRole="Sendero" ToRole="SenderoPuntoElevacion" />
         </EntityType>
         <EntityType Name="SenderoPunto">
           <Key>
@@ -948,7 +948,7 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1178,7 +1178,7 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
@@ -1193,7 +1193,7 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
