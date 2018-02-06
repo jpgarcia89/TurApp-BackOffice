@@ -74,8 +74,7 @@ namespace TurApp.Controllers
                     {
                         //Ej. ruta de recursos(imagen) de senderos: "~/Content/Senderos/2/Img/senderoImg_2.jpg"                                                
                         //Ej. ruta de recursos(mapa offline) de senderos: "~/Content/Senderos/2/Mapa/senderoMapa_2.zip"  
-
-
+                        
 
                         //SenderoImg
                         #region process SenderoImg

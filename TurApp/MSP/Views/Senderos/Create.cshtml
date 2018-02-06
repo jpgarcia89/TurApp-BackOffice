@@ -54,165 +54,342 @@
             {
                 @Html.AntiForgeryToken()
 
-                <div class="form-horizontal">
-                    <div class="container">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="container">
+                    <div class="row">
+                        <!-- Columna 1 -->
+                        <div class="col-lg-6">
 
-                        <!-- Grupo - Datos Generales -->
-                        <!-- Fila 1 - Nombre y Descripcion -->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-2 col-md-offset-1" for="Nombre">Nombre:</label>
-                                    <div class="col-md-8">
-                                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-                                    </div>
+                            <!-- Fila 1 - Nombre-->
+                            <div class="form-group">
+                                <label class="control-label" for="Nombre">Nombre:</label>
+                                <div>
+                                    @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-2 col-md-offset-1" for="Descripcion">Descripcion:</label>
-                                    <div class="col-md-8">
-                                        @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Fila 2 - LugarInicio y LugarFin -->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-2 col-md-offset-1" for="LugarInicio">Lugar de Inicio:</label>
-                                    <div class="col-md-8">
-                                        @Html.EditorFor(model => model.LugarInicio, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.LugarInicio, "", new { @class = "text-danger" })
-                                    </div>
+                            <!-- Fila 2 - LugarInicio-->
+                            <div class="form-group">
+                                <label class="control-label" for="LugarInicio">Lugar de Inicio:</label>
+                                <div>
+                                    @Html.EditorFor(model => model.LugarInicio, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.LugarInicio, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-2 col-md-offset-1" for="LugarFin">Lugar de Fin:</label>
-                                    <div class="col-md-8">
-                                        @Html.EditorFor(model => model.LugarFin, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.LugarFin, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- Fila 3 - TipoDificultadTecnicaID y TipoDificultadFisicaID -->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-2 col-md-offset-1" for="Apellido">Dificultad Tecnica:</label>
-                                    <div class="col-md-8">
-                                        @Html.DropDownList("TipoDificultadTecnicaID", null, htmlAttributes: new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.TipoDificultadTecnicaID, "", new { @class = "text-danger" })
-                                    </div>
+                            <!-- Fila 3 - LugarFin-->
+                            <div class="form-group">
+                                <label class="control-label" for="LugarFin">Lugar de Fin:</label>
+                                <div>
+                                    @Html.EditorFor(model => model.LugarFin, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.LugarFin, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-2 col-md-offset-1" for="TipoDificultadFisicaID">Dificultad Fisica:</label>
-                                    <div class="col-md-8">
-                                        @Html.DropDownList("TipoDificultadFisicaID", null, htmlAttributes: new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.TipoDificultadFisicaID, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-
-
-                        <!-- Fila 4 - Desnivel y Distancia -->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-2 col-md-offset-1" for="Desnivel">Desnivel:</label>
-                                    <div class="col-md-8">
-                                        @Html.EditorFor(model => model.Desnivel, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Desnivel, "", new { @class = "text-danger" })
-                                    </div>
+                            <!-- Fila 3 - TipoDificultadTecnicaID-->
+                            <div class="form-group">
+                                <label class="control-label " for="Apellido">Dificultad Tecnica:</label>
+                                <div>
+                                    @Html.DropDownList("TipoDificultadTecnicaID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.TipoDificultadTecnicaID, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-2 col-md-offset-1" for="Distancia">Distancia:</label>
-                                    <div class="col-md-8">
-                                        @Html.EditorFor(model => model.Distancia, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Distancia, "", new { @class = "text-danger" })
-                                    </div>
+
+                            <!-- Fila 3 - TipoDificultadFisicaID-->
+                            <div class="form-group">
+                                <label class="control-label" for="TipoDificultadFisicaID">Dificultad Fisica:</label>
+                                <div>
+                                    @Html.DropDownList("TipoDificultadFisicaID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.TipoDificultadFisicaID, "", new { @class = "text-danger" })
                                 </div>
                             </div>
+
+                            <!-- Fila 4 - Desnivel-->
+                            <div class="form-group">
+                                <label class="control-label" for="Desnivel">Desnivel:</label>
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.Desnivel, new { htmlAttributes = new { @class = "form-control" , @readonly = "readonly" } })
+                                    <div class="input-group-addon">Metros</div>
+                                    @Html.ValidationMessageFor(model => model.Desnivel, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!-- Fila 5 - Distancia-->
+                            <div class="form-group">
+                                <label class="control-label" for="Distancia">Distancia:</label>
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.Distancia, new { htmlAttributes = new { @class = "form-control" , @readonly = "readonly" } })
+                                    <div class="input-group-addon">Kms</div>
+                                    @Html.ValidationMessageFor(model => model.Distancia, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!-- Fila 6 - AlturaMaxima-->
+                            <div class="form-group">
+                                <label class="control-label" for="AlturaMaxima">AlturaMaxima:</label>
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.AlturaMaxima, new { htmlAttributes = new { @class = "form-control" , @readonly = "readonly" } })
+                                    <div class="input-group-addon">m.s.n.m</div>
+                                    @Html.ValidationMessageFor(model => model.AlturaMaxima, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!-- Fila 7 - DuracionTotal-->
+                            <div class="form-group">
+                                <label class="control-label" for="DuracionTotal">Duración:</label>
+                                <div>
+                                    @Html.EditorFor(model => model.DuracionTotal, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DuracionTotal, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
                         </div>
 
 
+                        <!-- Columna 2 -->
+                        <div class="col-lg-6">
 
-                        <!-- Fila 5 - AlturaMaxima y DuracionTotal -->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-2 col-md-offset-1" for="AlturaMaxima">AlturaMaxima:</label>
-                                    <div class="col-md-8">
-                                        @Html.EditorFor(model => model.AlturaMaxima, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.AlturaMaxima, "", new { @class = "text-danger" })
-                                    </div>
+                            <!-- Fila 1 - Nombre-->
+                            <div class="form-group" style="margin-bottom: 2%;">
+                                <label class="control-label " for="Descripcion">Descripcion:</label>
+                                <div>
+                                    @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control", rows = "5", style = "max-width:100%; margin-bottom: 3%;" } )
+                                    @*@Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control", cols = "40", rows = "5" }})*@
+
+
+                                    @* <textarea class="form-control" rows="5" id="comment" style="max-width:100%;"></textarea>*@
+
+                                    @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-2 col-md-offset-1" for="DuracionTotal">Duración:</label>
-                                    <div class="col-md-8">
-                                        @Html.EditorFor(model => model.DuracionTotal, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.DuracionTotal, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- Fila 5 - Imagen y zipRecursosMapaOffline -->
-                        <div class="row">
-                            <!-- Imagen -->
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-2 col-md-offset-1" for="Imagen">Imagen:</label>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("senderoImg", "", htmlAttributes: new { @class = "form-control", type = "file", accept = "image/*" })
-                                        <p class="text-success">@ViewBag.Message1</p>
-                                    </div>
+                            <!-- Fila 2 -Archivo zipRecursosMapaOffline-->
+                            <div class="form-group">
+                                <label class="control-label" for="zipMapa">Zip Mapa:</label>
+                                <div>
+                                    @Html.TextBox("zipMapa", "", htmlAttributes: new { @class = "form-control", type = "file", accept = ".zip" })
+                                    <p class="text-success">@ViewBag.Message2</p>
                                 </div>
                             </div>
 
-                            <!-- zipRecursosMapaOffline --> 
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-2 col-md-offset-1" for="zipMapa">Zip Mapa:</label>
-                                    <div class="col-md-8">
-                                        @Html.TextBox("zipMapa", "", htmlAttributes: new { @class = "form-control", type = "file", accept = ".zip" })
-                                        <p class="text-success">@ViewBag.Message2</p>
-                                    </div>
+                            <!-- Fila 3 - Archivo Imagen-->
+                            <div class="form-group">
+                                <label class="control-label" for="Imagen">Imagen:</label>
+                                <div>
+                                    @Html.TextBox("senderoImg", "", htmlAttributes: new { @class = "form-control", type = "file", accept = "image/*" })
+                                    <p class="text-success">@ViewBag.Message1</p>
                                 </div>
                             </div>
-                        </div>
+                            <!-- Fila 3 - Vista previa Imagen-->
+                            <div class="form-group">
+                                <label class="control-label" for="Imagen">Vista previa:</label>
+                                <div id="divImg">
+                                    <img src="~/Content/img/noimage.jpg" class="img-responsive img-thumbnail" alt="Responsive image" style="min-width: 100%;">
+                                </div>
+                            </div>
 
 
-                        <div class="row pull-right" style="margin-right: 5%;">
-                            <a href="@Url.Action("Index","Senderos")" class="btn btn-default">Cancelar</a>
 
-                            <input id="btnGuardar" type="submit" class="btn btn-primary" value="Guardar" />
+
+
                         </div>
                     </div>
+                    <div class="row pull-right" style="margin-right: 5%;">
+                        <a href="@Url.Action("Index","Senderos")" class="btn btn-default">Cancelar</a>
+
+                        <input id="btnGuardar" type="submit" class="btn btn-primary" value="Guardar" />
+                    </div>
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                @*<div class="form-horizontal">
+                        <div class="container">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <!-- Grupo - Datos Generales -->
+                            <!-- Fila 1 - Nombre y Descripcion -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-2 col-md-offset-1" for="Nombre">Nombre:</label>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-2 col-md-offset-1" for="Descripcion">Descripcion:</label>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fila 2 - LugarInicio y LugarFin -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-2 col-md-offset-1" for="LugarInicio">Lugar de Inicio:</label>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.LugarInicio, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.LugarInicio, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-2 col-md-offset-1" for="LugarFin">Lugar de Fin:</label>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.LugarFin, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.LugarFin, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Fila 3 - TipoDificultadTecnicaID y TipoDificultadFisicaID -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-2 col-md-offset-1" for="Apellido">Dificultad Tecnica:</label>
+                                        <div class="col-md-8">
+                                            @Html.DropDownList("TipoDificultadTecnicaID", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.TipoDificultadTecnicaID, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-2 col-md-offset-1" for="TipoDificultadFisicaID">Dificultad Fisica:</label>
+                                        <div class="col-md-8">
+                                            @Html.DropDownList("TipoDificultadFisicaID", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.TipoDificultadFisicaID, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <!-- Fila 4 - Desnivel y Distancia -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-2 col-md-offset-1" for="Desnivel">Desnivel:</label>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Desnivel, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Desnivel, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-2 col-md-offset-1" for="Distancia">Distancia:</label>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Distancia, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Distancia, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <!-- Fila 5 - AlturaMaxima y DuracionTotal -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-2 col-md-offset-1" for="AlturaMaxima">AlturaMaxima:</label>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.AlturaMaxima, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.AlturaMaxima, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-2 col-md-offset-1" for="DuracionTotal">Duración:</label>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.DuracionTotal, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.DuracionTotal, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Fila 6 - Imagen y zipRecursosMapaOffline -->
+                            <div class="row">
+                                <!-- Imagen -->
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-2 col-md-offset-1" for="Imagen">Imagen:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBox("senderoImg", "", htmlAttributes: new { @class = "form-control", type = "file", accept = "image/*" })
+                                            <p class="text-success">@ViewBag.Message1</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- zipRecursosMapaOffline -->
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-2 col-md-offset-1" for="zipMapa">Zip Mapa:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBox("zipMapa", "", htmlAttributes: new { @class = "form-control", type = "file", accept = ".zip" })
+                                            <p class="text-success">@ViewBag.Message2</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row pull-right" style="margin-right: 5%;">
+                                <a href="@Url.Action("Index","Senderos")" class="btn btn-default">Cancelar</a>
+
+                                <input id="btnGuardar" type="submit" class="btn btn-primary" value="Guardar" />
+                            </div>
+                        </div>
+                    </div>*@
+
+
+
+
             }
         </div>
     </div>
@@ -296,29 +473,74 @@
 
 <!-- Form and validations -->
 <script>
-    $('#senderoImg').change(function () {
+    $('#senderoImg').change(function (e) {
+
         var ext = this.value.match(/\.([^\.]+)$/)[1];
+
         switch (ext) {
             case 'jpg':
-            //case 'bmp':
+                //case 'bmp':
             case 'png':
-            //case 'tif':
+                //case 'tif':
                 //alert('allowed');
                 break;
             default:
                 alert('Formato de archivo no valido.');
                 this.value = '';
+                return;
         }
 
+        handleFileSelect(e);
+
+
     });
+
+    function handleFileSelect(evt) {
+        var file = evt.target.files[0]; // FileList object
+
+        // Loop through the FileList and render image files as thumbnails.
+        //for (var i = 0, f; f = files[i]; i++) {
+
+            // Only process image files.
+            //if (!f.type.match('image.*')) {
+            //    R
+            //}
+
+            var reader = new FileReader();
+
+            // Closure to capture the file information.
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    // Render thumbnail.
+
+                    //<img src="~/Content/img/noimage.jpg" class="img-responsive img-thumbnail" alt="Responsive image" style="min-width: 100%;">
+
+
+                    var img = '<img src="' + e.target.result + '" class="img-responsive img-thumbnail" alt="Responsive image" style="min-width: 100%;">';
+                    $("#divImg").empty();
+                    $("#divImg").append(img);
+
+
+                    //span.innerHTML = ['<img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+                    //document.getElementById('list').insertBefore(span, null);
+                };
+            })(file);
+
+            // Read in the image file as a data URL.
+            reader.readAsDataURL(file);
+        //}
+    }
+
+
+
 
     $('#zipMapa').change(function () {
         var ext = this.value.match(/\.([^\.]+)$/)[1];
         switch (ext) {
             case 'zip':
-            //case 'bmp':
-            //case 'png':
-            //case 'tif':
+                //case 'bmp':
+                //case 'png':
+                //case 'tif':
                 //alert('allowed');
                 break;
             default:
@@ -380,7 +602,7 @@
                 formData.append("senderoImg", file1[0]);
             }
 
-            
+
             //File 2
             var fileUpload2 = $("#zipMapa").get(0);
             if (fileUpload2.files.length) {
@@ -436,7 +658,7 @@
 
 <!-- Map Management -->
 <script>
-    var polyline ;//= [];//Array de "Polylines"
+    var polyline;//= [];//Array de "Polylines"
     var polylinePath; // Almacena "Polyline.getPath();"
     var marker;
     var chartData = [];
@@ -471,7 +693,7 @@
         //Recupera los puntos Guardados(Sendero)
         var SenderoPuntos = [];
 
-        if (SenderoPuntos.length>0) {
+        if (SenderoPuntos.length > 0) {
             //Genera "Polyline" con los puntos Guardados(Sendero)
             var PolylineSaved = new google.maps.Polyline({
                 path: SenderoPuntos,
@@ -484,7 +706,7 @@
             });
 
             //Se agrega el Polyline(Sendero) al Arry de "Polylines" (global)
-            polyline=PolylineSaved;;
+            polyline = PolylineSaved;;
 
             //se guarda la ruta del Polyline en una variable global
             polylinePath = PolylineSaved.getPath();
@@ -536,10 +758,10 @@
         //end of add drawing control
 
 
-        if (polyline!=null) {
+        if (polyline != null) {
             drawingManager.setOptions({
                 drawingControl: false,
-                drawingMode:null
+                drawingMode: null
             });
         }
 
@@ -550,9 +772,9 @@
             //polylines.push(polyline);
             drawingManager.setOptions({
                 drawingControl: false,
-                drawingMode:null
+                drawingMode: null
             });
-            polyline =xpolyline;
+            polyline = xpolyline;
             polylinePath = xpolyline.getPath();
             $('#btnGetElevacion').click();
         });
@@ -566,12 +788,12 @@
 
         //debugger
 
-        if (polyline !=null) {
+        if (polyline != null) {
 
 
             //var htmlStr = "";
-            var tableRows="";
-            var path=[];
+            var tableRows = "";
+            var path = [];
             var xy;
 
 
@@ -580,16 +802,16 @@
 
             for (var j = 0; j < polylinePath.b.length ; j++) {
                 //htmlStr += "&nbsp;&nbsp;" + polylines[i].getPath().getAt(j).toUrlValue(6) + "<br>";
-                tableRows +=    '<tr>'
-                    +               '<td>'+ j +'</td>'
-                    +               '<td>'+ polylinePath.b[j].lat().toFixed(4) +'</td>'
-                    +               '<td>'+ polylinePath.b[j].lng().toFixed(4) +'</td>'
-                    +               '<td>'
-                    +                   '<span data-placement="top" title="Eliminar" data-toggle="tooltip">'
-                    +                   '<a class="btn btn-danger fa fa-trash" onclick="removeVertex('+j+')"></a>'//'<a onclick="removeVertex('+j+')">Eliminar</a>'
-                    +                   '</span>'
-                    +               '</td>'
-                    +           '</tr>';
+                tableRows += '<tr>'
+                    + '<td>' + j + '</td>'
+                    + '<td>' + polylinePath.b[j].lat().toFixed(4) + '</td>'
+                    + '<td>' + polylinePath.b[j].lng().toFixed(4) + '</td>'
+                    + '<td>'
+                    + '<span data-placement="top" title="Eliminar" data-toggle="tooltip">'
+                    + '<a class="btn btn-danger fa fa-trash" onclick="removeVertex(' + j + ')"></a>'//'<a onclick="removeVertex('+j+')">Eliminar</a>'
+                    + '</span>'
+                    + '</td>'
+                    + '</tr>';
                 path.push(polylinePath.getAt(j));
             }
 
@@ -605,7 +827,7 @@
             elevator.getElevationAlongPath({
                 'path': path,
                 'samples': 256
-            },plotElevation);
+            }, plotElevation);
 
 
 
@@ -667,7 +889,10 @@
 
     google.maps.event.addDomListener(window, "load", initMap);
 
+    fillFormData(maxElevation, elevChange, distance)
+    {
 
+    }
 
     function plotElevation(returnedElevations) {
 
@@ -695,6 +920,7 @@
 
             pointsArray.push(point)
         }
+
         // smooth the data
         // display the results
         chartData = [];
@@ -707,6 +933,8 @@
         var maxGradientAt = 0;
         var maxGradientDesc = 0;
         var maxGradientDescAt = 0;
+
+        debugger
         for (var i_10 = 0; i_10 < elevations.length; i_10++) {
             minElevation = Math.min(elevations[i_10], minElevation);
             maxElevation = Math.max(elevations[i_10], maxElevation);
@@ -752,6 +980,10 @@
             },
             colors: ["#D9D9D9"]
         });
+
+        //fill form data
+        fillFormData(maxElevation, elevChange, distance);
+
 
         chart.on("mouseleave", function () {
             $("#tooltip").hide();
@@ -904,7 +1136,7 @@
 
 
 
-    $('tbody tr').mouseover(function(e) {
+    $('tbody tr').mouseover(function (e) {
 
 
     });
@@ -915,9 +1147,9 @@
 
         if (e.type == "mouseenter") {
             // check if it is mouseenter, do something
-            var vertexIndex = parseInt( e.currentTarget.cells[0].textContent);
+            var vertexIndex = parseInt(e.currentTarget.cells[0].textContent);
 
-            if (vertexIndex!=null) {
+            if (vertexIndex != null) {
 
                 if (marker == null || marker.getMap() == null) {
                     marker = new google.maps.Marker({
@@ -993,7 +1225,7 @@
 
     function drawPolilineFromKML() {
 
-        if (fileContent==null ) {
+        if (fileContent == null) {
             return;
         }
 
