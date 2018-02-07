@@ -73,8 +73,7 @@ namespace TurApp.Controllers
                     if (Request.Files.Count > 0)
                     {
                         //Ej. ruta de recursos(imagen) de senderos: "~/Content/Senderos/2/Img/senderoImg_2.jpg"                                                
-                        //Ej. ruta de recursos(mapa offline) de senderos: "~/Content/Senderos/2/Mapa/senderoMapa_2.zip"  
-                        
+                        //Ej. ruta de recursos(mapa offline) de senderos: "~/Content/Senderos/2/Mapa/senderoMapa_2.zip"                          
 
                         //SenderoImg
                         #region process SenderoImg
@@ -104,7 +103,6 @@ namespace TurApp.Controllers
                                     db.SaveChanges();
                                 }
                             }
-                            ViewBag.Message1 = "Titulo subido correctamente!!";
                         }
                         #endregion
 
@@ -136,15 +134,15 @@ namespace TurApp.Controllers
                                     db.SaveChanges();       
                                 }
                             }
-                            ViewBag.Message1 = "Titulo subido correctamente!!";
                         }
                         #endregion
-
-                        return Json(new
-                        {
-                            ok = true
-                        });
+                                                
                     }
+
+                    return Json(new
+                    {
+                        ok = true
+                    });
                 }
             }
             catch (DbEntityValidationException ex)
@@ -192,65 +190,150 @@ namespace TurApp.Controllers
         }
 
         // POST: Sendero/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Edit(Sendero Sendero)//[Bind(Include = "ID,Nombre,Descripcion,LugarInicio,LugarFin,TipoDificultadTecnicaID,TipoDificultadFisicaID,Desnivel,Distancia,AlturaMaxima,DuracionTotal")] 
+        public ActionResult Edit(Sendero sendero, HttpPostedFileBase senderoImg, HttpPostedFileBase zipMapa)//[Bind(Include = "ID,Nombre,Descripcion,LugarInicio,LugarFin,TipoDificultadTecnicaID,TipoDificultadFisicaID,Desnivel,Distancia,AlturaMaxima,DuracionTotal")] 
         {
+            sendero = JsonConvert.DeserializeObject<Sendero>(Request.Form["Sendero"]);
+            //var x =Request.Files.Count;
+            //var ssendero = Request.Form["Sendero"];
+            //sendero.ID = 2;//dato de prueba
+
+            ModelState["sendero"].Errors.Clear();
+            UpdateModel<Sendero>(sendero);
+
+
             if (ModelState.IsValid)
             {
-                //var SenderoEntidad = db.Sendero.Find(Sendero.ID);
 
-                if (db.SenderoPunto.Any(r => r.SenderoID == Sendero.ID))
+                #region Delete and Add "SenderoPunto"                
+                if (db.SenderoPunto.Any(r => r.SenderoID == sendero.ID))
                 {
                     //Delete old objects
-                    db.SenderoPunto.RemoveRange(db.SenderoPunto.Where(r => r.SenderoID == Sendero.ID));
+                    db.SenderoPunto.RemoveRange(db.SenderoPunto.Where(r => r.SenderoID == sendero.ID));
 
                     //Add new objects
-                    Sendero.SenderoPunto.ToList().ForEach(r => r.SenderoID = Sendero.ID);
-                    db.SenderoPunto.AddRange(Sendero.SenderoPunto);
+                    sendero.SenderoPunto.ToList().ForEach(r => r.SenderoID = sendero.ID);
+                    db.SenderoPunto.AddRange(sendero.SenderoPunto);
                 }
                 else
                 {
                     //Add new objects
-                    Sendero.SenderoPunto.ToList().ForEach(r => r.SenderoID = Sendero.ID);
-                    db.SenderoPunto.AddRange(Sendero.SenderoPunto);
+                    sendero.SenderoPunto.ToList().ForEach(r => r.SenderoID = sendero.ID);
+                    db.SenderoPunto.AddRange(sendero.SenderoPunto);
                 }
+                #endregion
 
-                if (db.SenderoPuntoElevacion.Any(r => r.SenderoID == Sendero.ID))
+
+                #region Delete and Add "SenderoPunto"  
+                if (db.SenderoPuntoElevacion.Any(r => r.SenderoID == sendero.ID))
                 {
                     //Delete old objects
-                    db.SenderoPuntoElevacion.RemoveRange(db.SenderoPuntoElevacion.Where(r => r.SenderoID == Sendero.ID));
+                    db.SenderoPuntoElevacion.RemoveRange(db.SenderoPuntoElevacion.Where(r => r.SenderoID == sendero.ID));
 
                     //Add new objects
-                    Sendero.SenderoPuntoElevacion.ToList().ForEach(r => r.SenderoID = Sendero.ID);
-                    db.SenderoPuntoElevacion.AddRange(Sendero.SenderoPuntoElevacion);
+                    sendero.SenderoPuntoElevacion.ToList().ForEach(r => r.SenderoID = sendero.ID);
+                    db.SenderoPuntoElevacion.AddRange(sendero.SenderoPuntoElevacion);
                 }
                 else
                 {
                     //Add new objects
-                    Sendero.SenderoPuntoElevacion.ToList().ForEach(r => r.SenderoID = Sendero.ID);
-                    db.SenderoPuntoElevacion.AddRange(Sendero.SenderoPuntoElevacion);
+                    sendero.SenderoPuntoElevacion.ToList().ForEach(r => r.SenderoID = sendero.ID);
+                    db.SenderoPuntoElevacion.AddRange(sendero.SenderoPuntoElevacion);
                 }
+                #endregion
 
-
-
-
-                db.Entry(Sendero).State = EntityState.Modified;
+                
+                db.Entry(sendero).State = EntityState.Modified;
                 db.SaveChanges();
-                //return 
+
+
+                if (Request.Files.Count > 0)
+                {
+                    //Ej. ruta de recursos(imagen) de senderos: "~/Content/Senderos/2/Img/senderoImg_2.jpg"                                                
+                    //Ej. ruta de recursos(mapa offline) de senderos: "~/Content/Senderos/2/Mapa/senderoMapa_2.zip"                          
+
+                    //SenderoImg
+                    #region process SenderoImg
+                    if (senderoImg != null)
+                    {
+                        if (senderoImg.ContentLength > 0)
+                        {
+                            //Validate file extension
+                            string fileExtension = Path.GetExtension(senderoImg.FileName);
+                            if (new[] { ".jpg", ".png" }.Any(c => fileExtension == c))
+                            {
+                                //Create name and paths
+                                string fileName = "senderoImg_" + sendero.ID + Path.GetExtension(senderoImg.FileName);  //Ej: "senderoiImg_2.jpg"
+                                string virtualDirectoryPath = "~/Content/Senderos/" + sendero.ID + "/Img";              //Ej: "~/Content/Senderos/2/Img/"
+                                string phisicaldirectoryPath = Server.MapPath(virtualDirectoryPath);                    //Ej: "F:/Sistemas/GitHub-Repositorios/TurApp-BackOffice/TurApp/MSP/Content/Senderos/2/Img"
+                                string fullVirtualPath = virtualDirectoryPath + "/" + fileName;
+                                string fullPhisicalPath = Path.Combine(phisicaldirectoryPath, fileName);                //Ej: "~/Content/Senderos/2/Img/senderoiImg_2.jpg"
+
+                                //CreateDirectory
+                                System.IO.Directory.CreateDirectory(phisicaldirectoryPath);
+
+                                //Save file in a phisicaldirectoryPath
+                                senderoImg.SaveAs(fullPhisicalPath);
+
+                                //Update in DB Sendero file path        
+                                sendero.RutaImagen = fullVirtualPath.Substring(1, fullVirtualPath.Length - 1);
+                                db.SaveChanges();
+                            }
+                        }
+                    }
+                    #endregion
+
+                    //ZipMapa
+                    #region process ZipMapa
+                    if (zipMapa != null)
+                    {
+                        if (zipMapa.ContentLength > 0)
+                        {
+                            //Validate file extension
+                            string fileExtension = Path.GetExtension(senderoImg.FileName);
+                            if (new[] { ".zip" }.Any(c => fileExtension == c))
+                            {
+                                //Create name and paths
+                                string fileName = "senderoMapa_" + sendero.ID + Path.GetExtension(zipMapa.FileName);        //Ej: "senderoiMapa_2.jpg"
+                                string virtualDirectoryPath = "~/Content/Senderos/" + sendero.ID + "/Mapa";                 //Ej: "~/Content/Senderos/2/Mapa/"
+                                string phisicaldirectoryPath = Server.MapPath(virtualDirectoryPath);
+                                string fullVirtualPath = Path.Combine(virtualDirectoryPath, fileName);
+                                string fullPhisicalPath = Path.Combine(phisicaldirectoryPath, fileName);                    //Ej: "~/Content/Senderos/2/Img/senderoiImg_2.jpg"
+
+                                //CreateDirectory
+                                System.IO.Directory.CreateDirectory(phisicaldirectoryPath);
+
+                                //Save file in a phisicaldirectoryPath
+                                senderoImg.SaveAs(fullPhisicalPath);
+
+                                //Update in DB Sendero file path            
+                                sendero.RutZipMapa = fullVirtualPath;
+                                db.SaveChanges();
+                            }
+                        }
+                    }
+                    #endregion
+
+                }
+
+
+
+
+
+
+
+
                 return Json(new
                 {
                     ok = true
                 });
-                //return RedirectToAction("Index");
             }
 
 
             ViewBag.TipoDificultadFisicaID = new SelectList(db.TipoDificultadFisica, "ID", "Descripcion");
             ViewBag.TipoDificultadTecnicaID = new SelectList(db.TipoDificultadTecnica, "ID", "Descripcion");
-            return View(Sendero);
+            return View(sendero);
         }
 
         // GET: Sendero/Delete/5

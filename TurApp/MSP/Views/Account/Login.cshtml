@@ -47,19 +47,20 @@
     <a href="#">I forgot my password</a><br>
     <a href="register.html" class="text-center">Register a new membership</a>*@
 
-<h2>@ViewBag.Title</h2>
+<h2>Iniciar sesion</h2>
 
-@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class= "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = Url.Action("Index", "Home") }, FormMethod.Post, new { @class= "form-horizontal", role = "form" })) //ViewBag.ReturnUrl
 {
-    @Html.AntiForgeryToken()
+                @Html.AntiForgeryToken()
 
-    <h4>Iniciar sesion</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                
+            
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    
 
-    <div class="form-group">
+
+                <div class="form-group">
         @Html.LabelFor(m => m.UserName, new { @class = "col-md-3 control-label" })
         <div class="col-md-9">
             @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })

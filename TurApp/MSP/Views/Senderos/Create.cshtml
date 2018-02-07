@@ -612,7 +612,7 @@
                 url: this.action,
                 type: this.method,
                 data: formData,
-                dataType: 'multipart/form-data',
+                dataType: 'json',//'multipart/form-data',
                 contentType: false,
                 processData: false,
                 beforeSend: function (xhr) {
@@ -622,18 +622,23 @@
                     //debugger
                     cerrarWaiting();
                     if (result.ok) {
-                        window.location.href = '@Url.Action("Index","Senderos")';
-                        return;
+
+                        jAlert("El sendero se registro correctamente", "Senderos", function () {
+                            window.location.href = '/Senderos';
+                        });                        
+                        
                     }
                     else {
-                        alert(result.msj);
+                        jAlert("Ha ocurrido un error: " + result.msj, "Senderos");
                     }
-
+                    return;
                 },
                 error: function (error) {
                     //debugger
                     cerrarWaiting();
-                    alert(error);
+                    jAlert("Ha ocurrido un error", "Senderos");
+                    console.log(error);
+                    return;
                 }
             });
         }

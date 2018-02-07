@@ -43,7 +43,7 @@
 
 <div class="content">
 
-    <!-- Box - Datos Centro de Salud -->
+    <!-- Box - Datos Sendero -->
     <div class="box box-primary">
 
         <div class="box-header">
@@ -55,7 +55,134 @@
             {
             @Html.AntiForgeryToken()
 
-            <div class="form-horizontal">
+                <div class="container">
+                    <div class="row">
+                        <!-- Columna 1 -->
+                        <div class="col-lg-6">
+                            <!-- Fila 1 - Nombre-->
+                            <div class="form-group">
+                                <label class="control-label" for="Nombre">Nombre:</label>
+                                <div>
+                                    @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!-- Fila 2 - LugarInicio-->
+                            <div class="form-group">
+                                <label class="control-label" for="LugarInicio">Lugar de Inicio:</label>
+                                <div>
+                                    @Html.EditorFor(model => model.LugarInicio, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.LugarInicio, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!-- Fila 3 - LugarFin-->
+                            <div class="form-group">
+                                <label class="control-label" for="LugarFin">Lugar de Fin:</label>
+                                <div>
+                                    @Html.EditorFor(model => model.LugarFin, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.LugarFin, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!-- Fila 3 - TipoDificultadTecnicaID-->
+                            <div class="form-group">
+                                <label class="control-label " for="Apellido">Dificultad Tecnica:</label>
+                                <div>
+                                    @Html.DropDownList("TipoDificultadTecnicaID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.TipoDificultadTecnicaID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!-- Fila 3 - TipoDificultadFisicaID-->
+                            <div class="form-group">
+                                <label class="control-label" for="TipoDificultadFisicaID">Dificultad Fisica:</label>
+                                <div>
+                                    @Html.DropDownList("TipoDificultadFisicaID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.TipoDificultadFisicaID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!-- Fila 4 - Desnivel-->
+                            <div class="form-group">
+                                <label class="control-label" for="Desnivel">Desnivel:</label>
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.Desnivel  ,new { htmlAttributes = new { @class = "form-control" , @readonly = "readonly" } })
+                                    <div class="input-group-addon">Metros</div>
+                                    @Html.ValidationMessageFor(model => model.Desnivel, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!-- Fila 5 - Distancia-->
+                            <div class="form-group">
+                                <label class="control-label" for="Distancia">Distancia:</label>
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.Distancia, new { htmlAttributes = new { @class = "form-control" , @readonly = "readonly" } })
+                                    <div class="input-group-addon">Kms</div>
+                                    @Html.ValidationMessageFor(model => model.Distancia, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!-- Fila 6 - AlturaMaxima-->
+                            <div class="form-group">
+                                <label class="control-label" for="AlturaMaxima">AlturaMaxima:</label>
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.AlturaMaxima, new { htmlAttributes = new { @class = "form-control" , @readonly = "readonly" } })
+                                    <div class="input-group-addon">m.s.n.m</div>
+                                    @Html.ValidationMessageFor(model => model.AlturaMaxima, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!-- Fila 7 - DuracionTotal-->
+                            <div class="form-group">
+                                <label class="control-label" for="DuracionTotal">Duración:</label>
+                                <div>
+                                    @Html.EditorFor(model => model.DuracionTotal, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DuracionTotal, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Columna 2 -->
+                        <div class="col-lg-6">
+                            <!-- Fila 1 - Nombre-->
+                            <div class="form-group" style="margin-bottom: 2%;">
+                                <label class="control-label " for="Descripcion">Descripcion:</label>
+                                <div>
+                                    @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control", rows = "5", style = "max-width:100%; margin-bottom: 3%;" } )
+                                    @*@Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control", cols = "40", rows = "5" }})*@
+                                    @* <textarea class="form-control" rows="5" id="comment" style="max-width:100%;"></textarea>*@
+                                    @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!-- Fila 2 -Archivo zipRecursosMapaOffline-->
+                            <div class="form-group">
+                                <label class="control-label" for="zipMapa">Zip Mapa:</label>
+                                <div>
+                                    @Html.TextBox("zipMapa", "", htmlAttributes: new { @class = "form-control", type = "file", accept = ".zip" })
+                                    <p class="text-success">@ViewBag.Message2</p>
+                                </div>
+                            </div>
+                            <!-- Fila 3 - Archivo Imagen-->
+                            <div class="form-group">
+                                <label class="control-label" for="Imagen">Imagen:</label>
+                                <div>
+                                    @Html.TextBox("senderoImg", "", htmlAttributes: new { @class = "form-control", type = "file", accept = "image/*" })
+                                    <p class="text-success">@ViewBag.Message1</p>
+                                </div>
+                            </div>
+                            <!-- Fila 3 - Vista previa Imagen-->
+                            <div class="form-group">
+                                <label class="control-label" for="Imagen">Vista previa:</label>
+                                <div id="divImg">
+                                    <img src="@(String.IsNullOrEmpty(Model.RutaImagen)?"~/Content/img/noimage.jpg":Model.RutaImagen)" class="img-responsive img-thumbnail" alt="Responsive image" style="min-width: 100%;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pull-right" style="margin-right: 5%;">
+                        <a href="@Url.Action("Index","Senderos")" class="btn btn-default">Cancelar</a>
+                        <input id="btnGuardar" type="submit" class="btn btn-primary" value="Guardar" />
+                    </div>
+                </div>
+
+                @Html.HiddenFor(r=>r.RutaImagen)
+                @Html.HiddenFor(r => r.RutZipMapa)
+                                
+
+                @*<div class="form-horizontal">
                 <div class="container">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -132,7 +259,7 @@
 
 
 
-                    <!-- Fila 4 - LugarInicio y LugarFin -->
+                            <!-- Fila 4 - Desnivel y Distancia -->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
@@ -157,7 +284,7 @@
 
 
 
-                    <!-- Fila 5 - LugarInicio y LugarFin -->
+                            <!-- Fila 5 - AlturaMaxima y DuracionTotal -->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
@@ -171,10 +298,33 @@
 
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="control-label col-md-2 col-md-offset-1" for="DuracionTotal">DuracionTotal:</label>
+                                        <label class="control-label col-md-2 col-md-offset-1" for="DuracionTotal">Duración:</label>
                                 <div class="col-md-8">
                                     @Html.EditorFor(model => model.DuracionTotal, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.DuracionTotal, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Fila 6 - Imagen y zipRecursosMapaOffline -->
+                            <div class="row">
+                                <!-- Imagen -->
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-2 col-md-offset-1" for="Imagen">Imagen:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBox("senderoImg", "", htmlAttributes: new { @class = "form-control", type = "file", accept = "image/*" })
+                                            <p class="text-success">@ViewBag.Message1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- zipRecursosMapaOffline -->
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-2 col-md-offset-1" for="zipMapa">Zip Mapa:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBox("zipMapa", "", htmlAttributes: new { @class = "form-control", type = "file", accept = ".zip" })
+                                            <p class="text-success">@ViewBag.Message2</p>
                                 </div>
                             </div>
                         </div>
@@ -187,7 +337,7 @@
                         <input id="btnGuardar" type="submit" class="btn btn-primary" value="Guardar" />
                     </div>
                 </div>
-            </div>
+                    </div>*@
             }
         </div>
     </div>
@@ -268,13 +418,66 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfmP3Pqo0aBdUZmidCxUsXQDS5NPYLang&libraries=geometry,drawing&ext=.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<!-- Form and validations -->
 <script>
+    $('#senderoImg').change(function (e) {
 
+        var ext = this.value.match(/\.([^\.]+)$/)[1];
+        switch (ext) {
+            case 'jpg':
+                //case 'bmp':
+            case 'png':
+                //case 'tif':
+                //alert('allowed');
+                break;
+            default:
+                alert('Formato de archivo no valido.');
+                this.value = '';
+                var img = '<img src="/Content/img/noimage.jpg" class="img-responsive img-thumbnail" alt="Responsive image" style="min-width: 100%;">';
+                $("#divImg").empty();
+                $("#divImg").append(img);
+                return;
+        }
+        handleFileSelect(e);
+    });
+    function handleFileSelect(evt) {
+        var file = evt.target.files[0]; 
+            var reader = new FileReader();
+            // Closure to capture the file information.
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    var img = '<img src="' + e.target.result + '" class="img-responsive img-thumbnail" alt="Responsive image" style="min-width: 100%;">';
+                    $("#divImg").empty();
+                    $("#divImg").append(img);
+                };
+            })(file);
+            // Read in the image file as a data URL.
+            reader.readAsDataURL(file);
+    }
+    $('#zipMapa').change(function () {
+        var ext = this.value.match(/\.([^\.]+)$/)[1];
+        switch (ext) {
+            case 'zip':
+                //case 'bmp':
+                //case 'png':
+                //case 'tif':
+                //alert('allowed');
+                break;
+            default:
+                alert('Formato de archivo no valido.');
+                this.value = '';
+        }
+    });
+</script>
+
+<!-- Submit -->
+<script>
     //Submit
     $('#formSendero').submit(function () {
 
         debugger
 
+        //DataSendero
         var data = {
             Nombre: $("#Nombre").val(),
             Descripcion: $("#Descripcion").val(),
@@ -289,9 +492,12 @@
             Latitud: map.getCenter().lat(),
             Longitud: map.getCenter().lng(),
             SenderoPuntoElevacion: pointsArray,//Puntos con elevacion... 255 puntos para dibujar graficos
-            SenderoPunto: [] // Puntos originales para formar polyline
+            SenderoPunto: [], // Puntos originales para formar polyline
+            RutaImagen: $("#RutaImagen").val(),
+            RutZipMapa: $("#RutZipMapa").val(),
         };
 
+        if (polylinePath != null) {
         for (var i = 0; i < polylinePath.length; i++) {
 
             var SenderoPunto = {
@@ -300,35 +506,62 @@
             };
 
             data.SenderoPunto.push(SenderoPunto);
+            }
         }
 
+        // Checking whether FormData is available in browser
+        if (window.FormData !== undefined) {
+            // Create FormData object
+            var formData = new FormData();
+
+            //File 1
+            var fileUpload1 = $("#senderoImg").get(0);
+            if (fileUpload1.files.length) {
+                var file1 = fileUpload1.files;
+                formData.append("senderoImg", file1[0]);
+            }
 
 
-
+            //File 2
+            var fileUpload2 = $("#zipMapa").get(0);
+            if (fileUpload2.files.length) {
+                var file2 = fileUpload2.files;
+                formData.append("zipMapa", file2[0]);
+            }
+            //Append "data" to "formData"
+            formData.append("Sendero", JSON.stringify(data));
+        }
+        //debugger
         if ($(this).valid()) {
             $.ajax({
                 url: this.action,
                 type: this.method,
-                data: data,
+                data: formData,
+                dataType: 'json',//'multipart/form-data',
+                contentType: false,
+                processData: false,
                 beforeSend: function (xhr) {
                     abrirWaiting();
                 },
                 success: function (result) {
-                    debugger
+                    //debugger
                     cerrarWaiting();
                     if (result.ok) {
-                        window.location.href='@Url.Action("Index","Senderos")';
-                        return;
+                        jAlert("El sendero se actualizo correctamente", "Senderos", function () {
+                            window.location.href = '/Senderos';
+                        });                        
                     }
                     else {
-                        alert(result.msj);
+                        jAlert("Ha ocurrido un error: " + result.msj, "Senderos");
                     }
-
+                    return;
                 },
                 error: function (error) {
-                    debugger
+                    //debugger
                     cerrarWaiting();
-                    alert(error);
+                    jAlert("Ha ocurrido un error", "Senderos");
+                    console.log(error);
+                    return;
                 }
             });
         }
@@ -341,6 +574,7 @@
 
 </script>
 
+<!-- Map Management -->
 <script>
     var polyline ;//= [];//Array de "Polylines"
     var polylinePath; // Almacena "Polyline.getPath();"
@@ -413,12 +647,12 @@
     }
 
     function addLine() {
-        debugger
+        //debugger
         polylinePath.setMap(map);
     }
 
     function addDrawingControl(map) {
-        debugger
+        //debugger
         //Create(Initialize) Drawing Manager
         drawingManager = new google.maps.drawing.DrawingManager({
             drawingMode: null,
@@ -456,7 +690,7 @@
 
         //add event listener
         google.maps.event.addListener(drawingManager, 'polylinecomplete', function (xpolyline) {
-            debugger
+            //debugger
             //polylines.push(polyline);
             drawingManager.setOptions({
                 drawingControl: false,
@@ -521,7 +755,7 @@
             
 
             //if (!$.fn.dataTable.isDataTable('#dtCoordenadas')) {
-            debugger
+            //debugger
             table = $('#dtCoordenadas').DataTable();
 
             table.destroy();
@@ -571,16 +805,28 @@
 
             
             $('#elevChart').hide();
+            removeFormData();
         }
     }
 
     google.maps.event.addDomListener(window, "load", initMap);
 
+    function fillFormData(maxElevation, elevChange, distance)
+    {
+        $("#AlturaMaxima").val(maxElevation.toFixed(2));   //m.s.n.m
+        $("#Desnivel").val(elevChange.toFixed(2));         //metros
+        $("#Distancia").val((distance/1000).toFixed(2));          //Kms
+    }
+    function removeFormData() {
+        $("#AlturaMaxima").val(null);   //m.s.n.m
+        $("#Desnivel").val(null);         //metros
+        $("#Distancia").val(null);          //Kms
+    }
 
 
     function plotElevation(returnedElevations) {
 
-        debugger
+        //debugger
         if (returnedElevations == null) {
             return;
         }
@@ -616,6 +862,7 @@
         var maxGradientAt = 0;
         var maxGradientDesc = 0;
         var maxGradientDescAt = 0;
+        debugger
         for (var i_10 = 0; i_10 < elevations.length; i_10++) {
             minElevation = Math.min(elevations[i_10], minElevation);
             maxElevation = Math.max(elevations[i_10], maxElevation);
@@ -661,6 +908,8 @@
             },
             colors: ["#D9D9D9"]
         });
+        //fill form data
+        fillFormData(maxElevation, elevChange, distance);
 
         chart.on("mouseleave", function () {
             $("#tooltip").hide();
@@ -805,7 +1054,7 @@
 
 
     function removeVertex(vertexIndex) {
-        debugger
+        //debugger
         polylinePath.removeAt(vertexIndex);
         $('#btnGetElevacion').click();
         marker.setMap(null);
@@ -914,6 +1163,10 @@
         myParser.parseKmlString(fileContent);
         polyline = myParser.docs[0].gpolylines[0]
         polylinePath = polyline.getPath();
+        drawingManager.setOptions({
+            drawingControl: false,
+            drawingMode: null
+        });
         polyline.setOptions({
             editable: true,
             draggable: false,

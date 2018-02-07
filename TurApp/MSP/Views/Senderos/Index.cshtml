@@ -40,12 +40,12 @@
             <table id="dtSenderos" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Sendero</th>
-                        <th>Desnivel</th>
-                        <th>Distancia</th>
-                        <th>AlturaMaxima</th>
-                        <th>DuracionTotal</th>
-                        <th style="width:140px">Acciones</th>
+                        <th style="text-align:center;">Sendero</thstyle="text-align:center;">
+                        <th style="text-align:center;">Desnivel</th>
+                        <th style="text-align:center;">Distancia</th>
+                        <th style="text-align:center;">AlturaMaxima</th>
+                        <th style="text-align:center;">DuracionTotal</th>
+                        <th style="text-align:center;width:110px;" >Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,15 +58,15 @@
                             <td>@Html.DisplayFor(modelItem => item.FullAlturaMaxima)</td>
                             <td>@Html.DisplayFor(modelItem => item.DuracionTotal)</td>
 
-                        <td>
+                        <td style="text-align:center;">
                             <div class="btn-group-sm">
                                 <span data-placement="top" title="Editar" data-toggle="tooltip">
-                                    <a class="btn btn-info fa fa-pencil-square-o" href="@Url.Action("Edit","Senderos", new {id=item.ID})" '/Senderos/Edit/@item.ID'></a>
+                                    <a class="btn btn-info fa fa-pencil-square-o" href="@Url.Action("Edit","Senderos", new {id=item.ID})"></a>
                                 </span>
 
-                                <span data-placement="top" title="Detalles" data-toggle="tooltip">
+                                @*<span data-placement="top" title="Detalles" data-toggle="tooltip">
                                     <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Senderos/Details/@item.ID','Detalle','Sendero')"></a>
-                                </span>
+                                </span>*@
                                 <span data-placement="top" title="Eliminar" data-toggle="tooltip">
                                     <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Senderos/Delete/@item.ID','Eliminar','Sendero')"></a>
                                 </span>
