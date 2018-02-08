@@ -21,7 +21,7 @@
 </style>
 
 
-
+<!-- Header -->
 <section class="content-header">
     <h1>
         Nuevo
@@ -39,7 +39,7 @@
 
 
 
-
+<!-- Box - Content -->
 <div class="content">
 
     <!-- Box - Datos Sendero -->
@@ -406,9 +406,14 @@
             <div class="container">
                 <!-- Botones -->
                 <div class="row">
-                    <div class="col-md-12" style="margin-bottom: 15px;">
+                    <div class="col-md-4" style="margin-bottom: 15px;">
                         <input id="btnGetElevacion" class="btn btn-info" value="Obtener Elevacion" type="button" />
                         <input id="btnDeletePolyline" class="btn btn-default" value="Borrar Sendero" type="button" />
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 15px;">
+                        <div class="checkbox">
+                            <label><input id="chkIdaVuelta" type="checkbox" value="">Calcular distancia ida y vuelta</label>
+                        </div>
                     </div>
                 </div>
 
@@ -890,7 +895,14 @@
     {
         $("#AlturaMaxima").val(maxElevation.toFixed(2));   //m.s.n.m
         $("#Desnivel").val(elevChange.toFixed(2));         //metros
-        $("#Distancia").val((distance/1000).toFixed(2));          //Kms
+                
+        
+        if ($("#chkIdaVuelta").is(':checked')) {
+            $("#Distancia").val(((distance*2) / 1000).toFixed(2));          //Kms
+        }
+        else {
+            $("#Distancia").val((distance / 1000).toFixed(2));          //Kms
+        }        
     }
     function removeFormData() {
         $("#AlturaMaxima").val(null);   //m.s.n.m

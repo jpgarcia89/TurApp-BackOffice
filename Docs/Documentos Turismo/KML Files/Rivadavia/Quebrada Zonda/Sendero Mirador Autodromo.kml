@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Sendero Mirador Autodromo.kml</name>
+	<Style id="s_ylw-pushpin00">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LineStyle>
+			<color>ff00ff55</color>
+			<width>3</width>
+		</LineStyle>
+	</Style>
+	<Style id="s_ylw-pushpin_hl00">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LineStyle>
+			<color>ff00ff55</color>
+			<width>3</width>
+		</LineStyle>
+	</Style>
+	<StyleMap id="m_ylw-pushpin10">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin00</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin_hl00</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark>
+		<name>Sendero Mirador Autodromo</name>
+		<styleUrl>#m_ylw-pushpin10</styleUrl>
+		<LineString>
+			<tessellate>1</tessellate>
+			<coordinates>
+				-68.69770157970208,-31.56011674505121,0 -68.69753811085735,-31.56017755557831,0 -68.69751855706026,-31.56006951013247,0 -68.69748317015289,-31.55986022334891,0 -68.69747041081206,-31.55972767116403,0 -68.697511249445,-31.55961316863015,0 -68.69752424890405,-31.5595660752814,0 -68.69742267249698,-31.55954151598214,0 -68.69731698740142,-31.55951673154272,0 -68.69730856815291,-31.55948713216035,0 -68.69741731171034,-31.55941472098168,0 -68.69744303817458,-31.5593514064216,0 -68.6974568816963,-31.5592893275835,0 -68.69743971475077,-31.55924261247638,0 -68.69737493415082,-31.55920093131375,0 -68.69732658132736,-31.55916287739828,0 -68.69724641101436,-31.55907008774847,0 -68.69718865446963,-31.5589971722407,0 -68.69712127859215,-31.55887970605783,0 -68.6970632260513,-31.55878807381182,0 -68.69698308370815,-31.55873629905152,0 -68.6969279359552,-31.5587164158407,0 -68.69689210003007,-31.55866173908675,0 -68.69691129844975,-31.55853166000982,0 -68.69687538055017,-31.55842861326326,0 -68.69685278989955,-31.55831335318423,0 -68.69683537906876,-31.55827134153037,0 -68.69673223217653,-31.55821081768621,0 -68.69659238387622,-31.55820277532689,0 -68.69657100069779,-31.55813024769169,0 -68.69662348086864,-31.55808644800133,0 -68.69663713192649,-31.55797466187581,0 -68.69664647944052,-31.55781559596271,0 -68.69664841375953,-31.55769499489593,0 -68.6966507398902,-31.55764192378354,0 
+			</coordinates>
+		</LineString>
+	</Placemark>
+</Document>
+</kml>

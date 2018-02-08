@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Quebrada La Teta.kml</name>
+	<Style id="sn_ylw-pushpin0">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LineStyle>
+			<color>ff00aaff</color>
+			<width>2.5</width>
+		</LineStyle>
+	</Style>
+	<StyleMap id="msn_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_ylw-pushpin0">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LineStyle>
+			<color>ff00aaff</color>
+			<width>2.5</width>
+		</LineStyle>
+	</Style>
+	<Placemark>
+		<name>Quebrada La Teta</name>
+		<styleUrl>#msn_ylw-pushpin</styleUrl>
+		<LineString>
+			<tessellate>1</tessellate>
+			<coordinates>
+				-68.78263666345698,-31.51953779070389,0 -68.78231427130332,-31.52025957316268,0 -68.78226660868992,-31.52030400958136,0 -68.78138422203793,-31.52091967701256,0 -68.78134237729476,-31.52100540058997,0 -68.78095302681231,-31.52210294702606,0 -68.78093038596742,-31.52230123879113,0 -68.78108279196887,-31.52318412740137,0 -68.78110785155687,-31.52332098336386,0 -68.78106618517059,-31.52423538910686,0 -68.78100548704906,-31.52470472466029,0 -68.78074205082444,-31.52595199219635,0 -68.78077855455925,-31.52603828233044,0 -68.78078710821274,-31.52649213892889,0 -68.78088913653457,-31.52665896807014,0 -68.78154621765249,-31.52667985798476,0 -68.78163654641898,-31.52665634707627,0 -68.78249809604765,-31.52642898484173,0 -68.78393453127802,-31.52671295043588,0 -68.78400725611428,-31.52674868218756,0 -68.78497998234515,-31.52719999021873,0 -68.78510804758776,-31.52729071663466,0 -68.78565023381186,-31.52739764284672,0 -68.78633162526249,-31.52781389739924,0 -68.78779830670906,-31.52818068122429,0 -68.78869031563644,-31.52794598200632,0 -68.78894432272377,-31.52817618121109,0 -68.78899096393867,-31.52814599042995,0 -68.78996652877743,-31.52797372641925,0 -68.79047491077131,-31.52795382852384,0 -68.79095667458741,-31.52789715109623,0 -68.79133529805309,-31.5276950124839,0 -68.7917683854287,-31.52784265157656,0 -68.79215030922623,-31.52775917112734,0 
+			</coordinates>
+		</LineString>
+	</Placemark>
+</Document>
+</kml>

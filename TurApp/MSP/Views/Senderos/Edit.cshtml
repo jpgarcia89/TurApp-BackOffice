@@ -22,7 +22,7 @@
 </style>
 
 
-
+<!-- Header -->
 <section class="content-header">
     <h1>
         Editar
@@ -40,7 +40,7 @@
 
 
 
-
+<!-- Content -->
 <div class="content">
 
     <!-- Box - Datos Sendero -->
@@ -167,7 +167,7 @@
                             <div class="form-group">
                                 <label class="control-label" for="Imagen">Vista previa:</label>
                                 <div id="divImg">
-                                    <img src="@(String.IsNullOrEmpty(Model.RutaImagen)?"~/Content/img/noimage.jpg":Model.RutaImagen)" class="img-responsive img-thumbnail" alt="Responsive image" style="min-width: 100%;">
+                                    <img src="@(String.IsNullOrEmpty(Model.RutaImagen)? Url.Content("~/Content/img/noimage.jpg"):Model.RutaImagen)" class="img-responsive img-thumbnail" alt="Responsive image" style="min-width: 100%;">
                                 </div>
                             </div>
                         </div>
@@ -354,9 +354,14 @@
             <div class="container">
                 <!-- Botones -->
                 <div class="row">
-                    <div class="col-md-12" style="margin-bottom: 15px;">
+                    <div class="col-md-4" style="margin-bottom: 15px;">
                         <input id="btnGetElevacion" class="btn btn-info" value="Obtener Elevacion" type="button" />
                         <input id="btnDeletePolyline" class="btn btn-default" value="Borrar Sendero" type="button" />
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 15px;">
+                        <div class="checkbox">
+                            <label><input id="chkIdaVuelta" type="checkbox" value="">Calcular distancia ida y vuelta</label>
+                        </div>
                     </div>
                 </div>
 
@@ -815,7 +820,14 @@
     {
         $("#AlturaMaxima").val(maxElevation.toFixed(2));   //m.s.n.m
         $("#Desnivel").val(elevChange.toFixed(2));         //metros
-        $("#Distancia").val((distance/1000).toFixed(2));          //Kms
+                
+        
+        if ($("#chkIdaVuelta").is(':checked')) {
+            $("#Distancia").val(((distance*2) / 1000).toFixed(2));          //Kms
+        }
+        else {
+            $("#Distancia").val((distance / 1000).toFixed(2));          //Kms
+        }        
     }
     function removeFormData() {
         $("#AlturaMaxima").val(null);   //m.s.n.m

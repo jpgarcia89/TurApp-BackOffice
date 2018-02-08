@@ -342,6 +342,13 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\images\station3.png" />
     <Content Include="Content\images\station6.png" />
+    <Content Include="Content\img\noimage.jpg" />
+    <Content Include="Content\img\senderismo.jpg" />
+    <Content Include="Content\img\senderismo2.jpg" />
+    <Content Include="Content\img\senderismo3.jpg" />
+    <Content Include="Content\Senderos\12\Img\senderoImg_12.jpg" />
+    <Content Include="Content\Senderos\2\Img\senderoiImg_2.jpg" />
+    <Content Include="Content\Senderos\2\Img\senderoImg_2.jpg" />
     <Content Include="Content\skin-green.css" />
     <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -534,7 +541,6 @@
     <Content Include="Models\Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\MapResource\quebradaZonda.zip" />
     <None Include="Properties\PublishProfiles\TurApp-Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -1223,6 +1229,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Senderos\6\Img\" />
     <Folder Include="ExportaSISA\" />
     <Folder Include="UploadedFiles\" />
     <Folder Include="Views\Menu\" />
