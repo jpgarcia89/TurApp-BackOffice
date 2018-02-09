@@ -331,8 +331,8 @@ namespace TurApp.Controllers
             }
 
 
-            ViewBag.TipoDificultadFisicaID = new SelectList(db.TipoDificultadFisica, "ID", "Descripcion");
-            ViewBag.TipoDificultadTecnicaID = new SelectList(db.TipoDificultadTecnica, "ID", "Descripcion");
+            ViewBag.TipoDificultadFisicaID = new SelectList(db.TipoDificultadFisica, "ID", "Descripcion", sendero.TipoDificultadFisicaID);
+            ViewBag.TipoDificultadTecnicaID = new SelectList(db.TipoDificultadTecnica, "ID", "Descripcion", sendero.TipoDificultadTecnicaID);
             return View(sendero);
         }
 
