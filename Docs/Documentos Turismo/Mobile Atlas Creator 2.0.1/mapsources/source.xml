@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<customMultiLayerMapSource>
+<name>Google-hybridni-256</name>
+<tileType>jpg</tileType>
+<layers>
+<customMapSource>
+  <name>Google Earth</name>
+  <minZoom>0</minZoom>
+  <maxZoom>19</maxZoom>
+  <tileType>JPG</tileType>
+  <tileUpdate>IfNoneMatch</tileUpdate>
+  <url>https://khms{$serverpart}.google.com/kh/v=154&amp;x={$x}&amp;y={$y}&amp;z={$z}</url>
+  <serverParts>0 1 2 3</serverParts>
+</customMapSource>

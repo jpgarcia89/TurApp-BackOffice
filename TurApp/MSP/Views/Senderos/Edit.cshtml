@@ -389,8 +389,12 @@
                                     <tr><td colspan="4" style="text-align:center;background-color: #55b9a1;color: white; border-radius: 4px;"><b>Coordenadas</b></td></tr>
                                     <tr>
                                         <th>#</th>
-                                        <th>Lat</th>
-                                        <th>Long</th>
+                                        <th style="text-align:center"><i class="fa fa-flag"></th>
+                                        <th style="text-align:center"><i class="fa fa-flag-o"></th>
+                                        <th style="text-align:center"><i class="fa fa-map-marker"></th>
+                                        @*<th>Ini</th>
+                                        <th>Fin</th>
+                                        <th>Cumbre</th>*@
                                         <th>Accion</th>
                                     </tr>
                                 </thead>
@@ -731,8 +735,8 @@
                 //htmlStr += "&nbsp;&nbsp;" + polylines[i].getPath().getAt(j).toUrlValue(6) + "<br>";
                 tableRows +=    '<tr>'
                     +               '<td>'+ j +'</td>'
-                    +               '<td>'+ polylinePath.b[j].lat().toFixed(4) +'</td>'
-                    +               '<td>'+ polylinePath.b[j].lng().toFixed(4) +'</td>'
+                    //+               '<td>'+ polylinePath.b[j].lat().toFixed(4) +'</td>'
+                    //+               '<td>'+ polylinePath.b[j].lng().toFixed(4) +'</td>'
                     +               '<td>'
                     +                   '<span data-placement="top" title="Eliminar" data-toggle="tooltip">'
                     +                   '<a class="btn btn-danger fa fa-trash" onclick="removeVertex('+j+')"></a>'//'<a onclick="removeVertex('+j+')">Eliminar</a>'

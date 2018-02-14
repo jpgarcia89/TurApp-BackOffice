@@ -291,7 +291,7 @@ namespace TurApp.Controllers
                         if (zipMapa.ContentLength > 0)
                         {
                             //Validate file extension
-                            string fileExtension = Path.GetExtension(senderoImg.FileName);
+                            string fileExtension = Path.GetExtension(zipMapa.FileName);
                             if (new[] { ".zip" }.Any(c => fileExtension == c))
                             {
                                 //Create name and paths
@@ -305,10 +305,10 @@ namespace TurApp.Controllers
                                 System.IO.Directory.CreateDirectory(phisicaldirectoryPath);
 
                                 //Save file in a phisicaldirectoryPath
-                                senderoImg.SaveAs(fullPhisicalPath);
+                                zipMapa.SaveAs(fullPhisicalPath);
 
                                 //Update in DB Sendero file path            
-                                sendero.RutZipMapa = fullVirtualPath;
+                                sendero.RutZipMapa = fullVirtualPath.Substring(1, fullVirtualPath.Length - 1);//fullVirtualPath;
                                 db.SaveChanges();
                             }
                         }

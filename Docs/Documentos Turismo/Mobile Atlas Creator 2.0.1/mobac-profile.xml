@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<atlas version="1" name="Unnamed" outputFormat="Osmdroid">
+    <Layer name="QuebradaZonda">
+        <PolygonMap maxTileCoordinate="2594303/4970239" minTileCoordinate="2593536/4969472" mapSource="Google Hibrido" zoom="15" name="QuebradaZonda 15">
+            <parameters format="JPEG50" height="256" width="256"/>
+            <polygon>
+                <point>2593633/4969933</point>
+                <point>2593910/4969586</point>
+                <point>2594064/4969618</point>
+                <point>2593752/4969998</point>
+                <point>2593752/4969998</point>
+            </polygon>
+        </PolygonMap>
+        <PolygonMap maxTileCoordinate="5188351/9940223" minTileCoordinate="5187072/9938944" mapSource="Google Hibrido" zoom="16" name="QuebradaZonda 16">
+            <parameters format="JPEG50" height="256" width="256"/>
+            <polygon>
+                <point>5187266/9939866</point>
+                <point>5187821/9939172</point>
+                <point>5188129/9939237</point>
+                <point>5187504/9939997</point>
+                <point>5187504/9939997</point>
+            </polygon>
+        </PolygonMap>
+        <PolygonMap maxTileCoordinate="10376447/19880191" minTileCoordinate="10374400/19878144" mapSource="Google Hibrido" zoom="17" name="QuebradaZonda 17">
+            <parameters format="JPEG50" height="256" width="256"/>
+            <polygon>
+                <point>10374532/19879732</point>
+                <point>10375642/19878344</point>
+                <point>10376258/19878474</point>
+                <point>10375008/19879994</point>
+                <point>10375008/19879994</point>
+            </polygon>
+        </PolygonMap>
+        <PolygonMap maxTileCoordinate="20752639/39760127" minTileCoordinate="20749056/39756544" mapSource="Google Hibrido" zoom="18" name="QuebradaZonda 18">
+            <parameters format="JPEG50" height="256" width="256"/>
+            <polygon>
+                <point>20749064/39759464</point>
+                <point>20751284/39756688</point>
+                <point>20752516/39756948</point>
+                <point>20750016/39759988</point>
+                <point>20750016/39759988</point>
+            </polygon>
+        </PolygonMap>
+    </Layer>
+</atlas>

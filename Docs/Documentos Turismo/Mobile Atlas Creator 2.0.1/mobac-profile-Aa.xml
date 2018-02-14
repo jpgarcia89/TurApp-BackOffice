@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<atlas version="1" name="Unnamed" outputFormat="AFTrack">
+    <Layer name="GranSJ">
+        <Map maxTileCoordinate="2598399/4969983" minTileCoordinate="2596608/4968704" mapSource="Google-hybridni-256" zoom="15" name="GranSJ 15">
+            <parameters format="PNG" height="256" width="256"/>
+        </Map>
+    </Layer>
+</atlas>
