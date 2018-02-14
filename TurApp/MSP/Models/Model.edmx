@@ -166,6 +166,7 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
           <Property Name="Longitud" Type="nvarchar" MaxLength="50" />
           <Property Name="RutaImagen" Type="nvarchar" MaxLength="100" />
           <Property Name="RutZipMapa" Type="nvarchar" MaxLength="100" />
+          <Property Name="CalcularIdaVuelta" Type="bit" />
         </EntityType>
         <EntityType Name="SenderoPunto">
           <Key>
@@ -200,6 +201,30 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Sendero__TipoDif__6EF57B66">
+          <End Role="TipoDificultadFisica" Type="Self.TipoDificultadFisica" Multiplicity="1" />
+          <End Role="Sendero" Type="Self.Sendero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDificultadFisica">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sendero">
+              <PropertyRef Name="TipoDificultadFisicaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sendero__TipoDif__6FE99F9F">
+          <End Role="TipoDificultadTecnica" Type="Self.TipoDificultadTecnica" Multiplicity="1" />
+          <End Role="Sendero" Type="Self.Sendero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDificultadTecnica">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sendero">
+              <PropertyRef Name="TipoDificultadTecnicaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_AspNetMenuAccion_Accion">
           <End Role="Accion" Type="Self.Accion" Multiplicity="1" />
           <End Role="AspNetMenuAccion" Type="Self.AspNetMenuAccion" Multiplicity="*" />
@@ -428,6 +453,14 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
     [AspNetMenuAccion].[IdAccion] AS [IdAccion]
     FROM [dbo].[AspNetMenuAccion] AS [AspNetMenuAccion]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK__Sendero__TipoDif__6EF57B66" Association="Self.FK__Sendero__TipoDif__6EF57B66">
+            <End Role="TipoDificultadFisica" EntitySet="TipoDificultadFisica" />
+            <End Role="Sendero" EntitySet="Sendero" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sendero__TipoDif__6FE99F9F" Association="Self.FK__Sendero__TipoDif__6FE99F9F">
+            <End Role="TipoDificultadTecnica" EntitySet="TipoDificultadTecnica" />
+            <End Role="Sendero" EntitySet="Sendero" />
+          </AssociationSet>
           <AssociationSet Name="FK_AspNetMenuAccion_Accion" Association="Self.FK_AspNetMenuAccion_Accion">
             <End Role="Accion" EntitySet="Accion" />
             <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
@@ -854,6 +887,14 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
             <End Role="Sendero" EntitySet="Sendero" />
             <End Role="SenderoPuntoElevacion" EntitySet="SenderoPuntoElevacion" />
           </AssociationSet>
+          <AssociationSet Name="FK__Sendero__TipoDif__6EF57B66" Association="TurAppModel.FK__Sendero__TipoDif__6EF57B66">
+            <End Role="TipoDificultadFisica" EntitySet="TipoDificultadFisica" />
+            <End Role="Sendero" EntitySet="Sendero" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sendero__TipoDif__6FE99F9F" Association="TurAppModel.FK__Sendero__TipoDif__6FE99F9F">
+            <End Role="TipoDificultadTecnica" EntitySet="TipoDificultadTecnica" />
+            <End Role="Sendero" EntitySet="Sendero" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -873,6 +914,7 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sendero" Relationship="TurAppModel.FK__Sendero__TipoDif__6EF57B66" FromRole="TipoDificultadFisica" ToRole="Sendero" />
         </EntityType>
         <EntityType Name="TipoDificultadTecnica">
           <Key>
@@ -880,6 +922,7 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sendero" Relationship="TurAppModel.FK__Sendero__TipoDif__6FE99F9F" FromRole="TipoDificultadTecnica" ToRole="Sendero" />
         </EntityType>
         <EntityType Name="Sendero">
           <Key>
@@ -902,6 +945,9 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
           <Property Name="RutZipMapa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SenderoPunto" Relationship="TurAppModel.FK_SenderoPunto_Sendero" FromRole="Sendero" ToRole="SenderoPunto" />
           <NavigationProperty Name="SenderoPuntoElevacion" Relationship="TurAppModel.FK_SenderoPuntoElevacion_Sendero" FromRole="Sendero" ToRole="SenderoPuntoElevacion" />
+          <Property Name="CalcularIdaVuelta" Type="Boolean" />
+          <NavigationProperty Name="TipoDificultadFisica" Relationship="TurAppModel.FK__Sendero__TipoDif__6EF57B66" FromRole="Sendero" ToRole="TipoDificultadFisica" />
+          <NavigationProperty Name="TipoDificultadTecnica" Relationship="TurAppModel.FK__Sendero__TipoDif__6FE99F9F" FromRole="Sendero" ToRole="TipoDificultadTecnica" />
         </EntityType>
         <EntityType Name="SenderoPunto">
           <Key>
@@ -945,6 +991,30 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
             </Principal>
             <Dependent Role="SenderoPuntoElevacion">
               <PropertyRef Name="SenderoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sendero__TipoDif__6EF57B66">
+          <End Type="TurAppModel.TipoDificultadFisica" Role="TipoDificultadFisica" Multiplicity="1" />
+          <End Type="TurAppModel.Sendero" Role="Sendero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDificultadFisica">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sendero">
+              <PropertyRef Name="TipoDificultadFisicaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sendero__TipoDif__6FE99F9F">
+          <End Type="TurAppModel.TipoDificultadTecnica" Role="TipoDificultadTecnica" Multiplicity="1" />
+          <End Type="TurAppModel.Sendero" Role="Sendero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDificultadTecnica">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sendero">
+              <PropertyRef Name="TipoDificultadTecnicaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1139,6 +1209,7 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
           <EntitySetMapping Name="Sendero">
             <EntityTypeMapping TypeName="TurAppModel.Sendero">
               <MappingFragment StoreEntitySet="Sendero">
+                <ScalarProperty Name="CalcularIdaVuelta" ColumnName="CalcularIdaVuelta" />
                 <ScalarProperty Name="RutZipMapa" ColumnName="RutZipMapa" />
                 <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
                 <ScalarProperty Name="Longitud" ColumnName="Longitud" />

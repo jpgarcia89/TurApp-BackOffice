@@ -29,10 +29,12 @@ namespace TurApp.Controllers
                 r.Desnivel,
                 r.DuracionTotal,
                 r.AlturaMaxima,
-                SenderoPunto = r.SenderoPunto.Select(x => new { x.Latitud, x.Longitud }),
-                SenderoPuntoElevacion = r.SenderoPuntoElevacion.Select(x => new {x.Latitud,x.Longitud,x.Altura }),
+                //SenderoPunto = r.SenderoPunto.Select(x => new { x.Latitud, x.Longitud }),
+                SenderoPuntoElevacion = r.SenderoPuntoElevacion.Select(x => new { x.Latitud, x.Longitud, x.Altura }),
                 r.RutaImagen,
-                r.RutZipMapa
+                r.RutZipMapa,
+                TipoDificultadFisicaID = r.TipoDificultadFisica.Descripcion,
+                TipoDificultadTecnica = r.TipoDificultadTecnica.Descripcion
             });
 
 
@@ -54,10 +56,12 @@ namespace TurApp.Controllers
                 r.Desnivel,
                 r.DuracionTotal,
                 r.AlturaMaxima,
-                SenderoPunto = r.SenderoPunto.Select(x => new { x.Latitud, x.Longitud }),
+                //SenderoPunto = r.SenderoPunto.Select(x => new { x.Latitud, x.Longitud }),
                 SenderoPuntoElevacion = r.SenderoPuntoElevacion.Select(x => new { x.Latitud, x.Longitud, x.Altura }),
                 r.RutaImagen,
-                r.RutZipMapa
+                r.RutZipMapa,
+                TipoDificultadFisicaID = r.TipoDificultadFisica.Descripcion,
+                TipoDificultadTecnica = r.TipoDificultadTecnica.Descripcion
             });
 
             if (data == null)

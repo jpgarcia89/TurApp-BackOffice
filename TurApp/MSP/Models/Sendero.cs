@@ -36,10 +36,13 @@ namespace TurApp.Models
         public string Longitud { get; set; }
         public string RutaImagen { get; set; }
         public string RutZipMapa { get; set; }
+        public Nullable<bool> CalcularIdaVuelta { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SenderoPunto> SenderoPunto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SenderoPuntoElevacion> SenderoPuntoElevacion { get; set; }
+        public virtual TipoDificultadFisica TipoDificultadFisica { get; set; }
+        public virtual TipoDificultadTecnica TipoDificultadTecnica { get; set; }
     }
 }
