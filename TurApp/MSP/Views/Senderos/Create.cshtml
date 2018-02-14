@@ -731,16 +731,16 @@
 
     function addDrawingControl(map) {
         //debugger
+
         //Create(Initialize) Drawing Manager
         drawingManager = new google.maps.drawing.DrawingManager({
             drawingMode: null,
             drawingControl: true,
             drawingControlOptions: {
                 position: google.maps.ControlPosition.TOP_CENTER,
-                drawingModes: [
-                  google.maps.drawing.OverlayType.POLYLINE
-                ]
+                drawingModes: ['polyline']//, 'marker' google.maps.drawing.OverlayType.POLYLINE
             },
+            //markerOptions: { icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png' },
             polylineOptions: {//add drawing control
                 editable: true,
                 draggable: false,
@@ -778,6 +778,18 @@
             polylinePath = xpolyline.getPath();
             $('#btnGetElevacion').click();
         });
+
+
+
+
+        // Create the DIV to hold the control and call the CustomControl() constructor passing in this DIV.
+        var customControlDiv = document.createElement('div');
+        var customControl = new CustomControl(customControlDiv, map);
+
+        customControlDiv.index = 1;
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(customControlDiv);
+
+
     }
 
 
@@ -904,6 +916,7 @@
             $("#Distancia").val((distance / 1000).toFixed(2));          //Kms
         }        
     }
+
     function removeFormData() {
         $("#AlturaMaxima").val(null);   //m.s.n.m
         $("#Desnivel").val(null);         //metros
@@ -1275,6 +1288,53 @@
 
 </script>
 
+
+<!-- Markers Management -->
+<script>
+
+    
+
+
+    function CustomControl(controlDiv, map) {
+
+        // Set CSS for the control border
+        var controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = '#ffffff';
+        controlUI.style.borderStyle = 'solid';
+        controlUI.style.borderWidth = '1px';
+        controlUI.style.borderColor = '#ffffff';
+        controlUI.style.height = '24px';
+        controlUI.style.width = '24px';
+        controlUI.style.marginTop = '5px';
+        controlUI.style.marginLeft = '-6px';
+        controlUI.style.paddingTop = '1px';
+        //controlUI.style.cursor = 'pointer';
+        controlUI.style.textAlign = 'center';
+        controlUI.title = 'Click to set the map to Home';
+        controlDiv.appendChild(controlUI);
+
+        // Set CSS for the control interior
+        var controlText = document.createElement('div');
+        controlText.style.fontFamily = 'Arial,sans-serif';
+        controlText.style.fontSize = '10px';
+        controlText.style.paddingLeft = '4px';
+        controlText.style.paddingRight = '4px';
+        controlText.style.marginTop = '-8px';
+        controlUI.style.backgroundImage = '@Url.Content("~/Content/img/mirador.svg")';
+        //controlText.innerHTML = 'Custom';
+        controlUI.appendChild(controlText);
+        // Setup the click event listeners
+        google.maps.event.addDomListener(controlUI, 'click', function () {
+            alert('Custom control clicked');
+        });
+    }
+
+
+
+
+
+
+</script>
 
 <script src="~/Scripts/plugins/elevation/jquery.flot.min.js"></script>
 <script src="~/Scripts/plugins/elevation/jquery.flot.selection.js"></script>

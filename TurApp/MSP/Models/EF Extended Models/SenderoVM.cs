@@ -22,7 +22,7 @@ namespace TurApp.Models
         {
             get
             {
-                return this.Distancia + " Kms";
+                return this.Distancia + " Km";
             }
         }
 
