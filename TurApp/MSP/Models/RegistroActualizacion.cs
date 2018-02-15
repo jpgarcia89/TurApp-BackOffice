@@ -10,18 +10,10 @@
 namespace TurApp.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class GetPermisosPorNombreDeUsuario_Result
+    public partial class RegistroActualizacion
     {
-        public int ID { get; set; }
-        public Nullable<int> PadreID { get; set; }
-        public string Nombre { get; set; }
-        public Nullable<byte> Orden { get; set; }
-        public string Icono { get; set; }
-        public string Accion { get; set; }
-        public string Controlador { get; set; }
-        public bool Activo { get; set; }
-        public System.DateTime FechaAlta { get; set; }
-        public Nullable<int> mnuId { get; set; }
+        public System.DateTime FechaActualizacion { get; set; }
     }
 }

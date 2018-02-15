@@ -241,7 +241,7 @@
     <Compile Include="Controllers\Seguridad\RolesController.cs" />
     <Compile Include="Controllers\Seguridad\UsersController.cs" />
     <Compile Include="Controllers\Administracion\Senderos\SenderosController.cs" />
-    <Compile Include="Controllers\SenderosAPIController.cs" />
+    <Compile Include="Controllers\Administracion\Senderos\SenderosAPIController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -310,6 +310,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Provincia.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RegistroActualizacion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sendero.cs">

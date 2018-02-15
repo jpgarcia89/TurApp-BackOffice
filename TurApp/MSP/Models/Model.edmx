@@ -14,8 +14,8 @@
           <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
           <Property Name="Icono" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="AspNetMenuAccion">
           <Key>
             <PropertyRef Name="IdMenu" />
@@ -147,6 +147,14 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
           <Property Name="Activa" Type="bit" Nullable="false" />
           <Property Name="id_access" Type="int" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TurApp.dbo.RegistroActualizacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="RegistroActualizacion">
+          <Key>
+            <PropertyRef Name="FechaActualizacion" />
+          </Key>
+          <Property Name="FechaActualizacion" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Sendero">
           <Key>
             <PropertyRef Name="ID" />
@@ -158,15 +166,16 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
           <Property Name="LugarFin" Type="nvarchar" MaxLength="100" />
           <Property Name="TipoDificultadTecnicaID" Type="int" Nullable="false" />
           <Property Name="TipoDificultadFisicaID" Type="int" Nullable="false" />
-          <Property Name="Desnivel" Type="nvarchar" MaxLength="50" />
+          <Property Name="Desnivel" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Distancia" Type="float" />
           <Property Name="AlturaMaxima" Type="float" />
-          <Property Name="DuracionTotal" Type="nvarchar" MaxLength="50" />
+          <Property Name="DuracionTotal" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Latitud" Type="nvarchar" MaxLength="50" />
           <Property Name="Longitud" Type="nvarchar" MaxLength="50" />
           <Property Name="RutaImagen" Type="nvarchar" MaxLength="100" />
           <Property Name="RutZipMapa" Type="nvarchar" MaxLength="100" />
           <Property Name="CalcularIdaVuelta" Type="bit" />
+          <Property Name="ImgBase64" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="SenderoPunto">
           <Key>
@@ -201,30 +210,6 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Sendero__TipoDif__6EF57B66">
-          <End Role="TipoDificultadFisica" Type="Self.TipoDificultadFisica" Multiplicity="1" />
-          <End Role="Sendero" Type="Self.Sendero" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoDificultadFisica">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Sendero">
-              <PropertyRef Name="TipoDificultadFisicaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Sendero__TipoDif__6FE99F9F">
-          <End Role="TipoDificultadTecnica" Type="Self.TipoDificultadTecnica" Multiplicity="1" />
-          <End Role="Sendero" Type="Self.Sendero" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoDificultadTecnica">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Sendero">
-              <PropertyRef Name="TipoDificultadTecnicaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AspNetMenuAccion_Accion">
           <End Role="Accion" Type="Self.Accion" Multiplicity="1" />
           <End Role="AspNetMenuAccion" Type="Self.AspNetMenuAccion" Multiplicity="*" />
@@ -453,14 +438,11 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
     [AspNetMenuAccion].[IdAccion] AS [IdAccion]
     FROM [dbo].[AspNetMenuAccion] AS [AspNetMenuAccion]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__Sendero__TipoDif__6EF57B66" Association="Self.FK__Sendero__TipoDif__6EF57B66">
-            <End Role="TipoDificultadFisica" EntitySet="TipoDificultadFisica" />
-            <End Role="Sendero" EntitySet="Sendero" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Sendero__TipoDif__6FE99F9F" Association="Self.FK__Sendero__TipoDif__6FE99F9F">
-            <End Role="TipoDificultadTecnica" EntitySet="TipoDificultadTecnica" />
-            <End Role="Sendero" EntitySet="Sendero" />
-          </AssociationSet>
+          <EntitySet Name="RegistroActualizacion" EntityType="Self.RegistroActualizacion" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RegistroActualizacion].[FechaActualizacion] AS [FechaActualizacion]
+    FROM [dbo].[RegistroActualizacion] AS [RegistroActualizacion]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_AspNetMenuAccion_Accion" Association="Self.FK_AspNetMenuAccion_Accion">
             <End Role="Accion" EntitySet="Accion" />
             <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
@@ -895,6 +877,7 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
             <End Role="TipoDificultadTecnica" EntitySet="TipoDificultadTecnica" />
             <End Role="Sendero" EntitySet="Sendero" />
           </AssociationSet>
+          <EntitySet Name="RegistroActualizacion" EntityType="TurAppModel.RegistroActualizacion" />
           </EntityContainer>
         <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -935,10 +918,10 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
           <Property Name="LugarFin" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="TipoDificultadTecnicaID" Type="Int32" Nullable="false" />
           <Property Name="TipoDificultadFisicaID" Type="Int32" Nullable="false" />
-          <Property Name="Desnivel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Desnivel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Distancia" Type="Double" />
           <Property Name="AlturaMaxima" Type="Double" />
-          <Property Name="DuracionTotal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DuracionTotal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Latitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Longitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RutaImagen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -948,6 +931,7 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
           <Property Name="CalcularIdaVuelta" Type="Boolean" />
           <NavigationProperty Name="TipoDificultadFisica" Relationship="TurAppModel.FK__Sendero__TipoDif__6EF57B66" FromRole="Sendero" ToRole="TipoDificultadFisica" />
           <NavigationProperty Name="TipoDificultadTecnica" Relationship="TurAppModel.FK__Sendero__TipoDif__6FE99F9F" FromRole="Sendero" ToRole="TipoDificultadTecnica" />
+          <Property Name="ImgBase64" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SenderoPunto">
           <Key>
@@ -1018,6 +1002,12 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="RegistroActualizacion">
+          <Key>
+            <PropertyRef Name="FechaActualizacion" />
+          </Key>
+          <Property Name="FechaActualizacion" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1209,6 +1199,7 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
           <EntitySetMapping Name="Sendero">
             <EntityTypeMapping TypeName="TurAppModel.Sendero">
               <MappingFragment StoreEntitySet="Sendero">
+                <ScalarProperty Name="ImgBase64" ColumnName="ImgBase64" />
                 <ScalarProperty Name="CalcularIdaVuelta" ColumnName="CalcularIdaVuelta" />
                 <ScalarProperty Name="RutZipMapa" ColumnName="RutZipMapa" />
                 <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
@@ -1246,6 +1237,13 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
                 <ScalarProperty Name="Latitud" ColumnName="Latitud" />
                 <ScalarProperty Name="SenderoID" ColumnName="SenderoID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistroActualizacion">
+            <EntityTypeMapping TypeName="TurAppModel.RegistroActualizacion">
+              <MappingFragment StoreEntitySet="RegistroActualizacion">
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

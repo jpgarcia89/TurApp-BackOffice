@@ -61,7 +61,7 @@ namespace TurApp.Controllers
 
             ModelState["sendero"].Errors.Clear();
             UpdateModel<Sendero>(sendero);
-
+            
             try
             {
                 if (ModelState.IsValid)
@@ -85,6 +85,16 @@ namespace TurApp.Controllers
                                 string fileExtension = Path.GetExtension(senderoImg.FileName);
                                 if (new[] { ".jpg", ".png" }.Any(c => fileExtension == c))
                                 {
+                                    //Parse image file to base64 encode
+                                    MemoryStream target = new MemoryStream();
+                                    senderoImg.InputStream.CopyTo(target);
+                                    byte[] data = target.ToArray();
+                                    
+                                    var ImgBase64 = Convert.ToBase64String(data);
+
+
+
+
                                     //Create name and paths
                                     string fileName = "senderoImg_" + sendero.ID + Path.GetExtension(senderoImg.FileName);  //Ej: "senderoiImg_2.jpg"
                                     string virtualDirectoryPath = "~/Content/Senderos/" + sendero.ID + "/Img";              //Ej: "~/Content/Senderos/2/Img/"
@@ -99,6 +109,7 @@ namespace TurApp.Controllers
                                     senderoImg.SaveAs(fullPhisicalPath);
 
                                     //Update in DB Sendero file path        
+                                    sendero.ImgBase64 = "data:image/jpeg;base64,"+ ImgBase64;
                                     sendero.RutaImagen = fullVirtualPath.Substring(1, fullVirtualPath.Length-1);
                                     db.SaveChanges();
                                 }
@@ -263,6 +274,16 @@ namespace TurApp.Controllers
                             string fileExtension = Path.GetExtension(senderoImg.FileName);
                             if (new[] { ".jpg", ".png" }.Any(c => fileExtension == c))
                             {
+
+                                //Parse image file to base64 encode
+                                MemoryStream target = new MemoryStream();
+                                senderoImg.InputStream.CopyTo(target);
+                                byte[] data = target.ToArray();
+
+                                var ImgBase64 = Convert.ToBase64String(data);
+
+
+
                                 //Create name and paths
                                 string fileName = "senderoImg_" + sendero.ID + Path.GetExtension(senderoImg.FileName);  //Ej: "senderoiImg_2.jpg"
                                 string virtualDirectoryPath = "~/Content/Senderos/" + sendero.ID + "/Img";              //Ej: "~/Content/Senderos/2/Img/"
@@ -276,7 +297,8 @@ namespace TurApp.Controllers
                                 //Save file in a phisicaldirectoryPath
                                 senderoImg.SaveAs(fullPhisicalPath);
 
-                                //Update in DB Sendero file path        
+                                //Update in DB Sendero file path     
+                                sendero.ImgBase64 = "data:image/jpeg;base64," + ImgBase64;
                                 sendero.RutaImagen = fullVirtualPath.Substring(1, fullVirtualPath.Length - 1);
                                 db.SaveChanges();
                             }

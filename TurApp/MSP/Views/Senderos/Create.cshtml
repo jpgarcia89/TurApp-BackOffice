@@ -23,6 +23,7 @@
 
 <!-- Header -->
 <section class="content-header">
+        
     <h1>
         Nuevo
         <small>Sendero</small>
@@ -750,10 +751,7 @@
                 strokeWeight: 5,
             }
         });
-
-
-
-
+        
         drawingManager.setMap(map);
         //end of add drawing control
 
@@ -779,21 +777,22 @@
             $('#btnGetElevacion').click();
         });
 
-
-
-
+        
         // Create the DIV to hold the control and call the CustomControl() constructor passing in this DIV.
-        var customControlDiv = document.createElement('div');
-        var customControl = new CustomControl(customControlDiv, map);
+        var customControlDivInicio = document.createElement('div');
+        //var customControl = new CustomControl(customControlDiv, map);
+        CustomControlInicio(customControlDivInicio, map);
+        customControlDivInicio.index = 1;
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(customControlDivInicio);
 
-        customControlDiv.index = 1;
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(customControlDiv);
+        var customControlDivFin = document.createElement('div');
+        //var customControl = new CustomControl(customControlDiv, map);
+        CustomControlFin(customControlDivFin, map);
+        customControlDivFin.index = 2;
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(customControlDivFin);
 
 
     }
-
-
-
 
 
     $('#btnGetElevacion').click(function () {
@@ -868,13 +867,10 @@
 
     });
 
-
-
     $('#btnDeletePolyline').click(function () {
         debugger
         DeletePolyline();
     });
-
 
     function DeletePolyline() {
         if (polyline != null) {
@@ -1071,7 +1067,7 @@
                     position: locations[j],
                     map: map,
                     icon: {
-                        url: "@Url.Content("~/Content/images/station6.png")",// "~/Content/images/station6.png",
+                        url:"../Content/images/station6.png", //"Url.Content("~/Content/images/station6.png")",// "~/Content/images/station6.png",
                         anchor: new google.maps.Point(10, 10)
                     },
                     title: "Elevation: " +
@@ -1088,12 +1084,7 @@
         });
     }
 
-
-
-
-
-
-
+    
     function showTooltip(n, t, i) {
         $("#tooltip").length === 0 && $('<div id="tooltip"><\/div>').css({
             position: "absolute",
@@ -1186,7 +1177,7 @@
                         position: polylinePath.b[vertexIndex],
                         map: map,
                         icon: {
-                            url: "@Url.Content("~/Content/images/station6.png")",// "~/Content/images/station6.png",
+                            url: "../Content/images/station6.png",//"Url.Content("~/Content/images/station6.png")",// "~/Content/images/station6.png",
                             anchor: new google.maps.Point(10, 10)
                         }
                     });
@@ -1292,10 +1283,38 @@
 <!-- Markers Management -->
 <script>
 
-    
+    function CustomControlInicio(controlDiv, map) {
 
+        // Set CSS for the control border
+        var controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = '#ffffff';        
+        controlUI.style.borderStyle = 'solid';
+        controlUI.style.borderWidth = '1px';
+        controlUI.style.borderColor = '#ffffff';
+        controlUI.style.height = '24px';
+        controlUI.style.width = '24px';
+        controlUI.style.marginTop = '5px';
+        controlUI.style.marginLeft = '-6px';
+        controlUI.style.paddingTop = '1px';
+        controlUI.style.textAlign = 'center';
+        controlUI.title = 'Marcardor Inicio';
+        controlDiv.appendChild(controlUI);
 
-    function CustomControl(controlDiv, map) {
+        // Set CSS for the control interior
+        var controlText = document.createElement('img');
+        controlText.src = "../Content/img/inicio.svg";
+        controlText.style.width = '100%';
+        controlText.style.height = 'auto';
+
+        //controlText.innerHTML = 'Custom';
+        controlUI.appendChild(controlText);
+
+        // Setup the click event listeners
+        google.maps.event.addDomListener(controlUI, 'click', onClickMarkerInicio);
+
+    }
+
+    function CustomControlFin(controlDiv, map) {
 
         // Set CSS for the control border
         var controlUI = document.createElement('div');
@@ -1308,31 +1327,71 @@
         controlUI.style.marginTop = '5px';
         controlUI.style.marginLeft = '-6px';
         controlUI.style.paddingTop = '1px';
-        //controlUI.style.cursor = 'pointer';
         controlUI.style.textAlign = 'center';
-        controlUI.title = 'Click to set the map to Home';
+        controlUI.title = 'Marcardor Fin';
         controlDiv.appendChild(controlUI);
 
         // Set CSS for the control interior
-        var controlText = document.createElement('div');
-        controlText.style.fontFamily = 'Arial,sans-serif';
-        controlText.style.fontSize = '10px';
-        controlText.style.paddingLeft = '4px';
-        controlText.style.paddingRight = '4px';
-        controlText.style.marginTop = '-8px';
-        controlUI.style.backgroundImage = '@Url.Content("~/Content/img/mirador.svg")';
+        var controlText = document.createElement('img');
+        controlText.src = "../Content/img/fin.svg";
+        controlText.style.width = '100%';
+        controlText.style.height = 'auto';
+
         //controlText.innerHTML = 'Custom';
         controlUI.appendChild(controlText);
+
         // Setup the click event listeners
-        google.maps.event.addDomListener(controlUI, 'click', function () {
-            alert('Custom control clicked');
-        });
+        google.maps.event.addDomListener(controlUI, 'click', onClickMarkerFin);
+
     }
 
 
+    function onClickMarkerInicio() {
+        
+
+        var icon = {
+            url: "../Content/img/inicio.png", // url
+            scaledSize: new google.maps.Size(30, 30), // scaled size
+            //origin: new google.maps.Point(0, 0), // origin
+            //anchor: new google.maps.Point(0, 0), // anchor
+            //color: "#ff0000"
+        };
 
 
+        drawingManager.setOptions({
+            drawingMode: 'marker',
+            markerOptions: {
+                icon: icon,
+                Draggable: true,
+                Title: 'Inicio'
+            }
+        });
 
+
+        //alert('Custom control "Marcardor Inicio" clicked');
+    }
+    function onClickMarkerFin() {
+
+        var icon = {
+            url: "../Content/img/fin.png", // url
+            scaledSize: new google.maps.Size(30, 30), // scaled size
+            //origin: new google.maps.Point(0, 0), // origin
+            //anchor: new google.maps.Point(0, 0), // anchor
+            //color: "#ff0000"
+        };
+
+
+        drawingManager.setOptions({
+            drawingMode: 'marker',
+            markerOptions: {
+                icon: icon,
+                Draggable: true,
+                Title: 'Inicio'
+            }
+        });
+
+        //alert('Custom control "Marcardor Fin" clicked');
+    }
 
 </script>
 

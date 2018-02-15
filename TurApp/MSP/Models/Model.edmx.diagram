@@ -29,7 +29,7 @@
           <ConnectorPoint PointX="6.947916666666667" PointY="6.9225878906249987" />
           <ConnectorPoint PointX="7.114583333333333" PointY="6.922587890625" />
           <ConnectorPoint PointX="7.125" PointY="6.922587890625" />
-          <ConnectorPoint PointX="7.5" PointY="5.6248165918615705" />
+          <ConnectorPoint PointX="7.5" PointY="5.6359122582462806" />
         </AssociationConnector>
         <AssociationConnector Association="TurAppModel.FK_MenuAspNetRoles_AspNetRoles" ManuallyRouted="false" />
         <AssociationConnector Association="TurAppModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
@@ -51,6 +51,7 @@
         <AssociationConnector Association="TurAppModel.FK_SenderoPuntoElevacion_Sendero" />
         <AssociationConnector Association="TurAppModel.FK__Sendero__TipoDif__6EF57B66" />
         <AssociationConnector Association="TurAppModel.FK__Sendero__TipoDif__6FE99F9F" />
+        <EntityTypeShape EntityType="TurAppModel.RegistroActualizacion" Width="1.5" PointX="0.75" PointY="11.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
