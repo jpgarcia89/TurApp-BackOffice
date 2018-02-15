@@ -19,6 +19,23 @@
     .dataTables_wrapper .dataTables_paginate .paginate_button {
         padding: 0px;
     }
+
+
+     .wrapper .overlay, .overlay-wrapper .overlay {
+        z-index: 50;
+        background: rgba(255,255,255,0.7);
+        border-radius: 3px;
+    }
+
+
+
+    .wrapper > .overlay, .overlay-wrapper > .overlay, .box > .loading-img, .overlay-wrapper > .loading-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
 </style>
 
 
@@ -389,12 +406,8 @@
                                     <tr><td colspan="4" style="text-align:center;background-color: #55b9a1;color: white; border-radius: 4px;"><b>Coordenadas</b></td></tr>
                                     <tr>
                                         <th>#</th>
-                                        <th style="text-align:center"><i class="fa fa-flag"></th>
-                                        <th style="text-align:center"><i class="fa fa-flag-o"></th>
-                                        <th style="text-align:center"><i class="fa fa-map-marker"></th>
-                                        @*<th>Ini</th>
-                                        <th>Fin</th>
-                                        <th>Cumbre</th>*@
+                                        <th>Lat</th>
+                                        <th>Long</th>
                                         <th>Accion</th>
                                     </tr>
                                 </thead>
@@ -477,6 +490,17 @@
                 this.value = '';
         }
     });
+
+
+    function abrirWaitingLocal() {
+        var waiting = '<div id="waiting" class="overlay"><i class="fa fa-refresh fa-spin"></i></div>';
+        /*<div id="waiting" class="overlay overlay-wrapper"><i class="fa fa-refresh fa-spin"></i></div>*/
+        $(".wrapper").append(waiting);
+    }
+
+    function cerrarWaitingLocal() {
+        $("#waiting").remove();
+    }
 </script>
 
 <!-- Submit -->
@@ -550,11 +574,11 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function (xhr) {
-                    abrirWaiting();
+                    abrirWaitingLocal();
                 },
                 success: function (result) {
                     //debugger
-                    cerrarWaiting();
+                    cerrarWaitingLocal();
                     if (result.ok) {
                         jAlert("El sendero se actualizo correctamente", "Senderos", function () {
                             window.location.href = '/Senderos';
@@ -567,7 +591,7 @@
                 },
                 error: function (error) {
                     //debugger
-                    cerrarWaiting();
+                    cerrarWaitingLocal();
                     jAlert("Ha ocurrido un error", "Senderos");
                     console.log(error);
                     return;
@@ -735,8 +759,8 @@
                 //htmlStr += "&nbsp;&nbsp;" + polylines[i].getPath().getAt(j).toUrlValue(6) + "<br>";
                 tableRows +=    '<tr>'
                     +               '<td>'+ j +'</td>'
-                    //+               '<td>'+ polylinePath.b[j].lat().toFixed(4) +'</td>'
-                    //+               '<td>'+ polylinePath.b[j].lng().toFixed(4) +'</td>'
+                    +               '<td>'+ polylinePath.b[j].lat().toFixed(4) +'</td>'
+                    +               '<td>'+ polylinePath.b[j].lng().toFixed(4) +'</td>'
                     +               '<td>'
                     +                   '<span data-placement="top" title="Eliminar" data-toggle="tooltip">'
                     +                   '<a class="btn btn-danger fa fa-trash" onclick="removeVertex('+j+')"></a>'//'<a onclick="removeVertex('+j+')">Eliminar</a>'
