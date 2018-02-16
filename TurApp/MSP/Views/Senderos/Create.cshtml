@@ -806,18 +806,47 @@
         });
 
 
+        //google.maps.event.addListener(drawingManager, 'markercomplete', function (xmarker) {
+        //    debugger
+
+        //    alert("onMarkerComplete");
+        //    //polylines.push(polyline);
+        //    //drawingManager.setOptions({
+        //    //    drawingControl: false,
+        //    //    drawingMode: null
+        //    //});
+        //    //polyline = xpolyline;
+        //    //polylinePath = xpolyline.getPath();
+        //    //$('#btnGetElevacion').click();
+        //});
+
+
         // Create the DIV to hold the control and call the CustomControl() constructor passing in this DIV.
+
+        //CustomControlInicio
         var customControlDivInicio = document.createElement('div');
         //var customControl = new CustomControl(customControlDiv, map);
-        CustomControlInicio(customControlDivInicio, map);
+        CustomControl(customControlDivInicio, map, "inicio");
         customControlDivInicio.index = 1;
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(customControlDivInicio);
+        map.controls[google.maps.ControlPosition.LEFT_CENTER].push(customControlDivInicio);
 
+        //CustomControlFin
         var customControlDivFin = document.createElement('div');
-        //var customControl = new CustomControl(customControlDiv, map);
-        CustomControlFin(customControlDivFin, map);
+        CustomControl(customControlDivFin, map, "fin");
         customControlDivFin.index = 2;
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(customControlDivFin);
+        map.controls[google.maps.ControlPosition.LEFT_CENTER].push(customControlDivFin);
+
+        //CustomControlMirador
+        var customControlDivMirador = document.createElement('div');
+        CustomControl(customControlDivFin, map, "mirador");
+        customControlDivMirador.index = 3;
+        map.controls[google.maps.ControlPosition.LEFT_CENTER].push(customControlDivMirador);
+
+        //CustomControlCumbre
+        var customControlDivCumbre = document.createElement('div');
+        CustomControl(customControlDivFin, map, "cumbre");
+        customControlDivCumbre.index = 4;
+        map.controls[google.maps.ControlPosition.LEFT_CENTER].push(customControlDivCumbre);
 
 
     }
@@ -988,7 +1017,7 @@
         var maxGradientDesc = 0;
         var maxGradientDescAt = 0;
 
-        debugger
+        //debugger
         for (var i_10 = 0; i_10 < elevations.length; i_10++) {
             minElevation = Math.min(elevations[i_10], minElevation);
             maxElevation = Math.max(elevations[i_10], maxElevation);
@@ -1310,39 +1339,8 @@
 
 <!-- Markers Management -->
 <script>
-
-    function CustomControlInicio(controlDiv, map) {
-
-        // Set CSS for the control border
-        var controlUI = document.createElement('div');
-        controlUI.style.backgroundColor = '#ffffff';
-        controlUI.style.borderStyle = 'solid';
-        controlUI.style.borderWidth = '1px';
-        controlUI.style.borderColor = '#ffffff';
-        controlUI.style.height = '24px';
-        controlUI.style.width = '24px';
-        controlUI.style.marginTop = '5px';
-        controlUI.style.marginLeft = '-6px';
-        controlUI.style.paddingTop = '1px';
-        controlUI.style.textAlign = 'center';
-        controlUI.title = 'Marcardor Inicio';
-        controlDiv.appendChild(controlUI);
-
-        // Set CSS for the control interior
-        var controlText = document.createElement('img');
-        controlText.src = "../Content/img/inicio.svg";
-        controlText.style.width = '100%';
-        controlText.style.height = 'auto';
-
-        //controlText.innerHTML = 'Custom';
-        controlUI.appendChild(controlText);
-
-        // Setup the click event listeners
-        google.maps.event.addDomListener(controlUI, 'click', onClickMarkerInicio);
-
-    }
-
-    function CustomControlFin(controlDiv, map) {
+       
+    function CustomControl(controlDiv, map, tipo) {
 
         // Set CSS for the control border
         var controlUI = document.createElement('div');
@@ -1352,16 +1350,16 @@
         controlUI.style.borderColor = '#ffffff';
         controlUI.style.height = '24px';
         controlUI.style.width = '24px';
-        controlUI.style.marginTop = '5px';
-        controlUI.style.marginLeft = '-6px';
+        controlUI.style.marginTop = '1px';
+        controlUI.style.marginLeft = '5px';
         controlUI.style.paddingTop = '1px';
         controlUI.style.textAlign = 'center';
-        controlUI.title = 'Marcardor Fin';
+        //controlUI.title = 'Marcardor Fin';
         controlDiv.appendChild(controlUI);
 
         // Set CSS for the control interior
         var controlText = document.createElement('img');
-        controlText.src = "../Content/img/fin.svg";
+        //controlText.src = "../Content/img/fin.svg";
         controlText.style.width = '100%';
         controlText.style.height = 'auto';
 
@@ -1369,57 +1367,112 @@
         controlUI.appendChild(controlText);
 
         // Setup the click event listeners
-        google.maps.event.addDomListener(controlUI, 'click', onClickMarkerFin);
+        //google.maps.event.addDomListener(controlUI, 'click', onClickMarkerFin);
+
+    
+        switch (tipo) {
+            case "inicio":{
+                controlUI.title = 'Marcardor Inicio';
+                controlText.src = "../Content/img/inicio.svg";
+                google.maps.event.addDomListener(controlUI, 'click', onClickMarkerInicio());
+            } break;
+
+            case "fin": {
+                controlUI.title = 'Marcardor Fin';
+                controlText.src = "../Content/img/fin.svg";
+                google.maps.event.addDomListener(controlUI, 'click', onClickMarkerFin);
+            }break;
+
+            case "mirador": {
+                controlUI.title = 'Marcardor Mirador';
+                controlText.src = "../Content/img/mirador.svg";
+                google.maps.event.addDomListener(controlUI, 'click', onClickMarkerMirador);
+            }break;
+
+            case "cumbre": {
+                controlUI.title = 'Marcardor Cumbre';
+                controlText.src = "../Content/img/cumbre.svg";
+                google.maps.event.addDomListener(controlUI, 'click', onClickMarkerCumbre);
+            }break;
+        }
 
     }
+
 
 
     function onClickMarkerInicio() {
-
-
+        debugger
         var icon = {
             url: "../Content/img/inicio.png", // url
             scaledSize: new google.maps.Size(30, 30), // scaled size
-            //origin: new google.maps.Point(0, 0), // origin
-            //anchor: new google.maps.Point(0, 0), // anchor
-            //color: "#ff0000"
         };
 
 
         drawingManager.setOptions({
             drawingMode: 'marker',
             markerOptions: {
+                //type: "inicio",
                 icon: icon,
                 Draggable: true,
                 Title: 'Inicio'
             }
         });
-
-
-        //alert('Custom control "Marcardor Inicio" clicked');
     }
-    function onClickMarkerFin() {
 
+    function onClickMarkerFin() {
+        debugger
         var icon = {
             url: "../Content/img/fin.png", // url
             scaledSize: new google.maps.Size(30, 30), // scaled size
-            //origin: new google.maps.Point(0, 0), // origin
-            //anchor: new google.maps.Point(0, 0), // anchor
-            //color: "#ff0000"
         };
-
-
+        
         drawingManager.setOptions({
             drawingMode: 'marker',
             markerOptions: {
+                //type: "fin",
                 icon: icon,
                 Draggable: true,
-                Title: 'Inicio'
+                Title: 'Fin'
             }
         });
-
-        //alert('Custom control "Marcardor Fin" clicked');
     }
+
+    function onClickMarkerMirador() {
+        debugger
+        var icon = {
+            url: "../Content/img/mirador.png", // url
+            scaledSize: new google.maps.Size(30, 30), // scaled size
+        };
+        
+        drawingManager.setOptions({
+            drawingMode: 'marker',
+            markerOptions: {
+                //type: "mirador",
+                icon: icon,
+                Draggable: true,
+                Title: 'mirador'
+            }
+        });
+    }
+
+    function onClickMarkerCumbre() {
+        debugger
+        var icon = {
+            url: "../Content/img/cumbre.png", // url
+            scaledSize: new google.maps.Size(30, 30), // scaled size
+        };
+        
+        drawingManager.setOptions({
+            drawingMode: 'marker',
+            markerOptions: {
+                //type: "cumbre",
+                icon: icon,
+                Draggable: true,
+                Title: 'cumbre'
+            }
+        });
+    }
+
 
 </script>
 
