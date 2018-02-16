@@ -324,10 +324,16 @@
     <Compile Include="Models\SenderoPuntoElevacion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SenderoPuntoInteres.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TipoDificultadFisica.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoDificultadTecnica.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoPuntoInteres.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

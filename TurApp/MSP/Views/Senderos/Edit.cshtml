@@ -381,6 +381,20 @@
                         </div>
                     </div>
                 </div>
+                <!--KML from file-->
+                <div class="row">
+                    <div class="col-md-4" style="margin-bottom: 15px;">
+                        <div class="form-group">
+                            <label class="control-label" for="Imagen">Cargar desde KML:</label>
+                            <div>
+                                @Html.TextBox("files", "", htmlAttributes: new { @class = "form-control", type = "file", accept = ".kml" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 15px;">
+                        <div id="btnKml" class="btn btn-default" style="margin-top: 8%;">Recargar desde KML</div>
+                    </div>
+                </div>
 
                 <!--Mapa - tabla - grafico-->
                 <div class="row">
@@ -419,13 +433,8 @@
                     </div>
                 </div>
 
-                <!--KML from file-->
-                <div class="row">
-                    <input class="btn" type="file" id="files" name="files[]" multiple />
-                    <output id="list"></output>
 
-                    <div id="btnKml" class="btn btn-default">Recargar desde KML</div>
-                </div>
+
 
             </div>
 
@@ -503,6 +512,7 @@
     }
 </script>
 
+
 <!-- Submit -->
 <script>
     //Submit
@@ -526,6 +536,7 @@
             Longitud: map.getCenter().lng(),
             SenderoPuntoElevacion: pointsArray,//Puntos con elevacion... 255 puntos para dibujar graficos
             SenderoPunto: [], // Puntos originales para formar polyline
+            SenderoPuntoInteres: [], // Puntos originales para formar polyline
             RutaImagen: $("#RutaImagen").val(),
             RutZipMapa: $("#RutZipMapa").val(),
         };
@@ -539,6 +550,19 @@
             };
 
             data.SenderoPunto.push(SenderoPunto);
+            }
+        }
+
+        
+        if (markers != null && markers.length > 0) {
+            for (var i = 0; i < markers.length; i++) {
+                var PuntoInteres = {
+                    Descripcion: markers[i].title,
+                    Latitud: markers[i].position.lat(),
+                    Longitud: markers[i].position.lng(),
+                    TipoPuntoInteresID: markers[i].typeId
+                };
+                data.SenderoPuntoInteres.push(PuntoInteres);
             }
         }
 
@@ -618,7 +642,7 @@
     var pointsArray = [];
     var table;
     var drawingManager;
-
+    var markers = [];
 
     function initMap() {
         //set center coordinate
@@ -721,7 +745,7 @@
         }
 
 
-        //add event listener
+        //add event listener 'polylinecomplete'
         google.maps.event.addListener(drawingManager, 'polylinecomplete', function (xpolyline) {
             //debugger
             //polylines.push(polyline);
@@ -733,10 +757,79 @@
             polylinePath = xpolyline.getPath();
             $('#btnGetElevacion').click();
         });
+        //add event listener 'markercomplete'
+        google.maps.event.addListener(drawingManager, 'markercomplete', function (xmarker) {
+            //debugger
+            //alert("onMarkerComplete. \n Tipo de marcador: " + xmarker.type);
+            xmarker.addListener("dblclick", function () {
+                //debugger
+                xmarker.setMap(null);
+                markers.splice(xmarker.index, 1);
+            });
+            switch (xmarker.type) {
+                case "inicio":
+                case "fin": {
+                    markers.push(xmarker);
+                    xmarker.index = markers.length - 1;
+                } break;
+                case "mirador": {
+                    jPrompt("Nombre del Mirador:", null, "Mirador", function (value) {
+                        if (value == null || value.trim() == "") {
+                            xmarker.setMap(null)
     }
+                        else {
+                            xmarker.setMap(null)
+                            xmarker.title = value;
+                            xmarker.setMap(map)
+                            markers.push(xmarker);
+                            xmarker.index = markers.length - 1;
+                        }
+                    })
+                } break;
 
+                case "cumbre": {
+                    jPrompt("Nombre/Descripcion de la Cumbre:", null, "Cumbre", function (value) {
     
+                        if (value == null || value.trim() == "") {
+                            xmarker.setMap(null)
+                        }
+                        else {
+                            xmarker.setMap(null)
+                            xmarker.title = value;
+                            xmarker.setMap(map)
+                            markers.push(xmarker);
+                            xmarker.index = markers.length - 1;
+                        }
+                    })
+                } break;
+            }
 
+            drawingManager.setOptions({
+                drawingMode: null
+            });
+        });
+        //Create CustomControls in map layer
+        //CustomControlInicio
+        var customControlDivInicio = document.createElement('div');
+        CustomControl(customControlDivInicio, map, "inicio");
+        customControlDivInicio.index = 1;
+        map.controls[google.maps.ControlPosition.LEFT_CENTER].push(customControlDivInicio);
+        //CustomControlFin
+        var customControlDivFin = document.createElement('div');
+        CustomControl(customControlDivFin, map, "fin");
+        customControlDivFin.index = 2;
+        map.controls[google.maps.ControlPosition.LEFT_CENTER].push(customControlDivFin);
+        //CustomControlMirador
+        var customControlDivMirador = document.createElement('div');
+        CustomControl(customControlDivFin, map, "mirador");
+        customControlDivMirador.index = 3;
+        map.controls[google.maps.ControlPosition.LEFT_CENTER].push(customControlDivMirador);
+        //CustomControlCumbre
+        var customControlDivCumbre = document.createElement('div');
+        CustomControl(customControlDivFin, map, "cumbre");
+        customControlDivCumbre.index = 4;
+        map.controls[google.maps.ControlPosition.LEFT_CENTER].push(customControlDivCumbre);
+    }
 
 
     $('#btnGetElevacion').click(function () {
@@ -844,8 +937,7 @@
 
     google.maps.event.addDomListener(window, "load", initMap);
 
-    function fillFormData(maxElevation, elevChange, distance)
-    {
+    function fillFormData(maxElevation, elevChange, distance) {
         $("#AlturaMaxima").val(maxElevation.toFixed(2));   //m.s.n.m
         $("#Desnivel").val(elevChange.toFixed(2));         //metros
                 
@@ -902,7 +994,7 @@
         var maxGradientAt = 0;
         var maxGradientDesc = 0;
         var maxGradientDescAt = 0;
-        debugger
+        //debugger
         for (var i_10 = 0; i_10 < elevations.length; i_10++) {
             minElevation = Math.min(elevations[i_10], minElevation);
             maxElevation = Math.max(elevations[i_10], maxElevation);
@@ -1007,7 +1099,7 @@
                     position: locations[j],
                     map: map,
                     icon: {
-                        url: "@Url.Content("~/Content/images/station6.png")",// "~/Content/images/station6.png",
+                        url: "../Content/images/station6.png", //"Url.Content("~/Content/images/station6.png")",// "~/Content/images/station6.png",
                         anchor: new google.maps.Point(10, 10)
                     },
                     title: "Elevation: " +
@@ -1122,7 +1214,7 @@
                         position: polylinePath.b[vertexIndex],
                         map: map,
                         icon: {
-                            url: "@Url.Content("~/Content/images/station6.png")",// "~/Content/images/station6.png",
+                            url: "../Content/images/station6.png",//"Url.Content("~/Content/images/station6.png")",// "~/Content/images/station6.png",
                             anchor: new google.maps.Point(10, 10)
                         }
                     });
@@ -1221,6 +1313,128 @@
 </script>
 
 
+<!-- Markers Management -->
+<script>
+    function CustomControl(controlDiv, map, tipo) {
+        // Set CSS for the control border
+        var controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = '#ffffff';
+        controlUI.style.borderStyle = 'solid';
+        controlUI.style.borderWidth = '1px';
+        controlUI.style.borderColor = '#ffffff';
+        controlUI.style.height = '24px';
+        controlUI.style.width = '24px';
+        controlUI.style.marginTop = '1px';
+        controlUI.style.marginLeft = '5px';
+        controlUI.style.paddingTop = '1px';
+        controlUI.style.textAlign = 'center';
+        controlDiv.appendChild(controlUI);
+        // Set CSS for the control interior
+        var controlText = document.createElement('img');
+        controlText.style.width = '100%';
+        controlText.style.height = 'auto';
+        //controlText.innerHTML = 'Custom';
+        controlUI.appendChild(controlText);
+        switch (tipo) {
+            case "inicio": {
+                // Set CSS for the controls
+                controlUI.title = 'Marcardor Inicio';
+                controlText.src = "../Content/img/inicio.svg";
+                // Setup the click and doubleclick event listeners
+                google.maps.event.addDomListener(controlUI, 'click', onClickMarkerInicio);
+            } break;
+            case "fin": {
+                // Set CSS for the controls
+                controlUI.title = 'Marcardor Fin';
+                controlText.src = "../Content/img/fin.svg";
+                // Setup the click and doubleclick event listeners
+                google.maps.event.addDomListener(controlUI, 'click', onClickMarkerFin);
+            } break;
+            case "mirador": {
+                // Set CSS for the controls
+                controlUI.title = 'Marcardor Mirador';
+                controlText.src = "../Content/img/mirador.svg";
+                // Setup the click and doubleclick event listeners
+                google.maps.event.addDomListener(controlUI, 'click', onClickMarkerMirador);
+            } break;
+            case "cumbre": {
+                // Set CSS for the controls
+                controlUI.title = 'Marcardor Cumbre';
+                controlText.src = "../Content/img/cumbre.svg";
+                // Setup the click and doubleclick event listeners
+                google.maps.event.addDomListener(controlUI, 'click', onClickMarkerCumbre);
+            } break;
+        }
+    }
+    function onClickMarkerInicio() {
+        //debugger
+        var icon = {
+            url: "../Content/img/inicio.png", // url
+            scaledSize: new google.maps.Size(30, 30), // scaled size
+        };
+        drawingManager.setOptions({
+            drawingMode: 'marker',
+            markerOptions: {
+                typeId:1,
+                type: "inicio",
+                icon: icon,
+                Draggable: true,
+                Title: 'Inicio'
+            }
+        });
+    }
+    function onClickMarkerFin() {
+        //debugger
+        var icon = {
+            url: "../Content/img/fin.png", // url
+            scaledSize: new google.maps.Size(30, 30), // scaled size
+        };
+        drawingManager.setOptions({
+            drawingMode: 'marker',
+            markerOptions: {
+                typeId: 2,
+                type: "fin",
+                icon: icon,
+                Draggable: true,
+                Title: 'Fin'
+            }
+        });
+    }
+    function onClickMarkerMirador() {
+        //debugger
+        var icon = {
+            url: "../Content/img/mirador.png", // url
+            scaledSize: new google.maps.Size(30, 30), // scaled size
+        };
+        drawingManager.setOptions({
+            drawingMode: 'marker',
+            markerOptions: {
+                typeId: 3,
+                type: "mirador",
+                icon: icon,
+                Draggable: true,
+                Title: 'mirador'
+            }
+        });
+    }
+    function onClickMarkerCumbre() {
+        // debugger
+        var icon = {
+            url: "../Content/img/cumbre.png", // url
+            scaledSize: new google.maps.Size(30, 30), // scaled size
+        };
+        drawingManager.setOptions({
+            drawingMode: 'marker',
+            markerOptions: {
+                typeId: 4,
+                type: "cumbre",
+                icon: icon,
+                Draggable: true,
+                Title: 'cumbre'
+            }
+        });
+    }
+</script>
 <script src="~/Scripts/plugins/elevation/jquery.flot.min.js"></script>
 <script src="~/Scripts/plugins/elevation/jquery.flot.selection.js"></script>
 

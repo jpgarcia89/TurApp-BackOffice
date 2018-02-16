@@ -12,18 +12,16 @@ namespace TurApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TipoDificultadFisica
+    public partial class SenderoPuntoInteres
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TipoDificultadFisica()
-        {
-            this.Sendero = new HashSet<Sendero>();
-        }
-    
         public int ID { get; set; }
+        public int SenderoID { get; set; }
+        public int TipoPuntoInteresID { get; set; }
+        public string Latitud { get; set; }
+        public string Longitud { get; set; }
         public string Descripcion { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sendero> Sendero { get; set; }
+        public virtual Sendero Sendero { get; set; }
+        public virtual TipoPuntoInteres TipoPuntoInteres { get; set; }
     }
 }

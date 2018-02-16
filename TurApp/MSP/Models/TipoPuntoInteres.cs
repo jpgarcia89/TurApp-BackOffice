@@ -12,23 +12,18 @@ namespace TurApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Departamento
+    public partial class TipoPuntoInteres
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Departamento()
+        public TipoPuntoInteres()
         {
-            this.Localidad = new HashSet<Localidad>();
+            this.SenderoPuntoInteres = new HashSet<SenderoPuntoInteres>();
         }
     
-        public short ID { get; set; }
-        public string Nombre { get; set; }
-        public byte ProvinciaID { get; set; }
-        public bool Activa { get; set; }
-        public Nullable<int> id_access { get; set; }
-        public Nullable<byte> Zona { get; set; }
+        public int ID { get; set; }
+        public string Descripcion { get; set; }
     
-        public virtual Provincia Provincia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Localidad> Localidad { get; set; }
+        public virtual ICollection<SenderoPuntoInteres> SenderoPuntoInteres { get; set; }
     }
 }
