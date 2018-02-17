@@ -14,8 +14,8 @@
           <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
           <Property Name="Icono" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="AspNetMenuAccion">
           <Key>
             <PropertyRef Name="IdMenu" />
@@ -147,8 +147,8 @@ warning 6002: The table/view 'TurApp.dbo.AspNetMenuAccion' does not have a prima
           <Property Name="Activa" Type="bit" Nullable="false" />
           <Property Name="id_access" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'TurApp.dbo.RegistroActualizacion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TurApp.dbo.RegistroActualizacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="RegistroActualizacion">
           <Key>
             <PropertyRef Name="FechaActualizacion" />
@@ -161,21 +161,22 @@ warning 6002: The table/view 'TurApp.dbo.RegistroActualizacion' does not have a 
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="300" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
           <Property Name="LugarInicio" Type="nvarchar" MaxLength="100" />
           <Property Name="LugarFin" Type="nvarchar" MaxLength="100" />
           <Property Name="TipoDificultadTecnicaID" Type="int" Nullable="false" />
           <Property Name="TipoDificultadFisicaID" Type="int" Nullable="false" />
-          <Property Name="Desnivel" Type="nvarchar" MaxLength="50" />
+          <Property Name="Desnivel" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Distancia" Type="float" />
           <Property Name="AlturaMaxima" Type="float" />
-          <Property Name="DuracionTotal" Type="nvarchar" MaxLength="50" />
+          <Property Name="DuracionTotal" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Latitud" Type="nvarchar" MaxLength="50" />
           <Property Name="Longitud" Type="nvarchar" MaxLength="50" />
           <Property Name="RutaImagen" Type="nvarchar" MaxLength="100" />
           <Property Name="RutZipMapa" Type="nvarchar" MaxLength="100" />
           <Property Name="CalcularIdaVuelta" Type="bit" />
-          <Property Name="ImgBase64" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImgBase64" Type="nvarchar(max)" />
+          <Property Name="InfoInteres" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="SenderoPunto">
           <Key>
@@ -228,30 +229,6 @@ warning 6002: The table/view 'TurApp.dbo.RegistroActualizacion' does not have a 
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Sendero__TipoDif__6EF57B66">
-          <End Role="TipoDificultadFisica" Type="Self.TipoDificultadFisica" Multiplicity="1" />
-          <End Role="Sendero" Type="Self.Sendero" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoDificultadFisica">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Sendero">
-              <PropertyRef Name="TipoDificultadFisicaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Sendero__TipoDif__6FE99F9F">
-          <End Role="TipoDificultadTecnica" Type="Self.TipoDificultadTecnica" Multiplicity="1" />
-          <End Role="Sendero" Type="Self.Sendero" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoDificultadTecnica">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Sendero">
-              <PropertyRef Name="TipoDificultadTecnicaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AspNetMenuAccion_Accion">
           <End Role="Accion" Type="Self.Accion" Multiplicity="1" />
           <End Role="AspNetMenuAccion" Type="Self.AspNetMenuAccion" Multiplicity="*" />
@@ -511,14 +488,6 @@ warning 6002: The table/view 'TurApp.dbo.RegistroActualizacion' does not have a 
     [RegistroActualizacion].[FechaActualizacion] AS [FechaActualizacion]
     FROM [dbo].[RegistroActualizacion] AS [RegistroActualizacion]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__Sendero__TipoDif__6EF57B66" Association="Self.FK__Sendero__TipoDif__6EF57B66">
-            <End Role="TipoDificultadFisica" EntitySet="TipoDificultadFisica" />
-            <End Role="Sendero" EntitySet="Sendero" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Sendero__TipoDif__6FE99F9F" Association="Self.FK__Sendero__TipoDif__6FE99F9F">
-            <End Role="TipoDificultadTecnica" EntitySet="TipoDificultadTecnica" />
-            <End Role="Sendero" EntitySet="Sendero" />
-          </AssociationSet>
           <AssociationSet Name="FK_AspNetMenuAccion_Accion" Association="Self.FK_AspNetMenuAccion_Accion">
             <End Role="Accion" EntitySet="Accion" />
             <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
@@ -1007,15 +976,15 @@ warning 6002: The table/view 'TurApp.dbo.RegistroActualizacion' does not have a 
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LugarInicio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LugarFin" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="TipoDificultadTecnicaID" Type="Int32" Nullable="false" />
           <Property Name="TipoDificultadFisicaID" Type="Int32" Nullable="false" />
-          <Property Name="Desnivel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Desnivel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Distancia" Type="Double" />
           <Property Name="AlturaMaxima" Type="Double" />
-          <Property Name="DuracionTotal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DuracionTotal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Latitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Longitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RutaImagen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -1025,8 +994,9 @@ warning 6002: The table/view 'TurApp.dbo.RegistroActualizacion' does not have a 
           <Property Name="CalcularIdaVuelta" Type="Boolean" />
           <NavigationProperty Name="TipoDificultadFisica" Relationship="TurAppModel.FK__Sendero__TipoDif__6EF57B66" FromRole="Sendero" ToRole="TipoDificultadFisica" />
           <NavigationProperty Name="TipoDificultadTecnica" Relationship="TurAppModel.FK__Sendero__TipoDif__6FE99F9F" FromRole="Sendero" ToRole="TipoDificultadTecnica" />
-          <Property Name="ImgBase64" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImgBase64" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SenderoPuntoInteres" Relationship="TurAppModel.FK_SenderoPuntoInteres_Sendero" FromRole="Sendero" ToRole="SenderoPuntoInteres" />
+          <Property Name="InfoInteres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SenderoPunto">
           <Key>
@@ -1339,6 +1309,7 @@ warning 6002: The table/view 'TurApp.dbo.RegistroActualizacion' does not have a 
           <EntitySetMapping Name="Sendero">
             <EntityTypeMapping TypeName="TurAppModel.Sendero">
               <MappingFragment StoreEntitySet="Sendero">
+                <ScalarProperty Name="InfoInteres" ColumnName="InfoInteres" />
                 <ScalarProperty Name="ImgBase64" ColumnName="ImgBase64" />
                 <ScalarProperty Name="CalcularIdaVuelta" ColumnName="CalcularIdaVuelta" />
                 <ScalarProperty Name="RutZipMapa" ColumnName="RutZipMapa" />

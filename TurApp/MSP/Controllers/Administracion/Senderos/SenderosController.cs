@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using TurApp.Filters;
 using TurApp.Models;
 
 namespace TurApp.Controllers
@@ -19,6 +20,7 @@ namespace TurApp.Controllers
         private TurAppEntities db = new TurAppEntities();
 
         // GET: Sendero
+        [CompressFilter]
         public ActionResult Index()
         {
             return View(db.Sendero.ToList());
@@ -40,6 +42,7 @@ namespace TurApp.Controllers
         }
 
         // GET: Sendero/Create
+        [CompressFilter]
         public ActionResult Create()
         {
             ViewBag.TipoDificultadFisicaID = new SelectList(db.TipoDificultadFisica, "ID", "Descripcion");
@@ -51,6 +54,7 @@ namespace TurApp.Controllers
 
         // POST: Sendero/Create
         [HttpPost]
+        [CompressFilter]
         //[ValidateAntiForgeryToken]
         public ActionResult Create(Sendero sendero, HttpPostedFileBase senderoImg, HttpPostedFileBase zipMapa)//[Bind(Include = "ID,Nombre,Descripcion,LugarInicio,LugarFin,TipoDificultadTecnicaID,TipoDificultadFisicaID,Desnivel,Distancia,AlturaMaxima,DuracionTotal")] 
         {
@@ -182,6 +186,7 @@ namespace TurApp.Controllers
         }
 
         // GET: Sendero/Edit/5
+        [CompressFilter]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -203,6 +208,7 @@ namespace TurApp.Controllers
         // POST: Sendero/Edit/5
         [HttpPost]
         //[ValidateAntiForgeryToken]
+        [CompressFilter]
         public ActionResult Edit(Sendero sendero, HttpPostedFileBase senderoImg, HttpPostedFileBase zipMapa)//[Bind(Include = "ID,Nombre,Descripcion,LugarInicio,LugarFin,TipoDificultadTecnicaID,TipoDificultadFisicaID,Desnivel,Distancia,AlturaMaxima,DuracionTotal")] 
         {
             sendero = JsonConvert.DeserializeObject<Sendero>(Request.Form["Sendero"]);
@@ -236,7 +242,7 @@ namespace TurApp.Controllers
                 #endregion
 
 
-                #region Delete and Add "SenderoPunto"  
+                #region Delete and Add "SenderoPuntoElevacion"  
                 if (db.SenderoPuntoElevacion.Any(r => r.SenderoID == sendero.ID))
                 {
                     //Delete old objects
@@ -254,7 +260,26 @@ namespace TurApp.Controllers
                 }
                 #endregion
 
-                
+
+                #region Delete and Add "SenderoPuntoInteres"  
+                if (db.SenderoPuntoInteres.Any(r => r.SenderoID == sendero.ID))
+                {
+                    //Delete old objects
+                    db.SenderoPuntoInteres.RemoveRange(db.SenderoPuntoInteres.Where(r => r.SenderoID == sendero.ID));
+
+                    //Add new objects
+                    sendero.SenderoPuntoInteres.ToList().ForEach(r => r.SenderoID = sendero.ID);
+                    db.SenderoPuntoInteres.AddRange(sendero.SenderoPuntoInteres);
+                }
+                else
+                {
+                    //Add new objects
+                    sendero.SenderoPuntoInteres.ToList().ForEach(r => r.SenderoID = sendero.ID);
+                    db.SenderoPuntoInteres.AddRange(sendero.SenderoPuntoInteres);
+                }
+                #endregion
+
+
                 db.Entry(sendero).State = EntityState.Modified;
                 db.SaveChanges();
 
@@ -340,12 +365,6 @@ namespace TurApp.Controllers
                 }
 
 
-
-
-
-
-
-
                 return Json(new
                 {
                     ok = true
@@ -359,6 +378,7 @@ namespace TurApp.Controllers
         }
 
         // GET: Sendero/Delete/5
+        [CompressFilter]
         public ActionResult Delete(int? id)
         {
             if (id == null)

@@ -6,8 +6,10 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using TurApp.Filters;
 using TurApp.Models;
 
 namespace TurApp.Controllers
@@ -33,7 +35,7 @@ namespace TurApp.Controllers
                 SenderoPuntoElevacion = r.SenderoPuntoElevacion.Select(x => new { x.Latitud, x.Longitud, x.Altura }),
                 r.RutaImagen,
                 r.RutZipMapa,
-                TipoDificultadFisicaID = r.TipoDificultadFisica.Descripcion,
+                TipoDificultadFisica= r.TipoDificultadFisica.Descripcion,
                 TipoDificultadTecnica = r.TipoDificultadTecnica.Descripcion,
                 r.ImgBase64
             });
@@ -41,6 +43,40 @@ namespace TurApp.Controllers
 
             return Json(new {Senderos = data});
         }
+
+
+        //public async Task<IHttpActionResult> GetSenderoGZip()
+        [Route("api/SenderosGZip")]
+        [AllowAnonymous]
+        [CompressFilter]
+        public IHttpActionResult GetSenderoGZip()
+        {
+            var data = db.Sendero.Select(r => new {
+                r.ID,
+                r.Nombre,
+                r.Descripcion,
+                r.LugarInicio,
+                r.LugarFin,
+                r.Distancia,
+                r.Desnivel,
+                r.DuracionTotal,
+                r.AlturaMaxima,
+                //SenderoPunto = r.SenderoPunto.Select(x => new { x.Latitud, x.Longitud }),
+                SenderoPuntoElevacion = r.SenderoPuntoElevacion.Select(x => new { x.Latitud, x.Longitud, x.Altura }),
+                r.RutaImagen,
+                r.RutZipMapa,
+                TipoDificultadFisica = r.TipoDificultadFisica.Descripcion,
+                TipoDificultadTecnica = r.TipoDificultadTecnica.Descripcion,
+                r.ImgBase64
+            });
+
+            //return Json(new { Senderos = data });
+            return Ok(data);
+        }
+
+
+
+
 
         // GET: api/SenderosAPI/5
         [ResponseType(typeof(Sendero))]
@@ -61,7 +97,7 @@ namespace TurApp.Controllers
                 SenderoPuntoElevacion = r.SenderoPuntoElevacion.Select(x => new { x.Latitud, x.Longitud, x.Altura }),
                 r.RutaImagen,
                 r.RutZipMapa,
-                TipoDificultadFisicaID = r.TipoDificultadFisica.Descripcion,
+                TipoDificultadFisica = r.TipoDificultadFisica.Descripcion,
                 TipoDificultadTecnica = r.TipoDificultadTecnica.Descripcion,
                 r.ImgBase64
                 

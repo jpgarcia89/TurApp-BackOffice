@@ -166,13 +166,24 @@
                                 </div>
                             </div>
 
+                            <!-- Fila 2 -Archivo zipRecursosMapaOffline-->
+                            <div class="form-group">
+                                <label class="control-label" for="zipMapa">Zip Mapa:</label>
+                                <div>
+                                    @Html.TextBox("zipMapa", "", htmlAttributes: new { @class = "form-control", type = "file", accept = ".zip" })
+                                    <p class="text-success">@ViewBag.Message2</p>
+                                </div>
+                            </div>
+
+                            
+
                         </div>
 
 
                         <!-- Columna 2 -->
                         <div class="col-lg-6">
 
-                            <!-- Fila 1 - Nombre-->
+                            <!-- Fila 1 - Descripcion-->
                             <div class="form-group" style="margin-bottom: 2%;">
                                 <label class="control-label " for="Descripcion">Descripcion:</label>
                                 <div>
@@ -186,15 +197,15 @@
                                 </div>
                             </div>
 
-                            <!-- Fila 2 -Archivo zipRecursosMapaOffline-->
-                            <div class="form-group">
-                                <label class="control-label" for="zipMapa">Zip Mapa:</label>
+                            <!-- Fila 2 - InfoInteres-->
+                            <div class="form-group" style="margin-bottom: 2%;">
+                                <label class="control-label " for="InfoInteres">Informacion de Interes:</label>
                                 <div>
-                                    @Html.TextBox("zipMapa", "", htmlAttributes: new { @class = "form-control", type = "file", accept = ".zip" })
-                                    <p class="text-success">@ViewBag.Message2</p>
+                                    @Html.TextAreaFor(model => model.InfoInteres, new { @class = "form-control", rows = "5", style = "max-width:100%; margin-bottom: 3%;" })
+                                    @Html.ValidationMessageFor(model => model.InfoInteres, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
+                            
                             <!-- Fila 3 - Archivo Imagen-->
                             <div class="form-group">
                                 <label class="control-label" for="Imagen">Imagen:</label>
@@ -422,6 +433,7 @@
         var data = {
             Nombre: $("#Nombre").val(),
             Descripcion: $("#Descripcion").val(),
+            InfoInteres: $("#InfoInteres").val(),
             LugarInicio: $("#LugarInicio").val(),
             LugarFin: $("#LugarFin").val(),
             TipoDificultadTecnicaID: $("#TipoDificultadTecnicaID").val(),
@@ -435,6 +447,8 @@
             SenderoPuntoElevacion: pointsArray,//Puntos con elevacion... 255 puntos para dibujar graficos
             SenderoPunto: [], // Puntos originales para formar polyline
             SenderoPuntoInteres: [],
+            CalcularIdaVuelta:$("#chkIdaVuelta")[0].checked,
+            //chkIdaVuelta
         };
 
         if (polylinePath != null) {
