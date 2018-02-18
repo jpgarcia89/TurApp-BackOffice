@@ -3,7 +3,7 @@
 @{
     //Layout = null;
     ViewBag.Title = "Senderos";
-
+    Random rnd = new Random();
 }
 
 
@@ -49,7 +49,7 @@
     <ol class="breadcrumb">
         <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <li><a>Administración</a></li>
-        <li><a href="@Url.Action("Index","Sendero")">Senderos</a></li>
+        <li><a href="@Url.Action("Index","Senderos")">Senderos</a></li>
         <li class="active">Editar</li>
     </ol>
 </section>
@@ -192,11 +192,13 @@
                             </div>
                         </div>
                         
+                        
                         <!-- Fila 3 - Vista previa Imagen-->
                         <div class="form-group">
                             <label class="control-label" for="Imagen">Vista previa:</label>
                             <div id="divImg">
-                                <img src="@(String.IsNullOrEmpty(Model.RutaImagen)? Url.Content("~/Content/img/noimage.jpg"):Model.RutaImagen)" class="img-responsive img-thumbnail" alt="Responsive image" style="min-width: 100%;">
+                                @*<img src="@(String.IsNullOrEmpty(Model.RutaImagen)? Url.Content("~/Content/img/noimage.jpg"):Model.RutaImagen+"?"+rnd.Next(1,255))" class="img-responsive img-thumbnail" alt="Responsive image" style="min-width: 100%;">*@
+                                <img src="@(String.IsNullOrEmpty(Model.RutaImagen)? Url.Content("~/Content/img/noimage.jpg"):Model.ImgBase64)" class="img-responsive img-thumbnail" alt="Responsive image" style="min-width: 100%;">
                             </div>
                         </div>
                     </div>
@@ -210,9 +212,10 @@
 
             @Html.HiddenFor(r=>r.RutaImagen)
             @Html.HiddenFor(r => r.RutZipMapa)
+            @Html.HiddenFor(r => r.ImgBase64)
 
 
-           
+
             }
         </div>
     </div>
@@ -398,6 +401,7 @@
             SenderoPuntoInteres: [], // Puntos originales para formar polyline
             RutaImagen: $("#RutaImagen").val(),
             RutZipMapa: $("#RutZipMapa").val(),
+            ImgBase64: $("#ImgBase64").val(),            
             CalcularIdaVuelta:$("#chkIdaVuelta")[0].checked,
         };
 

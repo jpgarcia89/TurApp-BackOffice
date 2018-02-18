@@ -135,7 +135,7 @@ namespace TurApp.Controllers
                                     string fileName = "senderoMapa_" + sendero.ID + Path.GetExtension(zipMapa.FileName);        //Ej: "senderoiMapa_2.jpg"
                                     string virtualDirectoryPath = "~/Content/Senderos/" + sendero.ID + "/Mapa";                 //Ej: "~/Content/Senderos/2/Mapa/"
                                     string phisicaldirectoryPath = Server.MapPath(virtualDirectoryPath);
-                                    string fullVirtualPath = Path.Combine(virtualDirectoryPath, fileName);
+                                    string fullVirtualPath = virtualDirectoryPath + "/" + fileName;
                                     string fullPhisicalPath = Path.Combine(phisicaldirectoryPath, fileName);                    //Ej: "~/Content/Senderos/2/Img/senderoiImg_2.jpg"
 
                                     //CreateDirectory
@@ -345,7 +345,7 @@ namespace TurApp.Controllers
                                 string fileName = "senderoMapa_" + sendero.ID + Path.GetExtension(zipMapa.FileName);        //Ej: "senderoiMapa_2.jpg"
                                 string virtualDirectoryPath = "~/Content/Senderos/" + sendero.ID + "/Mapa";                 //Ej: "~/Content/Senderos/2/Mapa/"
                                 string phisicaldirectoryPath = Server.MapPath(virtualDirectoryPath);
-                                string fullVirtualPath = Path.Combine(virtualDirectoryPath, fileName);
+                                string fullVirtualPath = virtualDirectoryPath + "/" + fileName;
                                 string fullPhisicalPath = Path.Combine(phisicaldirectoryPath, fileName);                    //Ej: "~/Content/Senderos/2/Img/senderoiImg_2.jpg"
 
                                 //CreateDirectory

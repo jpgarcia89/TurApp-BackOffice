@@ -25,6 +25,7 @@ namespace TurApp.Controllers
                 r.ID,
                 r.Nombre,
                 r.Descripcion,
+                r.InfoInteres,
                 r.LugarInicio,
                 r.LugarFin,
                 r.Distancia,
@@ -33,6 +34,7 @@ namespace TurApp.Controllers
                 r.AlturaMaxima,
                 //SenderoPunto = r.SenderoPunto.Select(x => new { x.Latitud, x.Longitud }),
                 SenderoPuntoElevacion = r.SenderoPuntoElevacion.Select(x => new { x.Latitud, x.Longitud, x.Altura }),
+                SenderoPuntoInteres = r.SenderoPuntoInteres.Select(x => new {x.Descripcion, x.Latitud, x.Longitud, x.TipoPuntoInteresID }),
                 r.RutaImagen,
                 r.RutZipMapa,
                 TipoDificultadFisica= r.TipoDificultadFisica.Descripcion,
@@ -55,6 +57,7 @@ namespace TurApp.Controllers
                 r.ID,
                 r.Nombre,
                 r.Descripcion,
+                r.InfoInteres,
                 r.LugarInicio,
                 r.LugarFin,
                 r.Distancia,
@@ -63,6 +66,7 @@ namespace TurApp.Controllers
                 r.AlturaMaxima,
                 //SenderoPunto = r.SenderoPunto.Select(x => new { x.Latitud, x.Longitud }),
                 SenderoPuntoElevacion = r.SenderoPuntoElevacion.Select(x => new { x.Latitud, x.Longitud, x.Altura }),
+                SenderoPuntoInteres = r.SenderoPuntoInteres.Select(x => new { x.Descripcion, x.Latitud, x.Longitud, x.TipoPuntoInteresID }),
                 r.RutaImagen,
                 r.RutZipMapa,
                 TipoDificultadFisica = r.TipoDificultadFisica.Descripcion,
@@ -70,8 +74,8 @@ namespace TurApp.Controllers
                 r.ImgBase64
             });
 
-            //return Json(new { Senderos = data });
-            return Ok(data);
+            return Json(new { Senderos = data });
+            //return Ok(data);
         }
 
 
@@ -80,6 +84,7 @@ namespace TurApp.Controllers
 
         // GET: api/SenderosAPI/5
         [ResponseType(typeof(Sendero))]
+        [CompressFilter]
         public IHttpActionResult GetSendero(int id)
         {
             //Sendero sendero = db.Sendero.Find(id);
@@ -87,6 +92,7 @@ namespace TurApp.Controllers
                 r.ID,
                 r.Nombre,
                 r.Descripcion,
+                r.InfoInteres,
                 r.LugarInicio,
                 r.LugarFin,
                 r.Distancia,
@@ -95,6 +101,7 @@ namespace TurApp.Controllers
                 r.AlturaMaxima,
                 //SenderoPunto = r.SenderoPunto.Select(x => new { x.Latitud, x.Longitud }),
                 SenderoPuntoElevacion = r.SenderoPuntoElevacion.Select(x => new { x.Latitud, x.Longitud, x.Altura }),
+                SenderoPuntoInteres = r.SenderoPuntoInteres.Select(x => new { x.Descripcion, x.Latitud, x.Longitud, x.TipoPuntoInteresID }),
                 r.RutaImagen,
                 r.RutZipMapa,
                 TipoDificultadFisica = r.TipoDificultadFisica.Descripcion,

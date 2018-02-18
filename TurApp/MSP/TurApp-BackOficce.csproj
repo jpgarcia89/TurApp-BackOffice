@@ -367,9 +367,13 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\images\station3.png" />
     <Content Include="Content\images\station6.png" />
+    <Content Include="Content\img\cumbre.png" />
     <Content Include="Content\img\cumbre.svg" />
+    <Content Include="Content\img\fin.png" />
     <Content Include="Content\img\fin.svg" />
+    <Content Include="Content\img\inicio.png" />
     <Content Include="Content\img\inicio.svg" />
+    <Content Include="Content\img\mirador.png" />
     <Content Include="Content\img\mirador.svg" />
     <Content Include="Content\img\noimage.jpg" />
     <Content Include="Content\img\senderismo.jpg" />
