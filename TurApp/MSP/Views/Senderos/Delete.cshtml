@@ -4,109 +4,86 @@
     Layout = null;
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
-</head>
-<body>
-    <h3>Are you sure you want to delete this?</h3>
-    <div>
-        <h4>Senderos</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Nombre)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Descripcion)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.LugarInicio)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.LugarInicio)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.LugarFin)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.LugarFin)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.TipoDificultadTecnicaID)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TipoDificultadTecnicaID)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.TipoDificultadFisicaID)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TipoDificultadFisicaID)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Desnivel)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Desnivel)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Distancia)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Distancia)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.AlturaMaxima)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.AlturaMaxima)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.DuracionTotal)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.DuracionTotal)
-            </dd>
-    
-        </dl>
-    
-        @using (Html.BeginForm()) {
-            @Html.AntiForgeryToken()
-    
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Index")
+
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <h4><i class="icon fa fa-ban"></i> Atencion!</h4>
+    ¿Esta seguro que desea eliminar este elemento?
+</div>
+
+<div>
+
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Nombre">Nombre</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
             </div>
-        }
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Sector">Sector</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SenderoSector.Nombre, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="NombreDepartamento">Departamento</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SenderoSector.NombreDepartamento, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+            </div>
+        </div>
+
     </div>
-</body>
-</html>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+    }
+</div>
+
+<script>
+    //Click "Guardar"
+    $("#btnGuardar").unbind("click");
+    $("#btnGuardar").click(function () {
+        //debugger
+        $('#contenidoModal form').submit()
+    });
+
+    //Submit
+    $('form').submit(function () {
+        //debugger
+        if ($(this).valid()) {
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                beforeSend: function (xhr) {
+                    abrirWaiting();
+                },
+                success: function (result) {
+                    debugger
+                    cerrarWaiting();
+
+                    if (result.ok == "true") {
+                        window.location.href = window.location.href;
+                        cerrarModal();
+                        return;
+                    }
+
+                    $('#contenidoModal').html(result);
+
+                },
+                error: function () {
+                    cerrarWaiting();
+                }
+            });
+        }
+        return false;
+    });
+
+</script>

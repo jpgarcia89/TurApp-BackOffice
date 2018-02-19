@@ -330,6 +330,9 @@
     <Compile Include="Models\SenderoPuntoInteres.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SenderoSector.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TipoDificultadFisica.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -574,6 +577,13 @@
     <Content Include="Models\Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\Sector\1\Mapa\sectorMapa_1.zip" />
+    <Content Include="Content\Sector\3\Mapa\sectorMapa_3.zip" />
+    <Content Include="Content\Sector\4\Mapa\sectorMapa_4.zip" />
+    <Content Include="Content\Sector\5\Mapa\sectorMapa_5.zip" />
+    <Content Include="Content\Sector\6\Mapa\sectorMapa_6.zip" />
+    <Content Include="Content\Sector\7\Mapa\sectorMapa_7.zip" />
+    <Content Include="Content\Sector\8\Mapa\sectorMapa_8.zip" />
     <None Include="Properties\PublishProfiles\TurApp-Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -1262,6 +1272,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Sector\2\Mapa\" />
     <Folder Include="Content\Senderos\6\Img\" />
     <Folder Include="ExportaSISA\" />
     <Folder Include="UploadedFiles\" />

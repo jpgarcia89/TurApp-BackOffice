@@ -6,6 +6,19 @@
 }
 
 
+<style>
+    thead{
+        background-color: #e8e8e8;
+    }
+
+    tr.group,
+    tr.group:hover {
+        background-color: #55b9a1 !important; /*#393939*/
+        text-align:center;
+        color:white;
+    }
+</style>
+
 
 <section class="content-header">
     <h1>
@@ -37,15 +50,17 @@
             </a>
         </div>
         <div class="box-body">
-            <table id="dtSenderos" class="table table-bordered table-striped">
-                <thead>
+            <table id="dtSenderos" class="table table-bordered">@*class="table table-bordered table-striped"*@
+                <thead style="background-color: #e8e8e8;">
                     <tr>
-                        <th style="text-align:center;">Sendero</thstyle="text-align:center;">
-                        <th style="text-align:center;">Desnivel</th>
-                        <th style="text-align:center;">Distancia</th>
+                        <th style="text-align:center;">Sendero</th>
+                        @*<th style="text-align:center;">Desnivel</th>
+                            <th style="text-align:center;">Distancia</th>*@
+                        <th style="text-align:center;">Sector</th>
+                        <th style="text-align:center;">Departamento</th>
                         <th style="text-align:center;">AlturaMaxima</th>
                         <th style="text-align:center;">DuracionTotal</th>
-                        <th style="text-align:center;width:110px;" >Acciones</th>
+                        <th style="text-align:center;width:110px;">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,27 +68,29 @@
                     {
                         <tr>
                             <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                            <td>@Html.DisplayFor(modelItem => item.FullDesnivel)</td>
-                            <td>@Html.DisplayFor(modelItem => item.FullDistancia)</td>
+                            @*<td>@Html.DisplayFor(modelItem => item.FullDesnivel)</td>
+                                <td>@Html.DisplayFor(modelItem => item.FullDistancia)</td>*@
+                            <td>@Html.DisplayFor(modelItem => item.SenderoSector.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.SenderoSector.NombreDepartamento)</td>
                             <td>@Html.DisplayFor(modelItem => item.FullAlturaMaxima)</td>
                             <td>@Html.DisplayFor(modelItem => item.DuracionTotal)</td>
 
-                        <td style="text-align:center;">
-                            <div class="btn-group-sm">
-                                <span data-placement="top" title="Editar" data-toggle="tooltip">
-                                    <a class="btn btn-info fa fa-pencil-square-o" href="@Url.Action("Edit","Senderos", new {id=item.ID})"></a>
-                                </span>
+                            <td style="text-align:center;">
+                                <div class="btn-group-sm">
+                                    <span data-placement="top" title="Editar" data-toggle="tooltip">
+                                        <a class="btn btn-info fa fa-pencil-square-o" href="@Url.Action("Edit","Senderos", new {id=item.ID})"></a>
+                                    </span>
 
-                                @*<span data-placement="top" title="Detalles" data-toggle="tooltip">
-                                    <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Senderos/Details/@item.ID','Detalle','Sendero')"></a>
-                                </span>*@
-                                <span data-placement="top" title="Eliminar" data-toggle="tooltip">
-                                    <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Senderos/Delete/@item.ID','Eliminar','Sendero')"></a>
-                                </span>
-                            </div>
-                        </td>
+                                    @*<span data-placement="top" title="Detalles" data-toggle="tooltip">
+                                            <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Senderos/Details/@item.ID','Detalle','Sendero')"></a>
+                                        </span>*@
+                                    <span data-placement="top" title="Eliminar" data-toggle="tooltip">
+                                        <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Senderos/Delete/@item.ID','Eliminar','Sendero')"></a>
+                                    </span>
+                                </div>
+                            </td>
 
-                    </tr>
+                        </tr>
                     }
                 </tbody>
             </table>
@@ -84,10 +101,51 @@
 <script>
     $(function () {
         if (!$.fn.dataTable.isDataTable('#dtSenderos')) {
-            $('#dtSenderos').DataTable({
-                "language": DataTableEsp()
+
+            var table=$('#dtSenderos').DataTable({
+                "language": DataTableEsp(),
+                "pageLength": 50,
+                "order": [[2, 'asc'], [1, 'asc']],
+
+                "columnDefs": [
+                    { "visible": false, "targets": 2 }
+                ],
+                "drawCallback": function (settings) {
+                    var api = this.api();
+                    var rows = api.rows({ page: 'current' }).nodes();
+                    var last = null;
+
+                    api.column(2, { page: 'current' }).data().each(function (group, i) {
+                        if (last !== group) {
+                            $(rows).eq(i).before(
+                                '<tr class="group"><td colspan="5">' + group + '</td></tr>'
+                            );
+
+                            last = group;
+                        }
+                    });
+                }
             });
-        }
+
+            // Order by the grouping
+            $('#dtSenderos tbody').on('click', 'tr.group', function () {
+                var currentOrder = table.order()[0];
+                if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                    table.order([2, 'desc']).draw();
+                }
+                else {
+                    table.order([2, 'asc']).draw();
+                }
+            });
+
+            
+        }//enf-if
+
+
+        
+
+
+        
     });
 </script>
 

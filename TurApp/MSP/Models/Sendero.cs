@@ -40,6 +40,7 @@ namespace TurApp.Models
         public Nullable<bool> CalcularIdaVuelta { get; set; }
         public string ImgBase64 { get; set; }
         public string InfoInteres { get; set; }
+        public int SenderoSectorID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SenderoPunto> SenderoPunto { get; set; }
@@ -49,5 +50,6 @@ namespace TurApp.Models
         public virtual TipoDificultadTecnica TipoDificultadTecnica { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SenderoPuntoInteres> SenderoPuntoInteres { get; set; }
+        public virtual SenderoSector SenderoSector { get; set; }
     }
 }

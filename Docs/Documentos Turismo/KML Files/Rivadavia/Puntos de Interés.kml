@@ -1,0 +1,1836 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+<Document>
+	<name>Puntos de Interés.kml</name>
+	<Style id="style23">
+		<IconStyle>
+			<scale>0.8</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-blank.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-blank-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="style32">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/hiker.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+	</Style>
+	<StyleMap id="msn_grn-circle0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_grn-circle0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_grn-circle</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="stylemap_id39">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style15</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style10</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style36">
+		<IconStyle>
+			<scale>0.8</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-blank.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-blank-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<StyleMap id="msn_convenience">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_convenience0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_convenience</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="stylemap_id310">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style31</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style30</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_ylw-circle3">
+		<IconStyle>
+			<scale>0.816667</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="style6">
+		<IconStyle>
+			<scale>0.8</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/hospitals.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+	</Style>
+	<StyleMap id="msn_caution">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_caution</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_caution</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_grn-circle0">
+		<IconStyle>
+			<scale>0.933333</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="style30">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="sh_ylw-circle1">
+		<IconStyle>
+			<scale>0.933333</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="style9">
+		<IconStyle>
+			<scale>0.8</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-blank.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-blank-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<StyleMap id="stylemap_id312">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style35</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style4</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_convenience0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_convenience</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_convenience0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style11">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="sh_water">
+		<IconStyle>
+			<scale>0.816667</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/water.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<StyleMap id="stylemap_id30">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style29</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style8</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_grn-circle">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_grn-circle1</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_grn-circle0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="stylemap_id38">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style27</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style5">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-blank.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-blank-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="style26">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<StyleMap id="msn_ylw-circle2">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-circle5</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-circle</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style33">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-blank.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-blank-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="sh_convenience0">
+		<IconStyle>
+			<scale>0.816667</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/convenience.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<StyleMap id="stylemap_id33">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style25</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style36</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style12">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/volcano.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="sn_grn-circle0">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="style14">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<StyleMap id="stylemap_id317">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style21</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style14</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style27">
+		<IconStyle>
+			<scale>0.8</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/volcano.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="sn_ylw-circle2">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="style7">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/volcano.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<StyleMap id="stylemap_id35">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style16</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style1</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style3">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/volcano.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="style34">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<StyleMap id="msn_ylw-circle4">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-circle3</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-circle1</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style19">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/volcano.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="style8">
+		<IconStyle>
+			<scale>0.8</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="sn_grn-circle1">
+		<IconStyle>
+			<scale>0.8</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="sn_caution">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/caution.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="style15">
+		<IconStyle>
+			<scale>0.8</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="sh_hiker0">
+		<IconStyle>
+			<scale>0.816667</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/hiker.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<StyleMap id="msn_water">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_water0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_water</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sn_ylw-circle5">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="style31">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="style21">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="sn_hiker1">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/hiker.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="sh_caution">
+		<IconStyle>
+			<scale>0.827273</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/caution.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="style">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/water.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="style35">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="sn_hiker10">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/hiker.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="sn_convenience0">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/convenience.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="sn_ylw-circle3">
+		<IconStyle>
+			<scale>0.8</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="sh_ylw-circle">
+		<IconStyle>
+			<scale>0.816667</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<StyleMap id="stylemap_id311">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style23</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style9</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sn_convenience">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/convenience.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="style2">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/hiker.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+	</Style>
+	<StyleMap id="stylemap_id314">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style28</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style12</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style24">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="sn_water0">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/water.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="style16">
+		<IconStyle>
+			<scale>0.8</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<StyleMap id="stylemap_id32">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style20</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style7</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_convenience">
+		<IconStyle>
+			<scale>0.816667</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/convenience.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="style25">
+		<IconStyle>
+			<scale>0.8</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-blank.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-blank-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<StyleMap id="msn_ylw-circle3">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-circle2</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-circle3</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style17">
+		<IconStyle>
+			<scale>0.8</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/hospitals.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="sh_hiker1">
+		<IconStyle>
+			<scale>0.816667</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/hiker.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<StyleMap id="stylemap_id31">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style19</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style3</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style10">
+		<IconStyle>
+			<scale>0.8</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<StyleMap id="stylemap_id313">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style5</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style33</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style4">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<StyleMap id="msn_camera1">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_camera1</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_camera1</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style22">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/water.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="sh_grn-circle">
+		<IconStyle>
+			<scale>0.816667</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/grn-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Style id="style0">
+		<IconStyle>
+			<scale>0.8</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/volcano.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="sh_camera1">
+		<IconStyle>
+			<scale>1.05</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/camera.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+	</Style>
+	<StyleMap id="stylemap_id316">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style6</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style17</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style20">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/volcano.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="style28">
+		<IconStyle>
+			<scale>0.7</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/volcano.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<StyleMap id="stylemap_id37">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style24</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style11</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sn_camera1">
+		<IconStyle>
+			<scale>0.9</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/camera.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="style29">
+		<IconStyle>
+			<scale>0.8</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<StyleMap id="stylemap_id315">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style2</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style32</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_hiker00">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_hiker10</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_hiker0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="stylemap_id34">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style34</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style26</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_hiker0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_hiker1</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_hiker1</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style1">
+		<IconStyle>
+			<scale>0.8</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0.8</scale>
+		</LabelStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<StyleMap id="stylemap_id3">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style22</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Folder>
+		<name>Puntos de Interés</name>
+		<open>1</open>
+		<Placemark>
+			<name>Bajada por Acarreo con Precaución</name>
+			<LookAt>
+				<gx:TimeSpan>
+					<begin>2017-05-23T17:58:42Z</begin>
+					<end>2017-07-11T16:51:50Z</end>
+				</gx:TimeSpan>
+				<longitude>-68.70149334136414</longitude>
+				<latitude>-31.56163152734194</latitude>
+				<altitude>0</altitude>
+				<heading>-28.25099599392927</heading>
+				<tilt>67.70569306424351</tilt>
+				<range>1063.973381909842</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_caution</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.69850104508461,-31.5604681583172,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Mirador 7 Caminos</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.70075612724205</longitude>
+				<latitude>-31.5632165847039</latitude>
+				<altitude>0</altitude>
+				<heading>3.446172364621138</heading>
+				<tilt>60.49523534165731</tilt>
+				<range>824.9780673985403</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_camera1</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.70106631993298,-31.5654946755756,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Libros de Sarmiento</name>
+			<styleUrl>#stylemap_id39</styleUrl>
+			<Point>
+				<coordinates>-68.68455727098447,-31.55254736176489,0</coordinates>
+			</Point>
+			<atom:link href="C:/Users/Augusto/AppData/Roaming/Garmin/BaseCamp/GeotaggedPhotos/DSC00741.jpg"></atom:link>
+		</Placemark>
+		<Placemark>
+			<name>Cabeza del Indio</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.69161118482666</longitude>
+				<latitude>-31.55773261907499</latitude>
+				<altitude>0</altitude>
+				<heading>-13.54078363652723</heading>
+				<tilt>43.71353557426525</tilt>
+				<range>2650.511048254519</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#stylemap_id35</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.69778318526089,-31.56007882984559,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>7 Caminos</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.69897882440229</longitude>
+				<latitude>-31.56085207694301</latitude>
+				<altitude>0</altitude>
+				<heading>-13.54053152461243</heading>
+				<tilt>51.92659309705211</tilt>
+				<range>843.5268729364586</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#stylemap_id30</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.70063793696578,-31.56082827995448,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Hostería D.F. Sarmiento</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.69894914403386</longitude>
+				<latitude>-31.56118478550963</latitude>
+				<altitude>0</altitude>
+				<heading>-13.54054707589108</heading>
+				<tilt>51.92671601745548</tilt>
+				<range>860.9094187118933</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#stylemap_id316</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.69987443317575,-31.56154657570612,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Sierra de Marquesado</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.69596026805145</longitude>
+				<latitude>-31.54403119975317</latitude>
+				<altitude>0</altitude>
+				<heading>-19.86649123095551</heading>
+				<tilt>30.05857981077968</tilt>
+				<range>13164.44535839855</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#stylemap_id38</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.69177781952408,-31.54272390427384,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Cº Parquinson 1.661m</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.69776766816086</longitude>
+				<latitude>-31.58174107327516</latitude>
+				<altitude>0</altitude>
+				<heading>-13.54301908381032</heading>
+				<tilt>56.0869300641451</tilt>
+				<range>2965.942698844516</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#stylemap_id32</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.69930788145125,-31.59050803594443,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Sierra Chica de Zonda</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.69760386718949</longitude>
+				<latitude>-31.57471277750312</latitude>
+				<altitude>0</altitude>
+				<heading>-19.86646926920382</heading>
+				<tilt>29.80722707453645</tilt>
+				<range>1991.779797628564</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#stylemap_id314</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.69743342229371,-31.5743715472222,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Sierras Azules</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.73485535286108</longitude>
+				<latitude>-31.61016248344797</latitude>
+				<altitude>0</altitude>
+				<heading>-19.84683352132527</heading>
+				<tilt>29.9063645038966</tilt>
+				<range>24658.06787418433</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#stylemap_id31</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.79756269905049,-31.61041424002568,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Dique de Ullum</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.65635408610963</longitude>
+				<latitude>-31.50531532636973</latitude>
+				<altitude>0</altitude>
+				<heading>-19.88794659105633</heading>
+				<tilt>29.90706164492893</tilt>
+				<range>24813.75502098955</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#stylemap_id3</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.67469585771669,-31.48243753860349,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Monumento a Rivadavia</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.69944866917346</longitude>
+				<latitude>-31.56135190018819</latitude>
+				<altitude>0</altitude>
+				<heading>-19.79422710094623</heading>
+				<tilt>58.78901221036173</tilt>
+				<range>347.1639921716098</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#stylemap_id317</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.69960695920437,-31.56197641416033,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Virgen Nuestra Sra. del Líbano</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.7002648477765</longitude>
+				<latitude>-31.5615156764513</latitude>
+				<altitude>0</altitude>
+				<heading>-19.79203038639689</heading>
+				<tilt>60.00426506436374</tilt>
+				<range>281.54397856715</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#stylemap_id37</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.70060348385273,-31.56203862028353,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Camping de Rivadavia</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.70062221378075</longitude>
+				<latitude>-31.5614911967396</latitude>
+				<altitude>0</altitude>
+				<heading>-19.79184334563265</heading>
+				<tilt>60.00748979657922</tilt>
+				<range>514.2076941654975</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#stylemap_id310</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.70076578804134,-31.56241105403294,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Museo Einstein</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.70615905530254</longitude>
+				<latitude>-31.56336196051761</latitude>
+				<altitude>0</altitude>
+				<heading>-19.78894514725365</heading>
+				<tilt>60.00726836194693</tilt>
+				<range>485.7215184716639</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#stylemap_id312</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.70717375506787,-31.56362859040409,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Dique Soldano</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.70552025699254</longitude>
+				<latitude>-31.56351176051854</latitude>
+				<altitude>0</altitude>
+				<heading>3.449321400497968</heading>
+				<tilt>60.96281805708903</tilt>
+				<range>511.0300066885259</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#stylemap_id34</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.70749662346378,-31.56372255816292,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Qº Juan el Pobre</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.70312104236544</longitude>
+				<latitude>-31.56505412965076</latitude>
+				<altitude>0</altitude>
+				<heading>3.448065472986836</heading>
+				<tilt>60.9665605087466</tilt>
+				<range>998.518923385406</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#stylemap_id311</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.70366840384074,-31.56853513896815,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Sendero Cabeza del Indio</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.70138192684384</longitude>
+				<latitude>-31.56212647261271</latitude>
+				<altitude>0</altitude>
+				<heading>3.446499971905993</heading>
+				<tilt>60.49497686147576</tilt>
+				<range>811.4629170496648</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#stylemap_id33</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.70038533776791,-31.56037758352403,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Parque Provincial Dr. Federico Cantoni</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.69257098955666</longitude>
+				<latitude>-31.5532820874412</latitude>
+				<altitude>0</altitude>
+				<heading>3.441888482368873</heading>
+				<tilt>60.5031972892123</tilt>
+				<range>1786.536835013246</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_grn-circle</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.68982839192881,-31.55330575390017,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Kiosco</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.69393238031424</longitude>
+				<latitude>-31.55652703101519</latitude>
+				<altitude>0</altitude>
+				<heading>3.44260105255691</heading>
+				<tilt>60.49458557806968</tilt>
+				<range>646.8284215994236</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_convenience</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.69426655312655,-31.55787077852102,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Autódromo Eduardo Copello</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.69240665338033</longitude>
+				<latitude>-31.55509375005033</latitude>
+				<altitude>0</altitude>
+				<heading>3.441802695506595</heading>
+				<tilt>60.49605624578319</tilt>
+				<range>815.7862372581757</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-circle4</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.69262697480266,-31.55297755139617,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Canal Estero de Zonda</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.69278528007946</longitude>
+				<latitude>-31.55634807474782</latitude>
+				<altitude>0</altitude>
+				<heading>3.847953722226166</heading>
+				<tilt>37.74613375673911</tilt>
+				<range>1662.4717462969</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_grn-circle0</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.69297147930578,-31.55701955332793,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Puente del Antiguo Dique Curvo</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.69582915261559</longitude>
+				<latitude>-31.56188334260422</latitude>
+				<altitude>0</altitude>
+				<heading>3.89126473250513</heading>
+				<tilt>58.07187410477908</tilt>
+				<range>298.0985795588075</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-circle2</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.69598826008541,-31.56139830965864,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Kiosco</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.69635586817452</longitude>
+				<latitude>-31.56145892690694</latitude>
+				<altitude>0</altitude>
+				<heading>3.891540396048851</heading>
+				<tilt>58.07212366284043</tilt>
+				<range>308.9816830281998</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_convenience0</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.69634437318256,-31.56124819352939,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Instituto Geofísico Sismológico Ing. Volponi</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.68277180240979</longitude>
+				<latitude>-31.54443111894814</latitude>
+				<altitude>0</altitude>
+				<heading>3.523578654279551</heading>
+				<tilt>59.96047713708038</tilt>
+				<range>579.29233967966</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-circle3</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.68410300257338,-31.5454477411233,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Escudo Provincial</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.68277180239231</longitude>
+				<latitude>-31.5444311188781</latitude>
+				<altitude>0</altitude>
+				<heading>3.523578654276523</heading>
+				<tilt>59.96047713715115</tilt>
+				<range>579.2923475470933</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-circle3</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.68325323598079,-31.54537357883599,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Jardín de los Poetas</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.68239476728718</longitude>
+				<latitude>-31.54446700873663</latitude>
+				<altitude>0</altitude>
+				<heading>3.523339866237127</heading>
+				<tilt>59.59961922983083</tilt>
+				<range>240.2662716020158</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-circle3</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.6826852079262,-31.54484120231991,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Recreación &quot;Las Ideas No Se Matan&quot;</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.69604791768239</longitude>
+				<latitude>-31.5603718502859</latitude>
+				<altitude>0</altitude>
+				<heading>3.530321368957919</heading>
+				<tilt>59.75322541077434</tilt>
+				<range>484.7566878326745</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-circle3</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.69646817752441,-31.56081802876791,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Monumento al Ciclismo</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.69605807286442</longitude>
+				<latitude>-31.56086727767638</latitude>
+				<altitude>0</altitude>
+				<heading>3.53032833618039</heading>
+				<tilt>60.00251079723802</tilt>
+				<range>162.2057441608162</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-circle3</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.69629166849927,-31.56108176831284,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Reservorio de Agua</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.69434414314138</longitude>
+				<latitude>-31.55853788139565</latitude>
+				<altitude>0</altitude>
+				<heading>3.529431309592552</heading>
+				<tilt>60.00551878335433</tilt>
+				<range>488.1733141685131</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_water</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.69478609439392,-31.55912384697454,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>INICIO/FIN</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.70490422479111</longitude>
+				<latitude>-31.5630975386794</latitude>
+				<altitude>0</altitude>
+				<heading>-24.88929796939093</heading>
+				<tilt>52.61656616964147</tilt>
+				<range>717.58963151735</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_hiker0</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.70705486970819,-31.56422688280464,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>FIN</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.69969225804699</longitude>
+				<latitude>-31.56211365517123</latitude>
+				<altitude>0</altitude>
+				<heading>-24.89260345406457</heading>
+				<tilt>56.0584749263986</tilt>
+				<range>467.1500974390564</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_hiker00</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.69994500618994,-31.56167789745798,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>FIN</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.70866240726649</longitude>
+				<latitude>-31.57627226698291</latitude>
+				<altitude>0</altitude>
+				<heading>-24.88805884977988</heading>
+				<tilt>60.01249997460808</tilt>
+				<range>992.8523837403524</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#stylemap_id315</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.70712188776879,-31.57860408383194,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Sendero Libros de Sarmiento</name>
+			<LookAt>
+				<gx:TimeStamp><when>2017-05-23T17:58:42Z</when>
+</gx:TimeStamp>
+				<longitude>-68.68507837513248</longitude>
+				<latitude>-31.54630310531384</latitude>
+				<altitude>0</altitude>
+				<heading>-24.00924390133718</heading>
+				<tilt>55.41810342712003</tilt>
+				<range>1438.595353687342</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#stylemap_id313</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.68326607521951,-31.54978210967177,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>INICIO|FIN</name>
+			<LookAt>
+				<gx:TimeSpan>
+					<begin>2017-05-23T17:58:42Z</begin>
+					<end>2017-07-11T16:51:50Z</end>
+				</gx:TimeSpan>
+				<longitude>-68.69869403841761</longitude>
+				<latitude>-31.562475699973</latitude>
+				<altitude>0</altitude>
+				<heading>-156.7645036637319</heading>
+				<tilt>58.62202365448453</tilt>
+				<range>463.2960035878542</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_hiker00</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-68.69823096573202,-31.5625337920701,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>

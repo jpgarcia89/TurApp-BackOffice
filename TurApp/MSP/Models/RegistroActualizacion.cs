@@ -15,5 +15,6 @@ namespace TurApp.Models
     public partial class RegistroActualizacion
     {
         public System.DateTime FechaActualizacion { get; set; }
+        public int Version { get; set; }
     }
 }

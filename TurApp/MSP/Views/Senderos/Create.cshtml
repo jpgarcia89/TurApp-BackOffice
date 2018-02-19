@@ -108,7 +108,7 @@
                             </div>
 
 
-                            <!-- Fila 3 - TipoDificultadTecnicaID-->
+                            <!-- Fila 4 - TipoDificultadTecnicaID-->
                             <div class="form-group">
                                 <label class="control-label " for="Apellido">Dificultad Tecnica:</label>
                                 <div>
@@ -118,7 +118,7 @@
                             </div>
 
 
-                            <!-- Fila 3 - TipoDificultadFisicaID-->
+                            <!-- Fila 5 - TipoDificultadFisicaID-->
                             <div class="form-group">
                                 <label class="control-label" for="TipoDificultadFisicaID">Dificultad Fisica:</label>
                                 <div>
@@ -127,7 +127,16 @@
                                 </div>
                             </div>
 
-                            <!-- Fila 4 - Desnivel-->
+                            <!-- Fila 6 - SenderoSectorID-->
+                            <div class="form-group">
+                                <label class="control-label" for="SenderoSectorID">Sendero Sector:</label>
+                                <div>
+                                    @Html.DropDownList("SenderoSectorID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.SenderoSectorID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!-- Fila 7 - Desnivel-->
                             <div class="form-group">
                                 <label class="control-label" for="Desnivel">Desnivel:</label>
                                 <div class="input-group">
@@ -137,7 +146,7 @@
                                 </div>
                             </div>
 
-                            <!-- Fila 5 - Distancia-->
+                            <!-- Fila 8 - Distancia-->
                             <div class="form-group">
                                 <label class="control-label" for="Distancia">Distancia:</label>
                                 <div class="input-group">
@@ -147,7 +156,7 @@
                                 </div>
                             </div>
 
-                            <!-- Fila 6 - AlturaMaxima-->
+                            <!-- Fila 9 - AlturaMaxima-->
                             <div class="form-group">
                                 <label class="control-label" for="AlturaMaxima">AlturaMaxima:</label>
                                 <div class="input-group">
@@ -157,7 +166,7 @@
                                 </div>
                             </div>
 
-                            <!-- Fila 7 - DuracionTotal-->
+                            <!-- Fila 10 - DuracionTotal-->
                             <div class="form-group">
                                 <label class="control-label" for="DuracionTotal">Duración:</label>
                                 <div>
@@ -167,7 +176,7 @@
                             </div>
 
                             <!-- Fila 2 -Archivo zipRecursosMapaOffline-->
-                            <div class="form-group">
+                            <div class="form-group" style="display:none">
                                 <label class="control-label" for="zipMapa">Zip Mapa:</label>
                                 <div>
                                     @Html.TextBox("zipMapa", "", htmlAttributes: new { @class = "form-control", type = "file", accept = ".zip" })
@@ -438,6 +447,7 @@
             LugarFin: $("#LugarFin").val(),
             TipoDificultadTecnicaID: $("#TipoDificultadTecnicaID").val(),
             TipoDificultadFisicaID: $("#TipoDificultadFisicaID").val(),
+            SenderoSectorID: $("#SenderoSectorID").val(),
             Desnivel: $("#Desnivel").val(),
             Distancia: $("#Distancia").val(),
             AlturaMaxima: $("#AlturaMaxima").val(),
@@ -1201,7 +1211,7 @@
             var result = reader.readAsText(f);
         }
 
-        document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+        //document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
     });
 
     $("#btnKml").click(function () {
@@ -1210,7 +1220,7 @@
 
 
     function drawPolilineFromKML() {
-
+        debugger
         if (fileContent == null) {
             return;
         }
@@ -1220,27 +1230,50 @@
 
         var myParser = new geoXML3.parser();
         myParser.parseKmlString(fileContent);
-        polyline = myParser.docs[0].gpolylines[0]
-        polylinePath = polyline.getPath();
 
-        drawingManager.setOptions({
-            drawingControl: false,
-            drawingMode: null
-        });
+        if (myParser.docs[0].gpolylines.length>0) {
+            polyline = myParser.docs[0].gpolylines[0]
+            polylinePath = polyline.getPath();
 
-        polyline.setOptions({
-            editable: true,
-            draggable: false,
-            geodesic: true,
-            strokeColor: "#00b3fd",
-            strokeOpacity: 0.5,
-            strokeWeight: 5,
-        });
-        polyline.setMap(map);
+            drawingManager.setOptions({
+                drawingControl: false,
+                drawingMode: null
+            });
+
+            polyline.setOptions({
+                editable: true,
+                draggable: false,
+                geodesic: true,
+                strokeColor: "#00b3fd",
+                strokeOpacity: 0.5,
+                strokeWeight: 5,
+            });
+            polyline.setMap(map);
+        }
+        
+        if (myParser.docs[0].markers.length > 0) {
+            setMarkers(myParser.docs[0].markers);
+        }
+
+
+    }
+
+
+
+    function setMarkers(kmlMarkers)
+    {
+        debugger
+
+
+
+
 
 
 
     }
+
+
+
 
 </script>
 

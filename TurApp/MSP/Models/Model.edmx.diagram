@@ -18,7 +18,7 @@
         <EntityTypeShape EntityType="TurAppModel.Pais" Width="1.5" PointX="9.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="TurAppModel.Provincia" Width="1.5" PointX="12" PointY="2.375" IsExpanded="true" />
         <AssociationConnector Association="TurAppModel.FK_MenuAspNetRolesAccion_Accion" ManuallyRouted="true" >
-          <ConnectorPoint PointX="1.5" PointY="4.5" />
+          <ConnectorPoint PointX="0.75" PointY="4.5" />
           <ConnectorPoint PointX="1.5" PointY="4.25" />
           <ConnectorPoint PointX="2.75" PointY="4.25" />
           <ConnectorPoint PointX="2.75" PointY="8.18850376202706" />
@@ -29,7 +29,7 @@
           <ConnectorPoint PointX="6.947916666666667" PointY="6.9225878906249987" />
           <ConnectorPoint PointX="7.114583333333333" PointY="6.922587890625" />
           <ConnectorPoint PointX="7.125" PointY="6.922587890625" />
-          <ConnectorPoint PointX="7.5" PointY="5.635646118265738" />
+          <ConnectorPoint PointX="7.5" PointY="5.6356524220192874" />
         </AssociationConnector>
         <AssociationConnector Association="TurAppModel.FK_MenuAspNetRoles_AspNetRoles" ManuallyRouted="false" />
         <AssociationConnector Association="TurAppModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
@@ -56,6 +56,8 @@
         <EntityTypeShape EntityType="TurAppModel.TipoPuntoInteres" Width="1.5" PointX="13.375" PointY="12.25" />
         <AssociationConnector Association="TurAppModel.FK_SenderoPuntoInteres_Sendero" />
         <AssociationConnector Association="TurAppModel.FK_SenderoPuntoInteres_TipoPuntoInteres" />
+        <EntityTypeShape EntityType="TurAppModel.SenderoSector" Width="1.5" PointX="0.75" PointY="13.875" />
+        <AssociationConnector Association="TurAppModel.FK_Sendero_SenderoSector" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -47,6 +47,7 @@ namespace TurApp.Controllers
         {
             ViewBag.TipoDificultadFisicaID = new SelectList(db.TipoDificultadFisica, "ID", "Descripcion");
             ViewBag.TipoDificultadTecnicaID = new SelectList(db.TipoDificultadTecnica, "ID", "Descripcion");
+            ViewBag.SenderoSectorID = new SelectList(db.SenderoSector, "ID", "Nombre","NombreDepartamento",1);
 
 
             return View();
@@ -182,6 +183,9 @@ namespace TurApp.Controllers
 
             ViewBag.TipoDificultadFisicaID = new SelectList(db.TipoDificultadFisica, "ID", "Descripcion");
             ViewBag.TipoDificultadTecnicaID = new SelectList(db.TipoDificultadTecnica, "ID", "Descripcion");
+            ViewBag.SenderoSectorID = new SelectList(db.SenderoSector, "ID", "Nombre", "NombreDepartamento", sendero.SenderoSectorID);
+
+
             return View(sendero);
         }
 
@@ -201,9 +205,12 @@ namespace TurApp.Controllers
 
             ViewBag.TipoDificultadFisicaID = new SelectList(db.TipoDificultadFisica, "ID", "Descripcion", Sendero.TipoDificultadFisicaID);
             ViewBag.TipoDificultadTecnicaID = new SelectList(db.TipoDificultadTecnica, "ID", "Descripcion", Sendero.TipoDificultadTecnicaID);
+            ViewBag.SenderoSectorID = new SelectList(db.SenderoSector, "ID", "Nombre", "NombreDepartamento", Sendero.SenderoSectorID);
 
             return View(Sendero);
         }
+
+        
 
         // POST: Sendero/Edit/5
         [HttpPost]
@@ -374,6 +381,7 @@ namespace TurApp.Controllers
 
             ViewBag.TipoDificultadFisicaID = new SelectList(db.TipoDificultadFisica, "ID", "Descripcion", sendero.TipoDificultadFisicaID);
             ViewBag.TipoDificultadTecnicaID = new SelectList(db.TipoDificultadTecnica, "ID", "Descripcion", sendero.TipoDificultadTecnicaID);
+            ViewBag.SenderoSectorID = new SelectList(db.SenderoSector, "ID", "Nombre", "NombreDepartamento", sendero.SenderoSectorID);
             return View(sendero);
         }
 
@@ -399,9 +407,35 @@ namespace TurApp.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Sendero Sendero = db.Sendero.Find(id);
+
+            #region Delete "SenderoPunto"  
+            if (db.SenderoPunto.Any(r => r.SenderoID == Sendero.ID))
+            {
+                //Delete old objects
+                db.SenderoPunto.RemoveRange(db.SenderoPunto.Where(r => r.SenderoID == Sendero.ID));               
+            }
+            #endregion
+
+            #region Delete "SenderoPuntoElevacion"  
+            if (db.SenderoPuntoElevacion.Any(r => r.SenderoID == Sendero.ID))
+            {
+                //Delete old objects
+                db.SenderoPuntoElevacion.RemoveRange(db.SenderoPuntoElevacion.Where(r => r.SenderoID == Sendero.ID));
+            }
+            #endregion
+
+            #region Delete "SenderoPuntoInteres"  
+            if (db.SenderoPuntoInteres.Any(r => r.SenderoID == Sendero.ID))
+            {
+                //Delete old objects
+                db.SenderoPuntoInteres.RemoveRange(db.SenderoPuntoInteres.Where(r => r.SenderoID == Sendero.ID));
+            }
+            #endregion
+
             db.Sendero.Remove(Sendero);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            return Json(new { ok = "true" });
         }
 
         protected override void Dispose(bool disposing)

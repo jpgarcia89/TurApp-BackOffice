@@ -116,6 +116,16 @@
                                 @Html.ValidationMessageFor(model => model.TipoDificultadFisicaID, "", new { @class = "text-danger" })
                             </div>
                         </div>
+
+                        <!-- Fila 6 - SenderoSectorID-->
+                        <div class="form-group">
+                            <label class="control-label" for="SenderoSectorID">Sendero Sector:</label>
+                            <div>
+                                @Html.DropDownList("SenderoSectorID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.SenderoSectorID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
                         <!-- Fila 4 - Desnivel-->
                         <div class="form-group">
                             <label class="control-label" for="Desnivel">Desnivel:</label>
@@ -152,7 +162,7 @@
                             </div>
                         </div>
                         <!-- Fila 2 -Archivo zipRecursosMapaOffline-->
-                        <div class="form-group">
+                        <div class="form-group" style="display:none">
                             <label class="control-label" for="zipMapa">Zip Mapa:</label>
                             <div>
                                 @Html.TextBox("zipMapa", "", htmlAttributes: new { @class = "form-control", type = "file", accept = ".zip" })
@@ -390,6 +400,7 @@
             LugarFin: $("#LugarFin").val(),
             TipoDificultadTecnicaID: $("#TipoDificultadTecnicaID").val(),
             TipoDificultadFisicaID: $("#TipoDificultadFisicaID").val(),
+            SenderoSectorID: $("#SenderoSectorID").val(),
             Desnivel: $("#Desnivel").val(),
             Distancia: $("#Distancia").val(),
             AlturaMaxima: $("#AlturaMaxima").val(),

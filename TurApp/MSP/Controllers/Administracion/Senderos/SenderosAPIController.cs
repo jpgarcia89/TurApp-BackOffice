@@ -21,39 +21,8 @@ namespace TurApp.Controllers
         // GET: api/SenderosAPI
         public IHttpActionResult GetSendero()
         {
-            var data = db.Sendero.Select(r =>  new {
-                r.ID,
-                r.Nombre,
-                r.Descripcion,
-                r.InfoInteres,
-                r.LugarInicio,
-                r.LugarFin,
-                r.Distancia,
-                r.Desnivel,
-                r.DuracionTotal,
-                r.AlturaMaxima,
-                //SenderoPunto = r.SenderoPunto.Select(x => new { x.Latitud, x.Longitud }),
-                SenderoPuntoElevacion = r.SenderoPuntoElevacion.Select(x => new { x.Latitud, x.Longitud, x.Altura }),
-                SenderoPuntoInteres = r.SenderoPuntoInteres.Select(x => new {x.Descripcion, x.Latitud, x.Longitud, x.TipoPuntoInteresID }),
-                r.RutaImagen,
-                r.RutZipMapa,
-                TipoDificultadFisica= r.TipoDificultadFisica.Descripcion,
-                TipoDificultadTecnica = r.TipoDificultadTecnica.Descripcion,
-                r.ImgBase64
-            });
-
-
-            return Json(new {Senderos = data});
-        }
-
-
-        //public async Task<IHttpActionResult> GetSenderoGZip()
-        [Route("api/SenderosGZip")]
-        [AllowAnonymous]
-        [CompressFilter]
-        public IHttpActionResult GetSenderoGZip()
-        {
-            var data = db.Sendero.Select(r => new {
+            var data = db.Sendero.Select(r => new
+            {
                 r.ID,
                 r.Nombre,
                 r.Descripcion,
@@ -67,12 +36,66 @@ namespace TurApp.Controllers
                 //SenderoPunto = r.SenderoPunto.Select(x => new { x.Latitud, x.Longitud }),
                 SenderoPuntoElevacion = r.SenderoPuntoElevacion.Select(x => new { x.Latitud, x.Longitud, x.Altura }),
                 SenderoPuntoInteres = r.SenderoPuntoInteres.Select(x => new { x.Descripcion, x.Latitud, x.Longitud, x.TipoPuntoInteresID }),
+                SenderoSector = new
+                {
+                    r.SenderoSector.ID,
+                    r.SenderoSector.Nombre,
+                    r.SenderoSector.NombreDepartamento,
+                    r.SenderoSector.PesoZipMapa,
+                    r.SenderoSector.RutaZipMapa,
+                    r.SenderoSector.Version,
+                },
                 r.RutaImagen,
                 r.RutZipMapa,
                 TipoDificultadFisica = r.TipoDificultadFisica.Descripcion,
                 TipoDificultadTecnica = r.TipoDificultadTecnica.Descripcion,
                 r.ImgBase64
             });
+
+
+            return Json(new { Senderos = data });
+        }
+
+
+        //public async Task<IHttpActionResult> GetSenderoGZip()
+        [Route("api/SenderosGZip")]
+        //[AllowAnonymous]
+        [CompressFilter]
+        public IHttpActionResult GetSenderoGZip()
+        {
+
+            var data = db.Sendero.Select(r => new
+            {
+                r.ID,
+                r.Nombre,
+                r.Descripcion,
+                r.InfoInteres,
+                r.LugarInicio,
+                r.LugarFin,
+                r.Distancia,
+                r.Desnivel,
+                r.DuracionTotal,
+                r.AlturaMaxima,
+                SenderoPuntoElevacion = r.SenderoPuntoElevacion.Select(x => new { x.Latitud, x.Longitud, x.Altura }),
+                SenderoPuntoInteres = r.SenderoPuntoInteres.Select(x => new { x.Descripcion, x.Latitud, x.Longitud, x.TipoPuntoInteresID }),
+                SenderoSector = new
+                {
+                    r.SenderoSector.ID,
+                    r.SenderoSector.Nombre,
+                    r.SenderoSector.NombreDepartamento,
+                    r.SenderoSector.PesoZipMapa,
+                    r.SenderoSector.RutaZipMapa,
+                    r.SenderoSector.Version,
+                },
+                r.RutaImagen,
+                r.RutZipMapa,
+                TipoDificultadFisica = r.TipoDificultadFisica.Descripcion,
+                TipoDificultadTecnica = r.TipoDificultadTecnica.Descripcion,
+                r.ImgBase64
+            }).OrderBy(r => r.SenderoSector.NombreDepartamento).ThenBy(n => n.SenderoSector.Nombre);
+
+            //sendero.SenderoPunto.ToList().ForEach(r => r.SenderoID = sendero.ID);
+            //data.ToList().ForEach(r => r.SenderoSector.FechaActualizacionTicks = r.SenderoSector.FechaActualizacion.Ticks);
 
             return Json(new { Senderos = data });
             //return Ok(data);
@@ -88,7 +111,8 @@ namespace TurApp.Controllers
         public IHttpActionResult GetSendero(int id)
         {
             //Sendero sendero = db.Sendero.Find(id);
-            var data = db.Sendero.Where(x => x.ID == id).Select(r => new {
+            var data = db.Sendero.Where(x => x.ID == id).Select(r => new
+            {
                 r.ID,
                 r.Nombre,
                 r.Descripcion,
@@ -102,12 +126,21 @@ namespace TurApp.Controllers
                 //SenderoPunto = r.SenderoPunto.Select(x => new { x.Latitud, x.Longitud }),
                 SenderoPuntoElevacion = r.SenderoPuntoElevacion.Select(x => new { x.Latitud, x.Longitud, x.Altura }),
                 SenderoPuntoInteres = r.SenderoPuntoInteres.Select(x => new { x.Descripcion, x.Latitud, x.Longitud, x.TipoPuntoInteresID }),
+                SenderoSector = new
+                {
+                    r.SenderoSector.ID,
+                    r.SenderoSector.Nombre,
+                    r.SenderoSector.NombreDepartamento,
+                    r.SenderoSector.PesoZipMapa,
+                    r.SenderoSector.RutaZipMapa,
+                    r.SenderoSector.Version,
+                },
                 r.RutaImagen,
                 r.RutZipMapa,
                 TipoDificultadFisica = r.TipoDificultadFisica.Descripcion,
                 TipoDificultadTecnica = r.TipoDificultadTecnica.Descripcion,
                 r.ImgBase64
-                
+
             });
 
             if (data == null)
@@ -115,103 +148,47 @@ namespace TurApp.Controllers
                 return NotFound();
             }
 
-            
+
             return Json(data);
         }
 
-        //// PUT: api/SenderosAPI/5
-        //[ResponseType(typeof(void))]
-        //public IHttpActionResult PutSendero(int id, Sendero sendero)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    if (id != sendero.ID)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    db.Entry(sendero).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!SenderoExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
-
-        //// POST: api/SenderosAPI
-        //[ResponseType(typeof(Sendero))]
-        //public IHttpActionResult PostSendero(Sendero sendero)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    db.Sendero.Add(sendero);
-        //    db.SaveChanges();
-
-        //    return CreatedAtRoute("DefaultApi", new { id = sendero.ID }, sendero);
-        //}
-
-        //// DELETE: api/SenderosAPI/5
-        //[ResponseType(typeof(Sendero))]
-        //public IHttpActionResult DeleteSendero(int id)
-        //{
-        //    Sendero sendero = db.Sendero.Find(id);
-        //    if (sendero == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    db.Sendero.Remove(sendero);
-        //    db.SaveChanges();
-
-        //    return Ok(sendero);
-        //}
 
 
-
-
-        // GET: api/SenderosAPI
-
-
+        // GET: /UpdateSenderosAPI
         //[HttpGet, ActionName("GetFechaActualizacion")]
         [Route("UpdateSenderosAPI")]
         public IHttpActionResult GetFechaActualizacion()
         {
-            var data = db.RegistroActualizacion.Select(r => new {
+            var data = db.RegistroActualizacion.Select(r => new
+            {
                 r.FechaActualizacion,
+                r.Version,
             }).FirstOrDefault();
 
-            //if (data == null)
-            //{
-            //    var entidad = new RegistroActualizacion();
-            //    entidad.FechaActualizacion = DateTime.Now;
-            //    db.RegistroActualizacion.Add(entidad);
-            //    db.SaveChanges();
 
-            //    return Json(new { FechaActualizacion = entidad.FechaActualizacion });
-            //}
-            
-
-            return Json(new { FechaActualizacion = data.FechaActualizacion.Ticks });
+            return Json(new { FechaActualizacion = data.FechaActualizacion.Ticks, Version = data.Version });
         }
+
+
+
+        // GET: /VersionSectorAPI/2
+        [Route("VersionSectorAPI/{id}")]
+        public IHttpActionResult GetFechaActualizacionSector(int id)
+        {
+            var Sector = db.SenderoSector.Find(id);
+
+            if (Sector == null)
+            {
+                return NotFound();
+            }
+
+
+            return Json(new { Version = Sector.Version });
+        }
+
+
+
+
 
         protected override void Dispose(bool disposing)
         {
