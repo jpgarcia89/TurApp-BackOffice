@@ -88,6 +88,14 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.AspNetMenuAccion' no tiene defini
           <Property Name="id_access" Type="int" />
           <Property Name="Zona" Type="tinyint" />
         </EntityType>
+        <EntityType Name="Guia">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Localidad">
           <Key>
             <PropertyRef Name="ID" />
@@ -490,6 +498,7 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.RegistroActualizacion' no tiene d
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Guia" EntityType="Self.Guia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuAspNetRoles" EntityType="Self.MenuAspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -978,6 +987,7 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.RegistroActualizacion' no tiene d
             <End Role="SenderoSector" EntitySet="SenderoSector" />
             <End Role="Sendero" EntitySet="Sendero" />
           </AssociationSet>
+          <EntitySet Name="Guia" EntityType="TurAppModel.Guia" />
           </EntityContainer>
         <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1183,6 +1193,14 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.RegistroActualizacion' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Guia">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1452,6 +1470,15 @@ advertencia 6002: La tabla o vista 'TurApp.dbo.RegistroActualizacion' no tiene d
                 <ScalarProperty Name="NombreDepartamento" ColumnName="NombreDepartamento" />
                 <ScalarProperty Name="PesoZipMapa" ColumnName="PesoZipMapa" />
                 <ScalarProperty Name="RutaZipMapa" ColumnName="RutaZipMapa" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Guia">
+            <EntityTypeMapping TypeName="TurAppModel.Guia">
+              <MappingFragment StoreEntitySet="Guia">
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

@@ -98,3 +98,42 @@ GO
 
 ALTER TABLE [dbo].[Sendero] CHECK CONSTRAINT [FK_Sendero_SenderoSector]
 GO
+
+
+
+ALTER TABLE [dbo].[RegistroActualizacion]
+ADD [Version] [int] NULL;
+
+select * from [RegistroActualizacion]
+
+update [RegistroActualizacion]
+set [Version] = 1
+
+
+ALTER TABLE [RegistroActualizacion]
+ALTER COLUMN [Version] [int] NOT NULL
+
+
+
+
+
+
+ALTER TABLE [SenderoSector]
+ADD [Version] [int] NULL default getdate();
+
+select * from [SenderoSector]
+
+update [SenderoSector]
+set [Version] = 1
+
+ALTER TABLE [SenderoSector]
+drop  COLUMN [FechaActualizacion] [int] NULL
+
+
+USE [turApp]
+GO
+ALTER TABLE [dbo].[SenderoSector] DROP CONSTRAINT [DF__SenderoSe__Fecha__0B91BA14]
+GO
+
+
+select * from Sendero

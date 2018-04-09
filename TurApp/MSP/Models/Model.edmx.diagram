@@ -29,7 +29,7 @@
           <ConnectorPoint PointX="6.947916666666667" PointY="6.9225878906249987" />
           <ConnectorPoint PointX="7.114583333333333" PointY="6.922587890625" />
           <ConnectorPoint PointX="7.125" PointY="6.922587890625" />
-          <ConnectorPoint PointX="7.5" PointY="5.6356524220192874" />
+          <ConnectorPoint PointX="7.5" PointY="5.6356522726646645" />
         </AssociationConnector>
         <AssociationConnector Association="TurAppModel.FK_MenuAspNetRoles_AspNetRoles" ManuallyRouted="false" />
         <AssociationConnector Association="TurAppModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
@@ -58,6 +58,7 @@
         <AssociationConnector Association="TurAppModel.FK_SenderoPuntoInteres_TipoPuntoInteres" />
         <EntityTypeShape EntityType="TurAppModel.SenderoSector" Width="1.5" PointX="0.75" PointY="13.875" />
         <AssociationConnector Association="TurAppModel.FK_Sendero_SenderoSector" />
+        <EntityTypeShape EntityType="TurAppModel.Guia" Width="1.5" PointX="3.375" PointY="13.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

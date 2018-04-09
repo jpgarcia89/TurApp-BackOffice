@@ -235,6 +235,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Administracion\Guias\GuiasController.cs" />
+    <Compile Include="Controllers\Administracion\Guias\GuiasAPIController.cs" />
+    <Compile Include="Controllers\Administracion\Noticias\NoticiasAPIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\Menu\MenuController.cs" />
@@ -272,6 +275,7 @@
     <Compile Include="Models\Departamento.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EF Extended Models\GuiaVM.cs" />
     <Compile Include="Models\EF Extended Models\AspNetRolesVM.cs" />
     <Compile Include="Models\App Models\IdentityModels.cs" />
     <Compile Include="Models\App Models\ManageViewModels.cs" />
@@ -280,6 +284,9 @@
     <Compile Include="Models\EF Extended Models\SenderoVM.cs" />
     <Compile Include="Models\EnumDias.cs" />
     <Compile Include="Models\GetPermisosPorNombreDeUsuario_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Guia.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Localidad.cs">
@@ -1269,6 +1276,15 @@
     <Content Include="Views\Senderos\Details.cshtml" />
     <Content Include="Views\Senderos\Edit.cshtml" />
     <Content Include="Views\Senderos\Index.cshtml" />
+    <Content Include="Views\Guias\old_Create.cshtml" />
+    <Content Include="Views\Guias\old_Delete.cshtml" />
+    <Content Include="Views\Guias\Details.cshtml" />
+    <Content Include="Views\Guias\old_Edit.cshtml" />
+    <Content Include="Views\Guias\old_Index.cshtml" />
+    <Content Include="Views\Guias\Index.cshtml" />
+    <Content Include="Views\Guias\Create.cshtml" />
+    <Content Include="Views\Guias\Edit.cshtml" />
+    <Content Include="Views\Guias\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

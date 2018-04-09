@@ -1,0 +1,105 @@
+﻿@model IEnumerable<TurApp.Models.Guia>
+@using TurApp.Models
+
+@{
+    ViewBag.Title = "Usuarios";
+
+    var Permisos = Session["Permisos"] as List<MenuAccionVM>;
+}
+
+<style>
+    .btn-roles {
+    color: white;
+    background-color: #0027d6;
+    border-color: #05008d;
+}
+</style>
+
+<section class="content-header">
+    <h1>
+        Guias
+        <small>Administracion</small>
+    </h1>
+
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="#">Administracion</a></li>
+        <li class="active">Guias</li>
+    </ol>
+</section>
+
+
+
+
+<div class="content">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Listado de Usuarios</h3>
+
+            @*@if (Permisos.Any(r => r.menu.Nombre == "Usuarios" && r.accion.Any(x => x.Nombre == "Agregar")))
+            {*@
+                <button type="button" style="margin-right:25px;" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Guias/Create', 'Agregar', 'Guia')">
+                    <i class="fa fa-plus"></i> Nuevo
+                </button>
+                @*}*@
+        </div>
+        <div class="box-body">
+            <table id="dtGuias" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Acciones</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>                            
+                            <td>
+                                <div class="btn-group-sm">
+
+                                    @*@if (Permisos.Any(r => r.menu.Nombre == "Usuarios" && r.accion.Any(x => x.Nombre == "Editar")))
+                                    {
+                                        <span data-placement="top" title="Editar" data-toggle="tooltip">
+                                            <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Users/Edit/@item.Id','Editar','Usuarios')"></a>
+                                        </span>
+                                    }*@
+
+                                    <span data-placement="top" title="Editar" data-toggle="tooltip">
+                                        <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Guias/Edit/@item.ID','Editar','Guia')"></a>
+                                    </span>
+
+                                    <span data-placement="top" title="Detalles" data-toggle="tooltip">
+                                        <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Guias/Details/@item.ID','Detalle','Guia')"></a>
+                                    </span>
+
+                                    <span data-placement="top" title="Eliminar" data-toggle="tooltip">
+                                        <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Guias/Delete/@item.ID','Eliminar','Guia')"></a>
+                                    </span>
+
+                                   
+                                </div>
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        if (!$.fn.dataTable.isDataTable('#dtGuias')) {
+            $('#dtGuias').DataTable({
+                "language": DataTableEsp(),
+                responsive: true
+            });
+        }
+    });
+</script>
+
+<script src="~/Scripts/plugins/input-mask/jquery.inputmask.js"></script>
